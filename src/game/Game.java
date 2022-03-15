@@ -1,4 +1,5 @@
 import org.joml.Vector3f;
+import tools.Time;
 
 import static core.GameEngine.*;
 import static display.GameDisplay.getDisplayID;
@@ -25,7 +26,7 @@ public class Game implements Runnable{
     }
 
     private void update(){
-        getCurrentScene().getGameObjectList().get(0).rotate(new Vector3f(0,0.5f,0));
+        getCurrentScene().getGameObjectList().get(0).rotate(new Vector3f(0,20f*(float)Time.getDeltaTime(),0));
         loop();
     }
 
