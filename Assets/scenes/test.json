@@ -23,7 +23,7 @@
   "currentGUI": {
     "textureList": [
       {
-        "textureName": "GUIPane",
+        "textureName": "WhitePane",
         "position": {
           "x": 0.9375,
           "y": 0.9375
@@ -31,6 +31,12 @@
         "scale": {
           "x": 0.0625,
           "y": 0.0625
+        },
+        "color": {
+          "r": 0.0,
+          "g": 1.0,
+          "b": 0.0,
+          "a": 0.7
         }
       }
     ]

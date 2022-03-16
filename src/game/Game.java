@@ -1,3 +1,4 @@
+import layout.components.Color;
 import org.joml.Vector3f;
 import tools.Time;
 
@@ -14,7 +15,6 @@ public class Game implements Runnable{
     @Override
     public void run() {
         startEngine();
-
         if(getCurrentScene() == null){
             System.err.println("No loaded scene");
             return;

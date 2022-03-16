@@ -1,6 +1,8 @@
 package layout.shaders;
 
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 import shaders.ShaderProgram;
 
 public class GUIShader extends ShaderProgram {
@@ -9,6 +11,7 @@ public class GUIShader extends ShaderProgram {
     private static final String FRAGMENT_FILE = "src/engine/layout/shaders/GUIFragmentShader.txt";
 
     private int location_transformationMatrix;
+    private int location_color;
 
     public GUIShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
@@ -21,6 +24,7 @@ public class GUIShader extends ShaderProgram {
     @Override
     protected void getAllUniformLocations() {
         location_transformationMatrix = super.getUniformLocation("transformationMatrix");
+        location_color = super.getUniformLocation("guiColor");
     }
 
     @Override
@@ -28,7 +32,8 @@ public class GUIShader extends ShaderProgram {
         super.bindAttribute(0, "position");
     }
 
-
-
+    public void loadColour(Vector4f color){
+        super.load4DVector(location_color,color);
+    }
 
 }
