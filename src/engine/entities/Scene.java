@@ -60,7 +60,6 @@ public class Scene {
 
     public void setGameObjectList(List<GameObject> gameObjectList) {
         for(GameObject gameObject : gameObjectList){
-            System.out.println("Loading "+ gameObject.getModelName());
             if(findModel(gameObject.getModelName())==-1)
                 prefabs.add(new Model(gameObject.getModelName()));
             this.gameObjectList.add(gameObject);
