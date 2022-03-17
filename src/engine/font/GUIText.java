@@ -1,5 +1,8 @@
 package font;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import font.components.FontType;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -18,15 +21,22 @@ public class GUIText {
 	private String textString;
 	private float fontSize;
 
+	@JsonIgnore
 	private int textMeshVao;
+	@JsonIgnore
 	private List<Integer> textMeshVboList;
+	@JsonIgnore
 	private int vertexCount;
+    @JsonIgnoreProperties({"finite"})
 	private Vector3f colour = new Vector3f(0f, 0f, 0f);
 
+	@JsonIgnoreProperties({"finite"})
 	private Vector2f position;
 	private float lineMaxSize;
+    @JsonIgnore
 	private int numberOfLines;
 
+	@JsonIgnore
 	private FontType font;
 
 	private boolean centerText = false;
@@ -56,6 +66,8 @@ public class GUIText {
 	 * @param centered
 	 *            - whether the text should be centered or not.
 	 */
+
+
 	public GUIText(String text, float fontSize, FontType font, Vector2f position, float maxLineLength,
 			boolean centered) {
 		this.textString = text;
@@ -67,6 +79,10 @@ public class GUIText {
 		textMeshVboList = new ArrayList<Integer>();
 		TextMaster.loadText(this);
 	}
+
+    public GUIText(){
+
+    }
 
 	public void updateText(String textString) {
 		this.remove();
@@ -99,6 +115,7 @@ public class GUIText {
 	 * @param b
 	 *            - blue value, between 0 and 1.
 	 */
+    @JsonIgnore
 	public void setColour(float r, float g, float b) {
 		colour.set(r, g, b);
 	}
@@ -132,10 +149,11 @@ public class GUIText {
 	 * @return the ID of the text's VAO, which contains all the vertex data for
 	 *         the quads on which the text will be rendered.
 	 */
+    @JsonIgnore
 	public int getMesh() {
 		return textMeshVao;
 	}
-
+    @JsonIgnore
 	public List<Integer> getMeshVboList() {
 		return textMeshVboList;
 	}
@@ -149,6 +167,7 @@ public class GUIText {
 	 * @param verticesCount
 	 *            - the total number of vertices in all of the quads.
 	 */
+    @JsonIgnore
 	public void setMeshInfo(int vao, int verticesCount) {
 		this.textMeshVao = vao;
 		this.vertexCount = verticesCount;
@@ -157,6 +176,7 @@ public class GUIText {
 	/**
 	 * @return The total number of vertices of all the text's quads.
 	 */
+    @JsonIgnore
 	public int getVertexCount() {
 		return this.vertexCount;
 	}
@@ -174,6 +194,7 @@ public class GUIText {
 	 * 
 	 * @param number
 	 */
+    @JsonIgnore
 	public void setNumberOfLines(int number) {
 		this.numberOfLines = number;
 	}
@@ -181,6 +202,7 @@ public class GUIText {
 	/**
 	 * @return {@code true} if the text should be centered.
 	 */
+	@JsonIgnore
 	public boolean isCentered() {
 		return centerText;
 	}
@@ -188,8 +210,21 @@ public class GUIText {
 	/**
 	 * @return The maximum length of a line of this text.
 	 */
+	@JsonProperty("lineMaxSize")
 	public float getMaxLineSize() {
 		return lineMaxSize;
+	}
+
+	public void setLineMaxSize(float lineMaxSize) {
+		this.lineMaxSize = lineMaxSize;
+	}
+
+	public boolean isCenterText() {
+		return centerText;
+	}
+
+	public void setCenterText(boolean centerText) {
+		this.centerText = centerText;
 	}
 
 	/**

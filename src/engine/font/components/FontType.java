@@ -1,5 +1,6 @@
 package font.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import font.GUIText;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.File;
  *
  */
 public class FontType {
+
 
 	private int textureAtlas;
 	private TextMeshCreator loader;
@@ -34,6 +36,7 @@ public class FontType {
 	/**
 	 * @return The font texture atlas.
 	 */
+
 	public int getTextureAtlas() {
 		return textureAtlas;
 	}

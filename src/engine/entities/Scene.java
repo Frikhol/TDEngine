@@ -63,6 +63,7 @@ public class Scene {
             if(findModel(gameObject.getModelName())==-1)
                 prefabs.add(new Model(gameObject.getModelName()));
             this.gameObjectList.add(gameObject);
+            //рекурсивно добавлять child объекты каждого объекта еси они есть
         }
     }
 
@@ -85,4 +86,11 @@ public class Scene {
     public List<Model> getPrefabs() {
         return prefabs;
     }
+
+    
+
+
+
+
+
 }

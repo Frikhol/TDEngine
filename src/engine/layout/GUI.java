@@ -34,7 +34,11 @@ public class GUI {
     }
 
     public static Vector2f getProperPosition(int x, int y){
-        return new Vector2f(0.2f*(float)x/(float)getDisplayWIDTH()[0]-1.0f,(-0.2f)*y/getDisplayHEIGHT()[0] +1);
+        return new Vector2f(2f*((float)x/(float)getDisplayWIDTH()[0])-1.0f,(-2f)*((float)y/(float)getDisplayHEIGHT()[0]) +1);
+    }
+
+    public static Vector2f getScreenPosition(float x, float y){
+        return new Vector2f((x+1f)/2f,(y-1)/(-2f));
     }
 
     public static Vector2f getProperScale(int width,int height){

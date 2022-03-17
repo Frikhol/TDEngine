@@ -2,7 +2,10 @@ package layout;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import core.Loader;
+import font.GUIText;
+import font.TextMaster;
 import layout.components.Color;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -16,6 +19,7 @@ public class GUIObject {
     @JsonIgnoreProperties({"finite"})
     private Vector2f scale;
     private Color color;
+    private GUIText text;
 
     public GUIObject() {
     }
@@ -28,6 +32,30 @@ public class GUIObject {
         this.color = Color.white;
     }
 
+    public GUIText getText() {
+        return text;
+    }
+    @JsonIgnore
+    public String getTextString() {
+        return text.getTextString();
+    }
+    @JsonIgnore
+    public void setTextString(String text) {
+        if(this.text == null)
+            this.text = new GUIText(text,1, TextMaster.getFonts().get("calibri"),GUI.getScreenPosition(this.position.x-scale.x,this.position.y),scale.x,true);
+        else
+            this.text.updateText(text);
+    }
+
+    @JsonProperty("text")
+    public void setText(GUIText text) {
+        if(text!=null) {
+            this.text = new GUIText(text.getTextString(), text.getFontSize(), TextMaster.getFonts().get("calibri"), text.getPosition(), text.getMaxLineSize(), true);
+            this.text.setColour(text.getColour().x, text.getColour().y, text.getColour().z);
+        }
+    }
+
+    @JsonIgnore
     public Vector4f getColorVec4() {
         return color.toVector4f();
     }

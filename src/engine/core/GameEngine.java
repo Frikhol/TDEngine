@@ -6,6 +6,8 @@ import entities.Scene;
 import font.GUIText;
 import font.TextMaster;
 import font.components.FontType;
+import layout.GUIObject;
+import layout.objects.GUIPane;
 import layout.shaders.GUIRenderer;
 import inputs.InputHandler;
 import inputs.TestControls;
@@ -31,15 +33,19 @@ public class GameEngine {
 
     public static void startEngine(){
         createDisplay();
-        loadScene("Assets/scenes/test.json");
-        new Renderer();
         TextMaster.init(new Loader());
+        loadScene("Assets/scenes/test1.json");
+        new Renderer();
         guiRenderer = new GUIRenderer(new Loader());
-        FontType font = new FontType(Loader.loadTexture("fonts/calibri.png").getID(),new File("Assets/fonts/calibri.fnt"));
-        text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,font,
+        text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,TextMaster.getFonts().get("calibri"),
                 new Vector2f((float)(getDisplayWIDTH()[0]-(getDisplayWIDTH()[0]/16))/getDisplayWIDTH()[0],
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),
                 (float)(getDisplayWIDTH()[0]/16)/getDisplayWIDTH()[0],true);
+        GUIPane somePain = new GUIPane(getDisplayWIDTH()[0]/2,getDisplayHEIGHT()[0]/2,200,200);
+        somePain.setTextString("Some Text for Test");
+        somePain.getText().setColour(1,1,1);
+        somePain.setTextString("New text for test lmlalolforthelinetest test");
+        //scene.getCurrentGUI().getTextureList().add(somePain);
         scene.setKeyList(new TestControls());
         glfwSetKeyCallback(getDisplayID(), InputHandler.keyCallback);
         checkWindowResize();
@@ -65,6 +71,7 @@ public class GameEngine {
     }
 
     public static void stopEngine(){
+        saveScene("Assets/scenes/test2.json");
         TextMaster.cleanUp();
         guiRenderer.cleanUp();
         Renderer.cleanUp();

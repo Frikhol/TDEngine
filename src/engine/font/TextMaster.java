@@ -5,6 +5,7 @@ import font.components.FontType;
 import font.components.TextMeshData;
 import org.lwjgl.opengl.GL30;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +15,16 @@ public class TextMaster {
 
     private static Map<FontType, List<GUIText>> texts = new HashMap<FontType, List<GUIText>>();
     private static FontRenderer renderer;
+    private static Map<String,FontType> fonts = new HashMap<String, FontType>();
+
+    public static Map<String, FontType> getFonts() {
+        return fonts;
+    }
 
     public static void init(Loader theLoader){
         renderer = new FontRenderer();
+        FontType font = new FontType(Loader.loadTexture("fonts/calibri.png").getID(),new File("Assets/fonts/calibri.fnt"));
+        fonts.put("calibri",font);
     }
 
     public static void render(){

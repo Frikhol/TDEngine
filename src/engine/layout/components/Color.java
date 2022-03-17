@@ -1,5 +1,7 @@
 package layout.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joml.Vector4f;
 
 public class Color {
@@ -92,34 +94,36 @@ public class Color {
         this.a = a;
     }
 
+    @JsonProperty("r")
     public float getRed() {
         return r;
     }
-
+    @JsonProperty("g")
     public float getGreen() {
         return g;
     }
-
+    @JsonProperty("b")
     public float getBlue() {
         return b;
     }
-
+    @JsonProperty("a")
     public float getAlpha() {
         return a;
     }
 
+    @JsonIgnore
     public int getRedI() {
         return (int) Math.floor(r*255.0f);
     }
-
+    @JsonIgnore
     public int getGreenI() {
         return (int) Math.floor(g*255.0f);
     }
-
+    @JsonIgnore
     public int getBlueI() {
         return (int) Math.floor(b*255.0f);
     }
-
+    @JsonIgnore
     public int getAlphaI() {
         return (int) Math.floor(a*255.0f);
     }
