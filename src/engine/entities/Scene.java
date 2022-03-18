@@ -1,6 +1,6 @@
 package entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import entities.components.Model;
 import layout.GUI;
 import inputs.KeyList;
@@ -38,14 +38,6 @@ public class Scene {
         return keyList;
     }
 
-    public int findModel(String modelName){
-        for(int i = 0;i<prefabs.size();i++){
-            if(prefabs.get(i).getName().equals(modelName))
-                return i;
-        }
-        return -1;
-    }
-
     public String getName() {
         return name;
     }
@@ -63,7 +55,7 @@ public class Scene {
             if(findModel(gameObject.getModelName())==-1)
                 prefabs.add(new Model(gameObject.getModelName()));
             this.gameObjectList.add(gameObject);
-            //рекурсивно добавлять child объекты каждого объекта еси они есть
+            //рекурсивно добавлять child объекты каждого объекта если они есть
         }
     }
 
@@ -87,10 +79,11 @@ public class Scene {
         return prefabs;
     }
 
-    
-
-
-
-
-
+    public int findModel(String modelName){
+        for(int i = 0;i<prefabs.size();i++){
+            if(prefabs.get(i).getName().equals(modelName))
+                return i;
+        }
+        return -1;
+    }
 }

@@ -4,11 +4,11 @@
     {
       "parent": null,
       "childes": [],
-      "modelName": "dragon",
+      "modelName": "Location",
       "transform": {
         "position": {
           "x": 0.0,
-          "y": -5.0,
+          "y": -3.0,
           "z": -25.0
         },
         "rotation": {
@@ -16,7 +16,7 @@
           "y": 205.0,
           "z": 0.0
         },
-        "scale": 1.0
+        "scale": 1
       }
     }
   ],
@@ -57,8 +57,8 @@
     "transform": {
       "position": {
         "x": 3.1999989,
-        "y": 0.0,
-        "z": -8.9
+        "y": 20.0,
+        "z": 16.9
       },
       "rotation": {
         "x": 0.0,
@@ -67,7 +67,7 @@
       },
       "scale": 1.0
     },
-    "pitch": 0.0,
+    "pitch": 30.0,
     "yaw": 0.0,
     "roll": 0.0
   }

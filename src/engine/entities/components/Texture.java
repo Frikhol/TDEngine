@@ -4,8 +4,8 @@ public class Texture {
 
     private int textureID;
 
-    private float shineDamper = 20;
-    private float reflectivity = 0.2f;
+    private float shineDamper = 100;
+    private float reflectivity = 0.0f;
 
     public Texture() { }
 

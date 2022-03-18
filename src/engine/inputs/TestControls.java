@@ -17,6 +17,10 @@ public class TestControls implements KeyList {
             camera.getTransform().translateX(-.1f);
         if(key == KeyCode.GLFW_KEY_D)
             camera.getTransform().translateX(.1f);
+        if(key == KeyCode.GLFW_KEY_SPACE)
+            camera.getTransform().translateY(.1f);
+        if(key == KeyCode.GLFW_KEY_LEFT_CONTROL)
+            camera.getTransform().translateY(-.1f);
     }
 
     @Override

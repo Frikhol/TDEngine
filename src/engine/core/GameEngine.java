@@ -34,17 +34,17 @@ public class GameEngine {
     public static void startEngine(){
         createDisplay();
         TextMaster.init(new Loader());
-        loadScene("Assets/scenes/test1.json");
+        loadScene("Assets/scenes/test.json");
         new Renderer();
         guiRenderer = new GUIRenderer(new Loader());
         text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,TextMaster.getFonts().get("calibri"),
                 new Vector2f((float)(getDisplayWIDTH()[0]-(getDisplayWIDTH()[0]/16))/getDisplayWIDTH()[0],
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),
                 (float)(getDisplayWIDTH()[0]/16)/getDisplayWIDTH()[0],true);
-        GUIPane somePain = new GUIPane(getDisplayWIDTH()[0]/2,getDisplayHEIGHT()[0]/2,200,200);
-        somePain.setTextString("Some Text for Test");
-        somePain.getText().setColour(1,1,1);
-        somePain.setTextString("New text for test lmlalolforthelinetest test");
+        //GUIPane somePain = new GUIPane(getDisplayWIDTH()[0]/2,getDisplayHEIGHT()[0]/2,200,200);
+        //somePain.setTextString("Some Text for Test");
+        //somePain.getText().setColour(1,1,1);
+        //somePain.setTextString("New text for test lmlalolforthelinetest test");
         //scene.getCurrentGUI().getTextureList().add(somePain);
         scene.setKeyList(new TestControls());
         glfwSetKeyCallback(getDisplayID(), InputHandler.keyCallback);
@@ -71,7 +71,7 @@ public class GameEngine {
     }
 
     public static void stopEngine(){
-        saveScene("Assets/scenes/test2.json");
+        //saveScene("Assets/scenes/test2.json");
         TextMaster.cleanUp();
         guiRenderer.cleanUp();
         Renderer.cleanUp();
