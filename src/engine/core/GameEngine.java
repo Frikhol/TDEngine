@@ -52,7 +52,7 @@ public class GameEngine {
     }
 
     public static void loop(){
-        setFPSCup(144);
+        setFPSCup(60);
         countFPS();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.74902f,  0.847059f, 0.847059f, 0.0f); //background's color

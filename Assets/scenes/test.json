@@ -4,16 +4,34 @@
     {
       "parent": null,
       "childes": [],
-      "modelName": "Location",
+      "modelName": "Tower",
       "transform": {
         "position": {
-          "x": 0.0,
-          "y": -3.0,
+          "x": 0,
+          "y": 1.0,
           "z": -25.0
         },
         "rotation": {
           "x": 0.0,
-          "y": 205.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": 1
+      }
+    },
+    {
+      "parent": null,
+      "childes": [],
+      "modelName": "Location",
+      "transform": {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -25.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
           "z": 0.0
         },
         "scale": 1

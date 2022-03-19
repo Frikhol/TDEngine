@@ -28,6 +28,20 @@ public class Track {
         }
         return points.get(points.size()-1);
     }
+    public float getDirection(float completePath){
+        for(int i=0;i<lengths.size();i++){
+            if(lengths.get(i)>=completePath){
+                float numerator = completePath-(i==0?0:lengths.get(i-1));
+                float denominator = lengths.get(i)-(i==0?0:lengths.get(i-1));
+                Vector2f prev = points.get(i);
+                Vector2f next = points.get(i+1);
+                Vector2f dir = (new Vector2f(next.x-prev.x,next.y-prev.y)).normalize();
+                float signum = dir.y==0?1:-(dir.y/Math.abs(dir.y));
+                return (float) (signum*(Math.acos(dir.x)*180/Math.PI));
+            }
+        }
+        return 0;
+    }
     public float getPathLength(){
         return lengths.get(lengths.size()-1);
     }

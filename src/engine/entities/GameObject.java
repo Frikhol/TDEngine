@@ -1,5 +1,6 @@
 package entities;
 
+import static core.GameEngine.*;
 import entities.components.Model;
 import entities.components.Transform;
 import org.joml.Vector3f;
@@ -15,6 +16,15 @@ public class GameObject {
     private Transform transform;
 
     public GameObject() {
+        String className  = this.getClass().getSimpleName();
+        System.out.println(className);
+        if(className.equals("GameObject"))
+            return;
+        this.transform = new Transform();
+        Scene scene = getCurrentScene();
+        if(scene.findModel(this.getModelName())==-1)
+            scene.getPrefabs().add(new Model(className));
+        modelName = className;
     }
 
     public GameObject(Model model){
