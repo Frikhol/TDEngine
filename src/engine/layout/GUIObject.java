@@ -1,8 +1,6 @@
 package layout;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import core.Loader;
 import font.GUIText;
 import font.TextMaster;
@@ -11,35 +9,38 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 public class GUIObject {
-    private String textureName;
-    @JsonIgnore
+    private String guiType;
     private int textureID;
-    @JsonIgnoreProperties({"finite"})
     private Vector2f position;
-    @JsonIgnoreProperties({"finite"})
     private Vector2f scale;
     private Color color;
     private GUIText text;
 
-    public GUIObject() {
-    }
-
-    public GUIObject(String textureName, Vector2f position, Vector2f scale) {
-        this.textureName = textureName;
-        this.textureID = Loader.loadTexture("gui/"+textureName+".png").getID();
+    public GUIObject(String guiType, Vector2f position, Vector2f scale) {
+        this.guiType = guiType;
+        this.textureID = Loader.loadTexture("gui/"+ guiType +".png").getID();
         this.position = position;
         this.scale = scale;
         this.color = Color.white;
     }
 
+    public GUIObject(String guiType, Vector2f position, Vector2f scale, Color color, GUIText text) {
+        this.guiType = guiType;
+        this.textureID = Loader.loadTexture("gui/"+ guiType +".png").getID();
+        this.position = position;
+        this.scale = scale;
+        this.color = color;
+        this.text = text;
+    }
+
     public GUIText getText() {
         return text;
     }
-    @JsonIgnore
+
     public String getTextString() {
         return text.getTextString();
     }
-    @JsonIgnore
+
     public void setTextString(String text) {
         if(this.text == null)
             this.text = new GUIText(text,1, TextMaster.getFonts().get("calibri"),GUI.getScreenPosition(this.position.x-scale.x,this.position.y),scale.x,true);
@@ -47,15 +48,13 @@ public class GUIObject {
             this.text.updateText(text);
     }
 
-    @JsonProperty("text")
     public void setText(GUIText text) {
         if(text!=null) {
-            this.text = new GUIText(text.getTextString(), text.getFontSize(), TextMaster.getFonts().get("calibri"), text.getPosition(), text.getMaxLineSize(), true);
+            this.text = text;
             this.text.setColour(text.getColour().x, text.getColour().y, text.getColour().z);
         }
     }
 
-    @JsonIgnore
     public Vector4f getColorVec4() {
         return color.toVector4f();
     }
@@ -68,13 +67,13 @@ public class GUIObject {
         this.color = new Color(R,G,B,a);
     }
 
-    public String getTextureName() {
-        return textureName;
+    public String getGuiType() {
+        return guiType;
     }
 
-    public void setTextureName(String textureName) {
-        this.textureName = textureName;
-        this.textureID = Loader.loadTexture("gui/"+textureName+".png").getID();
+    public void setGuiType(String guiType) {
+        this.guiType = guiType;
+        this.textureID = Loader.loadTexture("gui/"+ guiType +".png").getID();
     }
 
     public int getTextureID() {

@@ -1,11 +1,9 @@
 package entities.components;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joml.Vector3f;
 public class Transform {
-    @JsonIgnoreProperties({"finite"})
+
     private Vector3f position;
-    @JsonIgnoreProperties({"finite"})
     private Vector3f rotation;
     private float scale;
 

@@ -1,13 +1,19 @@
 package core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import data.deserializers.SceneDeserializer;
+import data.serializers.GUIObjectSerializer;
+import data.serializers.GameObjectSerializer;
+import data.serializers.SceneSerializer;
+import data.serializers.TransformSerializer;
 import display.GameDisplay;
+import entities.GameObject;
 import entities.Scene;
+import entities.components.Transform;
 import font.GUIText;
 import font.TextMaster;
-import font.components.FontType;
 import layout.GUIObject;
-import layout.objects.GUIPane;
 import layout.shaders.GUIRenderer;
 import inputs.InputHandler;
 import inputs.TestControls;
@@ -16,6 +22,7 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import static display.GameDisplay.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -34,18 +41,13 @@ public class GameEngine {
     public static void startEngine(){
         createDisplay();
         TextMaster.init(new Loader());
-        loadScene("Assets/scenes/test.json");
+        loadScene("Assets/scenes/test1.json");
         new Renderer();
         guiRenderer = new GUIRenderer(new Loader());
         text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,TextMaster.getFonts().get("calibri"),
                 new Vector2f((float)(getDisplayWIDTH()[0]-(getDisplayWIDTH()[0]/16))/getDisplayWIDTH()[0],
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),
                 (float)(getDisplayWIDTH()[0]/16)/getDisplayWIDTH()[0],true);
-        //GUIPane somePain = new GUIPane(getDisplayWIDTH()[0]/2,getDisplayHEIGHT()[0]/2,200,200);
-        //somePain.setTextString("Some Text for Test");
-        //somePain.getText().setColour(1,1,1);
-        //somePain.setTextString("New text for test lmlalolforthelinetest test");
-        //scene.getCurrentGUI().getTextureList().add(somePain);
         scene.setKeyList(new TestControls());
         glfwSetKeyCallback(getDisplayID(), InputHandler.keyCallback);
         checkWindowResize();
@@ -66,12 +68,12 @@ public class GameEngine {
 
     private static void render(){
         Renderer.render();
-        guiRenderer.render(scene.getCurrentGUI().getTextureList());
+        guiRenderer.render(scene.getCurrentGUI().getGuiList());
         TextMaster.render();
     }
 
     public static void stopEngine(){
-        //saveScene("Assets/scenes/test2.json");
+        saveScene("Assets/scenes/test2.json");
         TextMaster.cleanUp();
         guiRenderer.cleanUp();
         Renderer.cleanUp();
@@ -93,6 +95,14 @@ public class GameEngine {
 
     public static void saveScene(String saveFile){
         ObjectMapper mapper = new ObjectMapper();
+        SimpleModule simpleModule = new SimpleModule();
+
+        simpleModule.addSerializer(Scene.class, new SceneSerializer());
+        simpleModule.addSerializer(GameObject.class, new GameObjectSerializer());
+        simpleModule.addSerializer(GUIObject.class, new GUIObjectSerializer());
+        simpleModule.addSerializer(Transform.class, new TransformSerializer());
+        mapper.registerModule(simpleModule);
+
         try {
             mapper.writeValue(new File(saveFile), scene);
         } catch (IOException e) {
@@ -102,6 +112,11 @@ public class GameEngine {
 
     public static void loadScene(String loadFile){
         ObjectMapper mapper = new ObjectMapper();
+        SimpleModule simpleModule = new SimpleModule();
+
+        simpleModule.addDeserializer(Scene.class, new SceneDeserializer());
+        mapper.registerModule(simpleModule);
+
         try {
             scene = mapper.readValue(new File(loadFile), Scene.class);
         } catch (IOException e) {

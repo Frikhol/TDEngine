@@ -10,27 +10,27 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GUI {
 
-    private List<GUIObject> textureList;
+    private List<GUIObject> guiList;
     private static int polygonMode = GL_FILL;
 
     public GUI(){
-        textureList = new LinkedList<>();
+        guiList = new LinkedList<>();
     }
 
-    public GUI(List<GUIObject> textureList) {
-        this.textureList = textureList;
+    public GUI(List<GUIObject> guiList) {
+        this.guiList = guiList;
     }
 
-    public List<GUIObject> getTextureList() {
-        return textureList;
+    public List<GUIObject> getGuiList() {
+        return guiList;
     }
 
-    public void add(GUIObject texture){
-        textureList.add(texture);
+    public void add(GUIObject guiObject){
+        guiList.add(guiObject);
     }
 
-    public void remove(GUIObject texture){
-        textureList.remove(texture);
+    public void remove(GUIObject guiObject){
+        guiList.remove(guiObject);
     }
 
     public static Vector2f getProperPosition(int x, int y){

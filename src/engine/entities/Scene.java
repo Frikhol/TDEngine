@@ -1,6 +1,5 @@
 package entities;
 
-import com.fasterxml.jackson.annotation.*;
 import entities.components.Model;
 import layout.GUI;
 import inputs.KeyList;
@@ -12,11 +11,10 @@ public class Scene {
 
     private String name;
     private ArrayList<GameObject> gameObjectList = new ArrayList<GameObject>();
-    @JsonIgnore private ArrayList<Model> prefabs = new ArrayList<Model>();
+    private ArrayList<Model> prefabs = new ArrayList<Model>();
     private GUI currentGUI;
     private Light light;
     private Camera camera;
-    @JsonIgnore
     private KeyList keyList = null;
 
     public Scene(){
@@ -50,13 +48,8 @@ public class Scene {
         return gameObjectList;
     }
 
-    public void setGameObjectList(List<GameObject> gameObjectList) {
-        for(GameObject gameObject : gameObjectList){
-            if(findModel(gameObject.getModelName())==-1)
-                prefabs.add(new Model(gameObject.getModelName()));
-            this.gameObjectList.add(gameObject);
-            //рекурсивно добавлять child объекты каждого объекта если они есть
-        }
+    public void setGameObjectList(ArrayList<GameObject> gameObjectList) {
+        this.gameObjectList = gameObjectList;
     }
 
     public Light getLight() {
@@ -79,11 +72,19 @@ public class Scene {
         return prefabs;
     }
 
-    public int findModel(String modelName){
+    public int findModel(Model model){
         for(int i = 0;i<prefabs.size();i++){
-            if(prefabs.get(i).getName().equals(modelName))
+            if(prefabs.get(i).equals(model))
                 return i;
         }
         return -1;
+    }
+
+    public Model findModel(String modelName){
+        for(Model model:prefabs){
+            if(model.getName().equals(modelName))
+                return model;
+        }
+        return null;
     }
 }

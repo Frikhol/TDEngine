@@ -3,9 +3,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joml.Vector3f;
 
 public class Light {
-    @JsonIgnoreProperties({"finite"})
+
     private Vector3f position;
-    @JsonIgnoreProperties({"finite"})
     private Vector3f colour;
 
     public Light() {

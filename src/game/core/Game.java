@@ -1,14 +1,9 @@
-package gameCore;
+package core;
 
-import core.GameEngine;
 import entities.Enemy;
 import entities.Track;
 import initialisation.GameProcess;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
-import tools.Time;
-
-import static core.GameEngine.getCurrentScene;
 
 public class Game extends GameProcess {
     Enemy enemy1;

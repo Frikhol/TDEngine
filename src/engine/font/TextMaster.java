@@ -55,6 +55,14 @@ public class TextMaster {
         }
     }
 
+    public static String getFontName(FontType font){
+        for(Map.Entry<String,FontType> entry : fonts.entrySet()) {
+            if(entry.getValue().equals(font))
+                return entry.getKey();
+        }
+        return null;
+    }
+
     public static void cleanUp(){
         renderer.cleanUp();
     }

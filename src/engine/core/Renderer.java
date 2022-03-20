@@ -89,7 +89,7 @@ public class Renderer {
         Scene scene = GameEngine.getCurrentScene();
         for(GameObject gameObject : scene.getGameObjectList()) {
             int prefabID;
-            if((prefabID = scene.findModel(gameObject.getModelName())) == -1)
+            if((prefabID = scene.findModel(gameObject.getModel())) == -1)
                 break;
             Model prefabModel = scene.getPrefabs().get(prefabID);
             List<GameObject> batch = entities.get(prefabModel);
@@ -104,7 +104,7 @@ public class Renderer {
     }
 
     private static void prepareInstance(GameObject gameObject){
-        Matrix4f transformationMatrix = Maths.createTransformationMatrix(gameObject.getTransform().getPosition(), gameObject.getTransform().getRotation(), gameObject.getTransform().getScale());
+        Matrix4f transformationMatrix = Maths.createTransformationMatrix(gameObject.getPosition(), gameObject.getRotation(), gameObject.getScale());
         shader.loadTransformationMatrix(transformationMatrix);
     }
 
@@ -115,7 +115,6 @@ public class Renderer {
         float aspectRatio = (float)width/height;
         projectionMatrix = new Matrix4f();
         projectionMatrix.identity();
-        //projectionMatrix.setOrtho2D(-width/2,width/2,-height/2,height/2);
         projectionMatrix.perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
     }
 

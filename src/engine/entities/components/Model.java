@@ -2,19 +2,19 @@ package entities.components;
 
 import core.Loader;
 
+import static core.GameEngine.*;
+
 public class Model {
 
     private String name;
     private Mesh mesh;
     private Texture texture;
 
-    public Model() {
-    }
-
     public Model(String name) {
         this.name = name;
         this.mesh = Loader.loadObjModel(name);
         this.texture = new Texture(Loader.loadTexture("models/"+name+".png").getID());
+        getCurrentScene().getPrefabs().add(this);
     }
 
     public Model(String name,Mesh mesh, Texture texture){
@@ -22,7 +22,6 @@ public class Model {
         this.mesh = mesh;
         this.texture = texture;
     }
-
 
     public String getName() {
         return name;
@@ -47,7 +46,6 @@ public class Model {
     public void setTexture(Texture texture) {
         this.texture = texture;
     }
-
 
 }
 

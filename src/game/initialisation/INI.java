@@ -2,7 +2,7 @@ package initialisation;
 
 import core.GameEngine;
 import entities.GameObject;
-import gameCore.Game;
+import core.Game;
 
 import java.util.ArrayList;
 

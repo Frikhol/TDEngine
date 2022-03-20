@@ -15,6 +15,9 @@ public class Camera {
                 new Vector3f(0,0,0),
                 new Vector3f(0,0,0)
         );
+        this.pitch=0;
+        this.roll=0;
+        this.yaw=0;
     }
 
     public Camera(Transform transform, float pitch, float yaw, float roll) {

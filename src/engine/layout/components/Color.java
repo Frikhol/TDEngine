@@ -78,6 +78,13 @@ public class Color {
         this.a = ((float)(((byte)Math.min(a,255))&0xFF))/255.0f;
     }
 
+    public Color(float r,float g, float b, float a){
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+    }
+
     public void setR(float r) {
         this.r = r;
     }
