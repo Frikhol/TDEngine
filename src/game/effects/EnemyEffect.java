@@ -34,9 +34,20 @@ public abstract class EnemyEffect extends Effect{
             super("break_armor", power, time, "resist",source, enemy);
         }
     }
+
+    public static class EffectArmorUp extends EnemyEffect{
+        EffectArmorUp(float power, float time, String source, Enemy enemy) {
+            super("armor_buff_general", power, -1, "resist",source, enemy);
+        }
+    }
     public static class EffectHealthUp extends EnemyEffect{
-        EffectHealthUp(float power, float time, String source, Enemy enemy) {
-            super("health_buff", power, time, "stamina",source, enemy);
+        EffectHealthUp(float power, String source, Enemy enemy) {
+            super("health_buff_general", power, -1, "stamina",source, enemy);
+        }
+    }
+    public static class EffectDamageUp extends EnemyEffect{
+        EffectDamageUp(float power, String source, Enemy enemy) {
+            super("damage_buff_general", power, -1, "damage",source, enemy);
         }
     }
     /////////////////////////tags///////////////////////////
@@ -44,4 +55,6 @@ public abstract class EnemyEffect extends Effect{
     //time_damage   // урон(яд/ожог)
     //stamina       // запас здоровья
     //resist        // уменьшение/увеличение брони
+    //
+
 }

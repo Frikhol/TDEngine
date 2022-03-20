@@ -26,11 +26,9 @@ public class Game extends GameProcess {
                 new Vector2f(20,-36.5f)
                 );
         enemy1 = new Enemy.BaseEnemyTest(track);
-        GameEngine.getCurrentScene().getGameObjectList().add(enemy1);
+        enemy1.Create();
     }
     public void update(){
-        //getCurrentScene().getGameObjectList().get(0).rotate(new Vector3f(0,20f*(float) Time.getDeltaTime(),0));
-        enemy1.tactFrame();
     }
 
 }

@@ -141,4 +141,14 @@ public class GameObject {
     public void setTransform(Transform transform) {
         this.transform = transform;
     }
+
+    public void Create(){
+        getCurrentScene().getGameObjectList().add(this);
+    }
+    public void Destroy(){
+        getCurrentScene().getGameObjectList().remove(this);
+    }
+    public void Update(){
+
+    }
 }

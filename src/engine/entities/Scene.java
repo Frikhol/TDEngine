@@ -11,8 +11,8 @@ import java.util.List;
 public class Scene {
 
     private String name;
-    private List<GameObject> gameObjectList = new ArrayList<GameObject>();
-    @JsonIgnore private List<Model> prefabs = new ArrayList<Model>();
+    private ArrayList<GameObject> gameObjectList = new ArrayList<GameObject>();
+    @JsonIgnore private ArrayList<Model> prefabs = new ArrayList<Model>();
     private GUI currentGUI;
     private Light light;
     private Camera camera;
@@ -46,7 +46,7 @@ public class Scene {
         this.name = name;
     }
 
-    public List<GameObject> getGameObjectList() {
+    public ArrayList<GameObject> getGameObjectList() {
         return gameObjectList;
     }
 
