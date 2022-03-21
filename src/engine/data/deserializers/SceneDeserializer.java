@@ -93,10 +93,10 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
                             guiTextNode.get("fontSize").floatValue(),
                             TextMaster.getFonts().get(guiTextNode.get("fontType").asText()),
                             new Vector2f(
-                                    (posX+1f)/2f-scaleX/2.0f,
-                                    (posY+(scaleY/2.0f)-1)/(-2f)
+                                    guiTextNode.get("position").get("x").floatValue(),
+                                    guiTextNode.get("position").get("y").floatValue()
                             ),
-                            guiTextNode.get("maxLineSize").floatValue()/2.0f,
+                            guiTextNode.get("maxLineSize").floatValue(),
                             guiTextNode.get("centerText").asBoolean()
                     )
 

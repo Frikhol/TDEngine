@@ -3,7 +3,9 @@ package data.serializers;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import layout.GUI;
 import layout.GUIObject;
+import org.joml.Vector2f;
 
 import java.io.IOException;
 
@@ -40,8 +42,9 @@ public class GUIObjectSerializer extends StdSerializer<GUIObject> {
                 jGen.writeNumberField("fontSize",guiObject.getText().getFontSize());
                 jGen.writeStringField("fontType",guiObject.getText().getFontName());
                 jGen.writeObjectFieldStart("position");
-                    jGen.writeNumberField("x",guiObject.getText().getPosition().x);
-                    jGen.writeNumberField("y",guiObject.getText().getPosition().y);
+                    Vector2f screenPos = GUI.getScreenPosition(guiObject.getPosition().x,guiObject.getPosition().y);
+                    jGen.writeNumberField("x",screenPos.x-guiObject.getScale().x/2f);
+                    jGen.writeNumberField("y",screenPos.y);
                 jGen.writeEndObject();
                 jGen.writeNumberField("maxLineSize",guiObject.getText().getMaxLineSize());
                 jGen.writeBooleanField("centerText",guiObject.getText().isCentered());
