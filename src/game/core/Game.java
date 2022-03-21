@@ -1,9 +1,11 @@
 package core;
 
 import entities.Enemy;
+import entities.Tower;
 import entities.Track;
 import initialisation.GameProcess;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 public class Game extends GameProcess {
     Enemy enemy1;
@@ -22,6 +24,7 @@ public class Game extends GameProcess {
                 );
         enemy1 = new Enemy.BaseEnemyTest(track);
         enemy1.Create();
+        new Tower.BaseMagicTower(new Vector3f(0,1.5f,-25)).Create();
     }
     public void update(){
     }

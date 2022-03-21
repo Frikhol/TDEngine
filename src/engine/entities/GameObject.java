@@ -17,12 +17,7 @@ public class GameObject {
     private List<GameObject> childes = new ArrayList<GameObject>();
 
     public GameObject() {
-        this.name = this.getClass().getSimpleName();
-        if(this.name.equals("GameObject"))
-            return;
         this.transform = new Transform();
-        if((this.model = getCurrentScene().findModel(this.name)) == null)
-            this.model = new Model(this.name);
     }
 
     public GameObject(String name, Model model, Transform transform){
@@ -32,7 +27,13 @@ public class GameObject {
     }
 
     public void Create() {
+
         getCurrentScene().add(this);
+        this.name = this.getClass().getSimpleName();
+        if(this.name.equals("GameObject"))
+            return;
+        if((this.model = getCurrentScene().findModel(this.name)) == null)
+            this.model = new Model(this.name);
     }
 
     public void Destroy() {

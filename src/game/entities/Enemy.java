@@ -33,8 +33,8 @@ public class Enemy extends GameObject implements Effectible {
 
     private void move(){
         positionOnTrack+=getSpeed()* Time.getDeltaTime();
-        if((track.getPathLength()-positionOnTrack)*(track.getPathLength()-positionOnTrack)<=1.0){
-            GameEngine.getCurrentScene().getGameObjectList().remove(this);
+        if((track.getPathLength()-positionOnTrack)*(track.getPathLength()-positionOnTrack)<=0.1){
+            Destroy();
             Player.damaged(damage * effectMultiplayer("damage"));
         }
         Vector2f v2p=track.getPosition(positionOnTrack);
@@ -81,6 +81,8 @@ public class Enemy extends GameObject implements Effectible {
         super.Update();
         move();
         takeDamage(effectSumma("time_damage")*(float)Time.getDeltaTime());
+        if(health<=0)
+            Destroy();
     }
 
     @Override

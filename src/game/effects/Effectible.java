@@ -29,7 +29,7 @@ public interface Effectible {
         return (1.0f-multiplayer);
     }
     default float effectSumma(String tag){
-        float summa = 1.0f;
+        float summa = 0.0f;
         for(Effect effect : effectList){
             if(effect.getTag().equals(tag)){
                 summa+=effect.getPower();
