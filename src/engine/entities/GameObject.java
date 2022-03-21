@@ -31,6 +31,17 @@ public class GameObject {
         this.transform = transform;
     }
 
+    public void Create() {
+        getCurrentScene().add(this);
+    }
+
+    public void Destroy() {
+        getCurrentScene().remove(this);
+    }
+
+    public void Update() {
+    }
+
     public String getName() {
         return name;
     }
@@ -133,5 +144,6 @@ public class GameObject {
         for(GameObject child: childes)
             child.scale(scale);
     }
+
 
 }

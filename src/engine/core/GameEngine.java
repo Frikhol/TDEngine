@@ -37,11 +37,14 @@ public class GameEngine {
     public static Scene getCurrentScene() {
         return scene;
     }
+    public static void setCurrentScene(Scene scene) {
+        GameEngine.scene = scene;
+    }
 
     public static void startEngine(){
         createDisplay();
         TextMaster.init(new Loader());
-        loadScene("Assets/scenes/test1.json");
+        loadScene("Assets/scenes/test2.json");
         new Renderer();
         guiRenderer = new GUIRenderer(new Loader());
         text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,TextMaster.getFonts().get("calibri"),
@@ -73,7 +76,7 @@ public class GameEngine {
     }
 
     public static void stopEngine(){
-        saveScene("Assets/scenes/test2.json");
+        //saveScene("Assets/scenes/test2.json");
         TextMaster.cleanUp();
         guiRenderer.cleanUp();
         Renderer.cleanUp();
@@ -123,5 +126,6 @@ public class GameEngine {
             e.printStackTrace();
         }
     }
+
 
 }

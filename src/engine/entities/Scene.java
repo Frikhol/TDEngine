@@ -52,6 +52,14 @@ public class Scene {
         this.gameObjectList = gameObjectList;
     }
 
+    public void add(GameObject gameObject) {
+        this.gameObjectList.add(gameObject);
+    }
+
+    public void remove(GameObject gameObject) {
+        this.gameObjectList.remove(gameObject);
+    }
+
     public Light getLight() {
         return light;
     }
@@ -87,4 +95,6 @@ public class Scene {
         }
         return null;
     }
+
+
 }

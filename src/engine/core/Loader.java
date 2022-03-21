@@ -26,12 +26,13 @@ public class Loader {
 
     private static Mesh loadToVAO(float[] positions, int[] indices, float[] textureCoords, float[] normals){
         int vaoID = createVAO();
+        List<Integer> vboList = new ArrayList<>();
         bindIndicesBuffer(indices);
-        storeDataInAttributeList(0,3,positions);
-        storeDataInAttributeList(1,2,textureCoords);
-        storeDataInAttributeList(2,3,normals);
+        vboList.add(storeDataInAttributeList(0,3,positions));
+        vboList.add(storeDataInAttributeList(1,2,textureCoords));
+        vboList.add(storeDataInAttributeList(2,3,normals));
         unbindVAO();
-        return new Mesh(vaoID,indices.length);
+        return new Mesh(vaoID,vboList,indices.length);
     }
 
     public static int loadToVAO(float[] positions,float[] textureCoords, List<Integer> vboList){
@@ -44,9 +45,10 @@ public class Loader {
 
     public static Mesh loadToVAO(float[] positions){
         int vaoID = createVAO();
-        storeDataInAttributeList(0,2,positions);
+        List<Integer> vboList = new ArrayList<>();
+        vboList.add(storeDataInAttributeList(0,2,positions));
         unbindVAO();
-        return new Mesh(vaoID,positions.length/2);
+        return new Mesh(vaoID,vboList,positions.length/2);
     }
 
     private static void bindIndicesBuffer(int[] indices){

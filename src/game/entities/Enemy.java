@@ -26,7 +26,7 @@ public class Enemy extends GameObject implements Effectible {
         this.speed = speed;
         this.resist = resist;
         Vector2f v2=track.getPosition(positionOnTrack);
-        this.getTransform().setPosition(new Vector3f(v2.x,0,v2.y));
+        this.setPosition(new Vector3f(v2.x,0,v2.y));
 
     }
 
@@ -39,8 +39,8 @@ public class Enemy extends GameObject implements Effectible {
         }
         Vector2f v2p=track.getPosition(positionOnTrack);
         float angle = track.getDirection(positionOnTrack);
-        this.getTransform().setPosition(new Vector3f(v2p.x,0,v2p.y));
-        this.getTransform().setRotation(new Vector3f(0,angle,0));
+        this.setPosition(new Vector3f(v2p.x,0,v2p.y));
+        this.setRotation(new Vector3f(0,angle,0));
     }
 
     public void takeDamage(float dmg){
@@ -56,7 +56,7 @@ public class Enemy extends GameObject implements Effectible {
     public float getResist() {
         return resist*percentEffectMultiplayer("resist");
     }
-    Vector2f getPosition(){
+    Vector2f getTrackPosition(){
         return track.getPosition(positionOnTrack);
     }
     public float getPositionOnTrack() {
@@ -101,7 +101,7 @@ public class Enemy extends GameObject implements Effectible {
 
         public BaseEnemyTest(Track track) {
             super(100, 0, track, 3f, 0);
-            this.getTransform().scale(0.1f);
+            this.scale(0.1f);
         }
     }
 }

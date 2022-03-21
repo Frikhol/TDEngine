@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import core.GameEngine;
 import entities.Camera;
 import entities.GameObject;
 import entities.Light;
@@ -34,6 +35,7 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
     @Override
     public Scene deserialize(JsonParser jsonParser, DeserializationContext deContext) throws IOException, JsonProcessingException {
         Scene scene = new Scene();
+        GameEngine.setCurrentScene(scene);
         JsonNode jNode = jsonParser.getCodec().readTree(jsonParser);
         JsonNode nameNode = jNode.get("name");
         scene.setName(nameNode.asText());
@@ -91,14 +93,16 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
                             guiTextNode.get("fontSize").floatValue(),
                             TextMaster.getFonts().get(guiTextNode.get("fontType").asText()),
                             new Vector2f(
-                                    Math.signum(posX)*(Math.abs(posX)-scaleX),
-                                    posY
+                                    (posX+1f)/2f-scaleX/2.0f,
+                                    (posY+(scaleY/2.0f)-1)/(-2f)
                             ),
-                            guiTextNode.get("maxLineSize").floatValue(),
+                            guiTextNode.get("maxLineSize").floatValue()/2.0f,
                             guiTextNode.get("centerText").asBoolean()
                     )
+
                     )
             );
+            System.out.println((posY-1)/(-2f)-(scaleY/2.0f));
         }
         scene.setCurrentGUI(curGUI);
         JsonNode lightNode = jNode.get("light");
@@ -114,8 +118,24 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
                         lightNode.get("colour").get("z").floatValue()
                 )
         ));
-        //JsonNode cameraNode = jNode.get("camera");                     потом поменяем, нах не нужно пока расположение камеры
-        scene.setCamera(new Camera());
+        JsonNode cameraNode = jNode.get("camera");
+        scene.setCamera(new Camera(
+                new Transform(
+                        new Vector3f(
+                                cameraNode.get("transform").get("position").get("x").floatValue(),
+                                cameraNode.get("transform").get("position").get("y").floatValue(),
+                                cameraNode.get("transform").get("position").get("z").floatValue()
+                        ),
+                        new Vector3f(
+                                cameraNode.get("transform").get("rotation").get("x").floatValue(),
+                                cameraNode.get("transform").get("rotation").get("y").floatValue(),
+                                cameraNode.get("transform").get("rotation").get("z").floatValue()
+                        )
+                        ),
+                cameraNode.get("pitch").floatValue(),
+                cameraNode.get("yaw").floatValue(),
+                cameraNode.get("roll").floatValue()
+        ));
         return scene;
     }
 }

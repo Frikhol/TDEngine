@@ -47,7 +47,7 @@ public class Tower extends GameObject implements Effectible {
         Enemy aimEnemy = null;
         for (int i=0;i<enemyList.size();i++){
             Enemy enemy = enemyList.get(i);
-            float distance = enemy.getPosition().distance(towerPosition);
+            float distance = enemy.getTrackPosition().distance(towerPosition);
             if(distance<=range){
                 if(aimEnemy == null) {
                     aimEnemy = enemy;
