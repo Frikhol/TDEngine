@@ -24,13 +24,12 @@ public class GUIObject {
         this.color = Color.white;
     }
 
-    public GUIObject(String guiType, Vector2f position, Vector2f scale, Color color, GUIText text) {
+    public GUIObject(String guiType, Vector2f position, Vector2f scale, Color color) {
         this.guiType = guiType;
         this.textureID = Loader.loadTexture("gui/"+ guiType +".png").getID();
         this.position = position;
         this.scale = scale;
         this.color = color;
-        this.text = text;
     }
 
     public GUIText getText() {
@@ -49,10 +48,7 @@ public class GUIObject {
     }
 
     public void setText(GUIText text) {
-        if(text!=null) {
             this.text = text;
-            this.text.setColour(text.getColour().x, text.getColour().y, text.getColour().z);
-        }
     }
 
     public Vector4f getColorVec4() {

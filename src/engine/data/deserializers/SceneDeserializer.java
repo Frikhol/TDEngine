@@ -72,7 +72,7 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
             float scaleY = guiScaleNode.get("y").floatValue();
             JsonNode guiColorNode = guiObjectNode.get("color");
             JsonNode guiTextNode = guiObjectNode.get("text");
-            curGUI.add(new GUIObject(
+            GUIObject guiObject = new GUIObject(
                     guiObjectNode.get("guiType").asText(),
                     new Vector2f(
                             posX,
@@ -87,22 +87,22 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
                             guiColorNode.get("g").floatValue(),
                             guiColorNode.get("b").floatValue(),
                             guiColorNode.get("a").floatValue()
-                    ),
-                    new GUIText(
-                            guiTextNode.get("text").asText(),
-                            guiTextNode.get("fontSize").floatValue(),
-                            TextMaster.getFonts().get(guiTextNode.get("fontType").asText()),
-                            new Vector2f(
-                                    guiTextNode.get("position").get("x").floatValue(),
-                                    guiTextNode.get("position").get("y").floatValue()
-                            ),
-                            guiTextNode.get("maxLineSize").floatValue(),
-                            guiTextNode.get("centerText").asBoolean()
-                    )
-
                     )
             );
-            System.out.println((posY-1)/(-2f)-(scaleY/2.0f));
+            if(guiTextNode!=null) {
+                guiObject.setText(new GUIText(
+                        guiTextNode.get("text").asText(),
+                        guiTextNode.get("fontSize").floatValue(),
+                        TextMaster.getFonts().get(guiTextNode.get("fontType").asText()),
+                        new Vector2f(
+                                guiTextNode.get("position").get("x").floatValue(),
+                                guiTextNode.get("position").get("y").floatValue()
+                        ),
+                        guiTextNode.get("maxLineSize").floatValue(),
+                        guiTextNode.get("centerText").asBoolean()
+                ));
+            }
+            curGUI.add(guiObject);
         }
         scene.setCurrentGUI(curGUI);
         JsonNode lightNode = jNode.get("light");

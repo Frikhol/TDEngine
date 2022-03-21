@@ -20,6 +20,11 @@ public class GameObject {
         this.transform = new Transform();
     }
 
+    public GameObject(String name){
+        this.name = name;
+        this.transform = new Transform();
+    }
+
     public GameObject(String name, Model model, Transform transform){
         this.name = name;
         this.model = model;
@@ -27,9 +32,9 @@ public class GameObject {
     }
 
     public void Create() {
-
         getCurrentScene().add(this);
-        this.name = this.getClass().getSimpleName();
+        if(this.name == null)
+            this.name = this.getClass().getSimpleName();
         if(this.name.equals("GameObject"))
             return;
         if((this.model = getCurrentScene().findModel(this.name)) == null)
@@ -105,13 +110,13 @@ public class GameObject {
     }
 
     public void rotateY(float y){
-        transform.rotateX(y);
+        transform.rotateY(y);
         for(GameObject child: childes)
             child.rotateY(y);
     }
 
     public void rotateZ(float z){
-        transform.rotateX(z);
+        transform.rotateZ(z);
         for(GameObject child: childes)
             child.rotateZ(z);
     }

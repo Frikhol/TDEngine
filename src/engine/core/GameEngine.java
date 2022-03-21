@@ -44,7 +44,7 @@ public class GameEngine {
     public static void startEngine(){
         createDisplay();
         TextMaster.init(new Loader());
-        loadScene("Assets/scenes/test2.json");
+        loadScene("Assets/scenes/GameTestScene.json");
         new Renderer();
         guiRenderer = new GUIRenderer(new Loader());
         text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,TextMaster.getFonts().get("calibri"),
@@ -76,7 +76,7 @@ public class GameEngine {
     }
 
     public static void stopEngine(){
-        //saveScene("Assets/scenes/test2.json");
+        //saveScene("Assets/scenes/GameTestScene.json");
         TextMaster.cleanUp();
         guiRenderer.cleanUp();
         Renderer.cleanUp();

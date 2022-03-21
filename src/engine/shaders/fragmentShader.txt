@@ -9,11 +9,9 @@ out vec4 out_Color;
 
 uniform sampler2D textureSampler;
 uniform vec3 lightColour;
+
 uniform float shineDamper;
 uniform float reflectivity;
-
-float levels = 4.0;
-float dampLevels = 3.0;
 
 void main(void){
 
@@ -31,8 +29,6 @@ void main(void){
     float specularFactor = dot(reflectedLightDirection,unitVectorToCamera);
     specularFactor = max(specularFactor,0.0);
     float dampedFactor = pow(specularFactor,shineDamper);
-    float dampLevel = floor(dampedFactor*dampLevels);
-    dampedFactor = dampLevel/dampLevels;
     vec3 finalSpecular = dampedFactor * lightColour * reflectivity;
 
     out_Color = vec4(diffuse,1.0) * texture(textureSampler,pass_textureCoords) + vec4(finalSpecular,1.0);

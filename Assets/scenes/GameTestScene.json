@@ -1,0 +1,73 @@
+{
+  "name": "Test1",
+  "gameObjectList": [
+    {
+      "name": "Location",
+      "model": "Location",
+      "transform": {
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -25.0
+        },
+        "rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": 2.0
+      }
+    }
+  ],
+  "currentGUI": {
+    "guiList": [
+      {
+        "guiType": "WhitePane",
+        "position": {
+          "x": 0.9375,
+          "y": 0.9375
+        },
+        "scale": {
+          "x": 0.0625,
+          "y": 0.0625
+        },
+        "color": {
+          "r": 0.0,
+          "g": 0.4,
+          "b": 0.6,
+          "a": 0.5
+        }
+      }
+    ]
+  },
+  "light": {
+    "position": {
+      "x": 500.0,
+      "y": 500.0,
+      "z": 1000.0
+    },
+    "colour": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0
+    }
+  },
+  "camera": {
+    "transform": {
+      "position": {
+        "x": 0.0,
+        "y": 5.500065,
+        "z": -20.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": 1.0
+    },
+    "pitch": 40.0,
+    "yaw": 0.0,
+    "roll": 0.0
+  }
+}

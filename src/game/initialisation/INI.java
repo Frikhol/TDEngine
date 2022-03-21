@@ -1,6 +1,7 @@
 package initialisation;
 
 import core.GameEngine;
+import core.MaterialTest;
 import entities.GameObject;
 import core.Game;
 import entities.Tower;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 
 public class INI {
     public static void main(String[] args) {
-        new Game();
+        //new Game();
+        new MaterialTest();
 
 
 

@@ -128,11 +128,11 @@ public class Tower extends GameObject implements Effectible {
         public BaseMagicTower(Vector3f position){
             super(position,
                     10,
-                    5,
+                    10,
                     1,
                     100,
                     0,
-                    new Bullet.BaseMagicBullet(5),
+                    new Bullet.BaseMagicBullet(15),
                     new Vector3f(1,1.5f,0)
             );
             this.scale(0.5f);
