@@ -59,6 +59,10 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
                     ),
                     goTransform.get("scale").floatValue()
                     );
+            model.getMaterial().setAmbientValue(gameObjectNode.get("material").get("ambientValue").floatValue());
+            model.getMaterial().setDiffuseValue(gameObjectNode.get("material").get("diffuseValue").floatValue());
+            model.getMaterial().setSmoothness(gameObjectNode.get("material").get("smoothness").floatValue());
+            model.getMaterial().setSpecularValue(gameObjectNode.get("material").get("specularValue").floatValue());
             scene.getGameObjectList().add(new GameObject(gameObjectNode.get("name").asText(),model,transform));
         }
         JsonNode guiNode = jNode.get("currentGUI");

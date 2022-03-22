@@ -4,6 +4,12 @@
     {
       "name": "Location",
       "model": "Location",
+      "material": {
+        "ambientValue": 0.7,
+        "diffuseValue": 1.0,
+        "smoothness": 64,
+        "specularValue": 0.0
+      },
       "transform": {
         "position": {
           "x": 0.0,

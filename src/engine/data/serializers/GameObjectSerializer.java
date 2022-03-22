@@ -22,6 +22,12 @@ public class GameObjectSerializer extends StdSerializer<GameObject> {
         jGen.writeStartObject();
         jGen.writeStringField("name" , gameObject.getName());
         jGen.writeStringField("model", gameObject.getModel().getName());
+        jGen.writeObjectFieldStart("material");
+        jGen.writeNumberField("ambientValue",gameObject.getModel().getMaterial().getAmbientValue());
+        jGen.writeNumberField("diffuseValue",gameObject.getModel().getMaterial().getDiffuseValue());
+        jGen.writeNumberField("smoothness",gameObject.getModel().getMaterial().getSmoothness());
+        jGen.writeNumberField("specularValue",gameObject.getModel().getMaterial().getSpecularValue());
+        jGen.writeEndObject();
         jGen.writeObjectField("transform", gameObject.getTransform());
         jGen.writeEndObject();
     }

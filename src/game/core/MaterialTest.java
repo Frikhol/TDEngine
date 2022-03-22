@@ -4,14 +4,11 @@ import entities.GameObject;
 import initialisation.GameProcess;
 import org.joml.Vector3f;
 
-import static core.GameEngine.*;
-
 public class MaterialTest extends GameProcess {
     private GameObject redObject;
     private GameObject greenObject;
     private GameObject whiteObject;
     public void start() {
-        getCurrentScene().getGameObjectList().get(0).getModel().getMaterial().setAmbientValue(0.6f);
         whiteObject = new GameObject("White");
         whiteObject.Create();
         whiteObject.setPosition(new Vector3f(0f,0f,-25f));
@@ -21,6 +18,8 @@ public class MaterialTest extends GameProcess {
         redObject.setPosition(new Vector3f(3f,0f,-25f));
         redObject.scale(0.2f);
         redObject.rotateY(90);
+        redObject.getModel().getMaterial().setDiffuseValue(0.2f);
+        redObject.getModel().getMaterial().setSpecularValue(0.8f);
         greenObject = new GameObject("Green");
         greenObject.Create();
         greenObject.setPosition(new Vector3f(-3f,0f,-25f));
