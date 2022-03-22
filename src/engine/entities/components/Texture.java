@@ -4,8 +4,8 @@ public class Texture {
 
     private int textureID;
 
-    private float shineDamper = 20;
-    private float reflectivity = 0.5f;
+    private float shineDamper = 64;
+    private float reflectivity = 0.9f;
 
     public Texture(int textureID){
         this.textureID = textureID;
