@@ -76,7 +76,7 @@ public class GameEngine {
     }
 
     public static void stopEngine(){
-        //saveScene("Assets/scenes/GameTestScene.json");
+        //saveScene("Assets/scenes/GameTestScene1.json");
         TextMaster.cleanUp();
         guiRenderer.cleanUp();
         Renderer.cleanUp();

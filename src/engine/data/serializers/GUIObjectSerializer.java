@@ -37,18 +37,20 @@ public class GUIObjectSerializer extends StdSerializer<GUIObject> {
                 jGen.writeNumberField("b",guiObject.getColor().getBlue());
                 jGen.writeNumberField("a",guiObject.getColor().getAlpha());
             jGen.writeEndObject();
-            jGen.writeObjectFieldStart("text");
-                jGen.writeStringField("text",guiObject.getTextString());
-                jGen.writeNumberField("fontSize",guiObject.getText().getFontSize());
-                jGen.writeStringField("fontType",guiObject.getText().getFontName());
+            if(guiObject.getText() != null) {
+                jGen.writeObjectFieldStart("text");
+                jGen.writeStringField("text", guiObject.getTextString());
+                jGen.writeNumberField("fontSize", guiObject.getText().getFontSize());
+                jGen.writeStringField("fontType", guiObject.getText().getFontName());
                 jGen.writeObjectFieldStart("position");
-                    Vector2f screenPos = GUI.getScreenPosition(guiObject.getPosition().x,guiObject.getPosition().y);
-                    jGen.writeNumberField("x",screenPos.x-guiObject.getScale().x/2f);
-                    jGen.writeNumberField("y",screenPos.y);
+                Vector2f screenPos = GUI.getScreenPosition(guiObject.getPosition().x, guiObject.getPosition().y);
+                jGen.writeNumberField("x", screenPos.x - guiObject.getScale().x / 2f);
+                jGen.writeNumberField("y", screenPos.y);
                 jGen.writeEndObject();
-                jGen.writeNumberField("maxLineSize",guiObject.getText().getMaxLineSize());
-                jGen.writeBooleanField("centerText",guiObject.getText().isCentered());
-            jGen.writeEndObject();
+                jGen.writeNumberField("maxLineSize", guiObject.getText().getMaxLineSize());
+                jGen.writeBooleanField("centerText", guiObject.getText().isCentered());
+                jGen.writeEndObject();
+            }
         jGen.writeEndObject();
     }
 }
