@@ -15,8 +15,10 @@ public class StaticShader extends ShaderProgram{
     private int location_viewMatrix;
     private int location_lightPosition;
     private int location_lightColour;
-    private int location_shineDamper;
-    private int location_reflectivity;
+    private int location_ambientValue;
+    private int location_diffuseValue;
+    private int location_smoothness;
+    private int location_specularValue;
 
     public StaticShader(){
         super(VERTEX_FILE,FRAGMENT_FILE);
@@ -36,13 +38,17 @@ public class StaticShader extends ShaderProgram{
         location_viewMatrix = super.getUniformLocation("viewMatrix");
         location_lightPosition = super.getUniformLocation("lightPosition");
         location_lightColour = super.getUniformLocation("lightColour");
-        location_shineDamper = super.getUniformLocation("shineDamper");
-        location_reflectivity = super.getUniformLocation("reflectivity");
+        location_ambientValue = super.getUniformLocation("ambientValue");
+        location_diffuseValue = super.getUniformLocation("diffuseValue");
+        location_smoothness = super.getUniformLocation("smoothness");
+        location_specularValue = super.getUniformLocation("specularValue");
     }
 
-    public void loadShineVariables(float damper,float reflectivity){
-        super.loadFloat(location_shineDamper,damper);
-        super.loadFloat(location_reflectivity,reflectivity);
+    public void loadMaterialVariables(float ambientValue,float diffuseValue,float smoothness,float specularValue){
+        super.loadFloat(location_ambientValue,ambientValue);
+        super.loadFloat(location_diffuseValue,diffuseValue);
+        super.loadFloat(location_smoothness,smoothness);
+        super.loadFloat(location_specularValue,specularValue);
     }
 
     public void loadTransformationMatrix(Matrix4f matrix){

@@ -72,8 +72,13 @@ public class Renderer {
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
-        Texture texture = model.getTexture();
-        shader.loadShineVariables(texture.getShineDamper(),texture.getReflectivity());
+        Texture texture = model.getMaterial().getTexture();
+        shader.loadMaterialVariables(
+                model.getMaterial().getAmbientValue(),
+                model.getMaterial().getDiffuseValue(),
+                model.getMaterial().getSmoothness(),
+                model.getMaterial().getSpecularValue()
+                );
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getID());
     }
