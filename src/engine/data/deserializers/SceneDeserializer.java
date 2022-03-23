@@ -1,23 +1,14 @@
 package data.deserializers;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import core.GameEngine;
-import entities.Camera;
-import entities.GameObject;
-import entities.Light;
-import entities.Scene;
-import entities.components.Model;
-import entities.components.Transform;
-import font.GUIText;
-import font.TextMaster;
-import layout.GUI;
-import layout.GUIObject;
-import layout.components.Color;
-import org.joml.Vector2f;
+import entities.*;
+import entities.components.*;
+import layout.*;
+import layout.objects.GUIPane;
 import org.joml.Vector3f;
 
 import java.io.IOException;
@@ -35,6 +26,11 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
     @Override
     public Scene deserialize(JsonParser jsonParser, DeserializationContext deContext) throws IOException, JsonProcessingException {
         Scene scene = new Scene();
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule simpleModule = new SimpleModule();
+        simpleModule.addDeserializer(GUIObject.class, new GUIObjectDeserializer());
+        simpleModule.addDeserializer(GUIPane.class, new GUIPaneDeserializer());
+        mapper.registerModule(simpleModule);
         GameEngine.setCurrentScene(scene);
         JsonNode jNode = jsonParser.getCodec().readTree(jsonParser);
         JsonNode nameNode = jNode.get("name");
@@ -68,60 +64,29 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
         JsonNode guiNode = jNode.get("currentGUI");
         GUI curGUI = new GUI();
         for(JsonNode guiObjectNode : guiNode.get("guiList")){
-            JsonNode guiPositionNode = guiObjectNode.get("position");
-            float posX = guiPositionNode.get("x").floatValue();
-            float posY = guiPositionNode.get("y").floatValue();
-            JsonNode guiScaleNode = guiObjectNode.get("scale");
-            float scaleX = guiScaleNode.get("x").floatValue();
-            float scaleY = guiScaleNode.get("y").floatValue();
-            JsonNode guiColorNode = guiObjectNode.get("color");
-            JsonNode guiTextNode = guiObjectNode.get("text");
-            GUIObject guiObject = new GUIObject(
-                    guiObjectNode.get("guiType").asText(),
-                    new Vector2f(
-                            posX,
-                            posY
-                    ),
-                    new Vector2f(
-                            scaleX,
-                            scaleY
-                    ),
-                    new Color(
-                            guiColorNode.get("r").floatValue(),
-                            guiColorNode.get("g").floatValue(),
-                            guiColorNode.get("b").floatValue(),
-                            guiColorNode.get("a").floatValue()
-                    )
-            );
-            if(guiTextNode!=null) {
-                guiObject.setText(new GUIText(
-                        guiTextNode.get("text").asText(),
-                        guiTextNode.get("fontSize").floatValue(),
-                        TextMaster.getFonts().get(guiTextNode.get("fontType").asText()),
-                        new Vector2f(
-                                guiTextNode.get("position").get("x").floatValue(),
-                                guiTextNode.get("position").get("y").floatValue()
-                        ),
-                        guiTextNode.get("maxLineSize").floatValue(),
-                        guiTextNode.get("centerText").asBoolean()
-                ));
+            try {
+                GUIObject guiClass = (GUIObject) Class.forName(guiObjectNode.get("guiType").asText()).newInstance();
+                curGUI.add(mapper.treeToValue(guiObjectNode, guiClass.getClass()));
+            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
-            curGUI.add(guiObject);
         }
         scene.setCurrentGUI(curGUI);
-        JsonNode lightNode = jNode.get("light");
-        scene.setLight(new Light(
-                new Vector3f(
-                        lightNode.get("position").get("x").floatValue(),
-                        lightNode.get("position").get("y").floatValue(),
-                        lightNode.get("position").get("z").floatValue()
-                ),
-                new Vector3f(
-                        lightNode.get("colour").get("x").floatValue(),
-                        lightNode.get("colour").get("y").floatValue(),
-                        lightNode.get("colour").get("z").floatValue()
-                )
-        ));
+        JsonNode lightsNode = jNode.get("lights");
+        for(JsonNode lightNode : lightsNode) {
+            scene.getLights().add(new Light(
+                    new Vector3f(
+                            lightNode.get("position").get("x").floatValue(),
+                            lightNode.get("position").get("y").floatValue(),
+                            lightNode.get("position").get("z").floatValue()
+                    ),
+                    new Vector3f(
+                            lightNode.get("colour").get("x").floatValue(),
+                            lightNode.get("colour").get("y").floatValue(),
+                            lightNode.get("colour").get("z").floatValue()
+                    )
+            ));
+        }
         JsonNode cameraNode = jNode.get("camera");
         scene.setCamera(new Camera(
                 new Transform(

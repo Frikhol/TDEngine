@@ -2,6 +2,7 @@ package core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import data.deserializers.GUIObjectDeserializer;
 import data.deserializers.SceneDeserializer;
 import data.serializers.GUIObjectSerializer;
 import data.serializers.GameObjectSerializer;
@@ -118,6 +119,7 @@ public class GameEngine {
         SimpleModule simpleModule = new SimpleModule();
 
         simpleModule.addDeserializer(Scene.class, new SceneDeserializer());
+        simpleModule.addDeserializer(GUIObject.class, new GUIObjectDeserializer());
         mapper.registerModule(simpleModule);
 
         try {

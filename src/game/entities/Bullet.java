@@ -1,14 +1,20 @@
 package entities;
 
 import org.joml.Vector3f;
-import tools.Maths;
+import static core.GameEngine.*;
 import tools.Time;
 
 public class Bullet extends GameObject{
     protected float speed;
     protected float damage;
     protected Enemy target;
+    protected int lightId;
     //texture
+
+
+    public int getLightId() {
+        return lightId;
+    }
 
     public void setDamage(float damage) {
         this.damage = damage;
@@ -42,10 +48,13 @@ public class Bullet extends GameObject{
     @Override
     public void Create() {
         super.Create();
+        this.lightId = getCurrentScene().getLights().size();
+        getCurrentScene().getLights().add(new Light(getPosition(),new Vector3f(0,0.5f,0),new Vector3f(1,0.01f,0.002f)));
     }
 
     @Override
     public void Destroy() {
+        getCurrentScene().getLights().remove(getLightId());
         super.Destroy();
     }
 
@@ -71,6 +80,7 @@ public class Bullet extends GameObject{
                  speed*(float)Time.getDeltaTime()
         );
         getTransform().getPosition().add(direction);
+        getCurrentScene().getLights().get(getLightId()).setPosition(getPosition());
     }
     boolean hit(){
         if(!target.isAlive())

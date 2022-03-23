@@ -22,7 +22,7 @@ public class GUIObjectSerializer extends StdSerializer<GUIObject> {
     @Override
     public void serialize(GUIObject guiObject, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
         jGen.writeStartObject();
-            jGen.writeStringField("guiType",guiObject.getGuiType());
+            jGen.writeStringField("guiType",guiObject.getClass().getName());
             jGen.writeObjectFieldStart("position");
                 jGen.writeNumberField("x",guiObject.getPosition().x);
                 jGen.writeNumberField("y",guiObject.getPosition().y);

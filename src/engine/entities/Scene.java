@@ -13,7 +13,7 @@ public class Scene {
     private ArrayList<GameObject> gameObjectList = new ArrayList<GameObject>();
     private ArrayList<Model> prefabs = new ArrayList<Model>();
     private GUI currentGUI;
-    private Light light;
+    private List<Light> lights = new ArrayList<>();
     private Camera camera;
     private KeyList keyList = null;
 
@@ -60,12 +60,12 @@ public class Scene {
         this.gameObjectList.remove(gameObject);
     }
 
-    public Light getLight() {
-        return light;
+    public List<Light> getLights() {
+        return lights;
     }
 
-    public void setLight(Light light) {
-        this.light = light;
+    public void setLights(List<Light> lights) {
+        this.lights = lights;
     }
 
     public Camera getCamera() {

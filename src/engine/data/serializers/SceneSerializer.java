@@ -33,18 +33,18 @@ public class SceneSerializer extends StdSerializer<Scene> {
             jGen.writeObject(guiObject);
         jGen.writeEndArray();
         jGen.writeEndObject();
-        jGen.writeObjectFieldStart("light");
+        /*jGen.writeObjectFieldStart("light");
             jGen.writeObjectFieldStart("position");
-                jGen.writeNumberField("x",scene.getLight().getPosition().x);
-                jGen.writeNumberField("y",scene.getLight().getPosition().y);
-                jGen.writeNumberField("z",scene.getLight().getPosition().z);
+                jGen.writeNumberField("x",scene.getLights().getPosition().x);
+                jGen.writeNumberField("y",scene.getLights().getPosition().y);
+                jGen.writeNumberField("z",scene.getLights().getPosition().z);
             jGen.writeEndObject();
             jGen.writeObjectFieldStart("colour");
-                jGen.writeNumberField("x",scene.getLight().getColour().x);
-                jGen.writeNumberField("y",scene.getLight().getColour().y);
-                jGen.writeNumberField("z",scene.getLight().getColour().z);
+                jGen.writeNumberField("x",scene.getLights().getColour().x);
+                jGen.writeNumberField("y",scene.getLights().getColour().y);
+                jGen.writeNumberField("z",scene.getLights().getColour().z);
             jGen.writeEndObject();
-        jGen.writeEndObject();
+        jGen.writeEndObject();*/
         jGen.writeObjectFieldStart("camera");
             jGen.writeObjectField("transform",scene.getCamera().getTransform());
             jGen.writeNumberField("pitch",scene.getCamera().getPitch());

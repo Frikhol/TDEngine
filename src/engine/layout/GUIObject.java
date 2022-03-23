@@ -8,13 +8,15 @@ import layout.components.Color;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-public class GUIObject {
+public class GUIObject extends Object{
     private String guiType;
     private int textureID;
     private Vector2f position;
     private Vector2f scale;
     private Color color;
     private GUIText text;
+
+    public GUIObject(){}
 
     public GUIObject(String guiType, Vector2f position, Vector2f scale) {
         this.guiType = guiType;

@@ -48,10 +48,10 @@ public class Renderer {
      */
 
     public static void render(){
-        Light light = GameEngine.getCurrentScene().getLight();
+        List<Light> lights = GameEngine.getCurrentScene().getLights();
         Camera camera = GameEngine.getCurrentScene().getCamera();
         shader.start();
-        shader.loadLight(light);
+        shader.loadLights(lights);
         shader.loadViewMatrix(camera);
         processEntities();
         for(Model model: entities.keySet()){
