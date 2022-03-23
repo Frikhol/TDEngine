@@ -33,7 +33,8 @@ void main(void){
         vec3 reflectedLightDirection = reflect(lightDirection,unitNormal);
 
         float nDot1 = dot(unitNormal,unitLightVector);
-        totalDiffuse = totalDiffuse + (max(min(diffuseValue,1.0),0.0) * nDot1 * lightColour[i])/attFactor;
+        float brightness = max(nDot1,0.0);
+        totalDiffuse = totalDiffuse + (max(min(diffuseValue,1.0),0.0) * brightness * lightColour[i])/attFactor;
 
         float specularFactor = dot(reflectedLightDirection,unitVectorToCamera);
         specularFactor = max(specularFactor,0.0);

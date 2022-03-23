@@ -49,7 +49,7 @@ public class Bullet extends GameObject{
     public void Create() {
         super.Create();
         this.lightId = getCurrentScene().getLights().size();
-        getCurrentScene().getLights().add(new Light(getPosition(),new Vector3f(0,0.5f,0),new Vector3f(1,0.01f,0.002f)));
+        getCurrentScene().getLights().add(new Light(getPosition(),new Vector3f(0,0.2f,0),new Vector3f(1,0.01f,0.002f)));
     }
 
     @Override
