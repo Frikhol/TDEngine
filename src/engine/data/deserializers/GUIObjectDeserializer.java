@@ -28,10 +28,9 @@ public class GUIObjectDeserializer extends StdDeserializer<GUIObject> {
         JsonNode jNode = jsonParser.getCodec().readTree(jsonParser);
         JsonNode guiPositionNode = jNode.get("position");
         JsonNode guiScaleNode = jNode.get("scale");
-        JsonNode guiColorNode = jNode.get("color");
+        JsonNode guiColorNode = jNode.get("textureColor");
         JsonNode guiTextNode = jNode.get("text");
         GUIObject guiObject = new GUIObject(
-                "WhitePane",
                 new Vector2f(
                         guiPositionNode.get("x").floatValue(),
                         guiPositionNode.get("y").floatValue()
@@ -39,15 +38,15 @@ public class GUIObjectDeserializer extends StdDeserializer<GUIObject> {
                 new Vector2f(
                         guiScaleNode.get("x").floatValue(),
                         guiScaleNode.get("y").floatValue()
-                ),
-                new Color(
-                        guiColorNode.get("r").floatValue(),
-                        guiColorNode.get("g").floatValue(),
-                        guiColorNode.get("b").floatValue(),
-                        guiColorNode.get("a").floatValue()
                 )
         );
-        if(guiTextNode!=null) {
+        guiObject.getTexture().setColor(new Color(
+                guiColorNode.get("r").floatValue(),
+                guiColorNode.get("g").floatValue(),
+                guiColorNode.get("b").floatValue(),
+                guiColorNode.get("a").floatValue()
+        ));
+        /*if(guiTextNode!=null) {
             guiObject.setText(new GUIText(
                     guiTextNode.get("text").asText(),
                     guiTextNode.get("fontSize").floatValue(),
@@ -59,7 +58,7 @@ public class GUIObjectDeserializer extends StdDeserializer<GUIObject> {
                     guiTextNode.get("maxLineSize").floatValue(),
                     guiTextNode.get("centerText").asBoolean()
             ));
-        }
+        }*/
         return guiObject;
     }
 }

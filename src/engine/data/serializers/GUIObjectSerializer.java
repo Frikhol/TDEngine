@@ -22,7 +22,7 @@ public class GUIObjectSerializer extends StdSerializer<GUIObject> {
     @Override
     public void serialize(GUIObject guiObject, JsonGenerator jGen, SerializerProvider serializerProvider) throws IOException {
         jGen.writeStartObject();
-            jGen.writeStringField("guiType",guiObject.getClass().getName());
+            jGen.writeStringField("guiClass",guiObject.getClass().getName());
             jGen.writeObjectFieldStart("position");
                 jGen.writeNumberField("x",guiObject.getPosition().x);
                 jGen.writeNumberField("y",guiObject.getPosition().y);
@@ -31,13 +31,13 @@ public class GUIObjectSerializer extends StdSerializer<GUIObject> {
                 jGen.writeNumberField("x",guiObject.getScale().x);
                 jGen.writeNumberField("y",guiObject.getScale().y);
             jGen.writeEndObject();
-            jGen.writeObjectFieldStart("color");
-                jGen.writeNumberField("r",guiObject.getColor().getRed());
-                jGen.writeNumberField("g",guiObject.getColor().getGreen());
-                jGen.writeNumberField("b",guiObject.getColor().getBlue());
-                jGen.writeNumberField("a",guiObject.getColor().getAlpha());
+            jGen.writeObjectFieldStart("textureColor");
+                jGen.writeNumberField("r",guiObject.getTexture().getColor().getRed());
+                jGen.writeNumberField("g",guiObject.getTexture().getColor().getGreen());
+                jGen.writeNumberField("b",guiObject.getTexture().getColor().getBlue());
+                jGen.writeNumberField("a",guiObject.getTexture().getColor().getAlpha());
             jGen.writeEndObject();
-            if(guiObject.getText() != null) {
+            /*if(guiObject.getText() != null) {
                 jGen.writeObjectFieldStart("text");
                 jGen.writeStringField("text", guiObject.getTextString());
                 jGen.writeNumberField("fontSize", guiObject.getText().getFontSize());
@@ -50,7 +50,7 @@ public class GUIObjectSerializer extends StdSerializer<GUIObject> {
                 jGen.writeNumberField("maxLineSize", guiObject.getText().getMaxLineSize());
                 jGen.writeBooleanField("centerText", guiObject.getText().isCentered());
                 jGen.writeEndObject();
-            }
+            }*/
         jGen.writeEndObject();
     }
 }

@@ -28,7 +28,7 @@
   "currentGUI": {
     "guiList": [
       {
-        "guiType": "layout.GUIObject",
+        "guiClass": "layout.GUIObject",
         "position": {
           "x": 0.9375,
           "y": 0.9375
@@ -37,7 +37,7 @@
           "x": 0.0625,
           "y": 0.0625
         },
-        "color": {
+        "textureColor": {
           "r": 0.0,
           "g": 0.4,
           "b": 0.6,

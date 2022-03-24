@@ -24,7 +24,7 @@ public class Game extends GameProcess {
                 );
         enemy1 = new Enemy.BaseEnemyTest(track);
         enemy1.Create();
-        new Tower.BaseMagicTower(new Vector3f(0,1.5f,-25)).Create();
+        new Tower.BaseMagicTower(new Vector3f(0,1f,-25)).Create();
     }
     public void update(){
     }

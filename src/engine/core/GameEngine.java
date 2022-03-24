@@ -33,7 +33,7 @@ public class GameEngine {
 
     private static Scene scene;
     private static GUIText text;
-    private static GUIRenderer guiRenderer; // make static
+    private static GUIRenderer guiRenderer; //TODO make static
 
     public static Scene getCurrentScene() {
         return scene;
@@ -44,10 +44,10 @@ public class GameEngine {
 
     public static void startEngine(){
         createDisplay();
-        TextMaster.init(new Loader());
+        TextMaster.init();
         loadScene("Assets/scenes/GameTestScene.json");
         new Renderer();
-        guiRenderer = new GUIRenderer(new Loader());
+        guiRenderer = new GUIRenderer();
         text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,TextMaster.getFonts().get("calibri"),
                 new Vector2f((float)(getDisplayWIDTH()[0]-(getDisplayWIDTH()[0]/16))/getDisplayWIDTH()[0],
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),

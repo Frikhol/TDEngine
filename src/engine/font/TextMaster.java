@@ -21,7 +21,7 @@ public class TextMaster {
         return fonts;
     }
 
-    public static void init(Loader theLoader){
+    public static void init(){
         renderer = new FontRenderer();
         FontType font = new FontType(Loader.loadTexture("fonts/calibri.png").getID(),new File("Assets/fonts/calibri.fnt"));
         fonts.put("calibri",font);

@@ -65,7 +65,7 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
         GUI curGUI = new GUI();
         for(JsonNode guiObjectNode : guiNode.get("guiList")){
             try {
-                GUIObject guiClass = (GUIObject) Class.forName(guiObjectNode.get("guiType").asText()).newInstance();
+                GUIObject guiClass = (GUIObject) Class.forName(guiObjectNode.get("guiClass").asText()).newInstance();
                 curGUI.add(mapper.treeToValue(guiObjectNode, guiClass.getClass()));
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
                 e.printStackTrace();

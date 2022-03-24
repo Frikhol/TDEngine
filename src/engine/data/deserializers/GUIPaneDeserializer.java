@@ -32,7 +32,6 @@ public class GUIPaneDeserializer extends StdDeserializer<GUIPane> {
         JsonNode guiColorNode = jNode.get("color");
         JsonNode guiTextNode = jNode.get("text");
         GUIPane guiObject = (GUIPane) new GUIObject(
-                "GUIPane",
                 new Vector2f(
                         guiPositionNode.get("x").floatValue(),
                         guiPositionNode.get("y").floatValue()
@@ -40,27 +39,14 @@ public class GUIPaneDeserializer extends StdDeserializer<GUIPane> {
                 new Vector2f(
                         guiScaleNode.get("x").floatValue(),
                         guiScaleNode.get("y").floatValue()
-                ),
-                new Color(
-                        guiColorNode.get("r").floatValue(),
-                        guiColorNode.get("g").floatValue(),
-                        guiColorNode.get("b").floatValue(),
-                        guiColorNode.get("a").floatValue()
                 )
         );
-        if(guiTextNode!=null) {
-            guiObject.setText(new GUIText(
-                    guiTextNode.get("text").asText(),
-                    guiTextNode.get("fontSize").floatValue(),
-                    TextMaster.getFonts().get(guiTextNode.get("fontType").asText()),
-                    new Vector2f(
-                            guiTextNode.get("position").get("x").floatValue(),
-                            guiTextNode.get("position").get("y").floatValue()
-                    ),
-                    guiTextNode.get("maxLineSize").floatValue(),
-                    guiTextNode.get("centerText").asBoolean()
-            ));
-        }
+        guiObject.getTexture().setColor(new Color(
+                guiColorNode.get("r").floatValue(),
+                guiColorNode.get("g").floatValue(),
+                guiColorNode.get("b").floatValue(),
+                guiColorNode.get("a").floatValue()
+        ));
         return guiObject;
     }
 }

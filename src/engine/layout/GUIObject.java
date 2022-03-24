@@ -1,40 +1,22 @@
 package layout;
 
-
-import core.Loader;
-import font.GUIText;
-import font.TextMaster;
-import layout.components.Color;
+import layout.components.GUITexture;
 import org.joml.Vector2f;
-import org.joml.Vector4f;
 
 public class GUIObject extends Object{
-    private String guiType;
-    private int textureID;
+    private GUITexture texture;
     private Vector2f position;
     private Vector2f scale;
-    private Color color;
-    private GUIText text;
 
     public GUIObject(){}
 
-    public GUIObject(String guiType, Vector2f position, Vector2f scale) {
-        this.guiType = guiType;
-        this.textureID = Loader.loadTexture("gui/"+ guiType +".png").getID();
+    public GUIObject(Vector2f position, Vector2f scale) {
+        this.texture = GUITexture.findTexture(this.getClass().getSimpleName());
         this.position = position;
         this.scale = scale;
-        this.color = Color.white;
     }
 
-    public GUIObject(String guiType, Vector2f position, Vector2f scale, Color color) {
-        this.guiType = guiType;
-        this.textureID = Loader.loadTexture("gui/"+ guiType +".png").getID();
-        this.position = position;
-        this.scale = scale;
-        this.color = color;
-    }
-
-    public GUIText getText() {
+    /*public GUIText getText() {
         return text;
     }
 
@@ -51,35 +33,10 @@ public class GUIObject extends Object{
 
     public void setText(GUIText text) {
             this.text = text;
-    }
+    }*/
 
-    public Vector4f getColorVec4() {
-        return color.toVector4f();
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(int R, int G, int B, int a) {
-        this.color = new Color(R,G,B,a);
-    }
-
-    public String getGuiType() {
-        return guiType;
-    }
-
-    public void setGuiType(String guiType) {
-        this.guiType = guiType;
-        this.textureID = Loader.loadTexture("gui/"+ guiType +".png").getID();
-    }
-
-    public int getTextureID() {
-        return textureID;
-    }
-
-    public void setTextureID(int textureID) {
-        this.textureID = textureID;
+    public GUITexture getTexture() {
+        return texture;
     }
 
     public Vector2f getPosition() {

@@ -12,10 +12,10 @@ public class MaterialTest extends GameProcess {
     private GameObject greenObject;
     private GameObject whiteObject;
     public void start() {
-        whiteObject = new GameObject("White");
+        whiteObject = new GameObject("Tower");
         whiteObject.Create();
         whiteObject.setPosition(new Vector3f(0f,0f,-25f));
-        whiteObject.scale(0.2f);
+        whiteObject.scale(1f);
         redObject = new GameObject("Red");
         redObject.Create();
         redObject.setPosition(new Vector3f(3f,1f,-25f));
@@ -23,7 +23,7 @@ public class MaterialTest extends GameProcess {
         redObject.rotateY(90);
         redObject.getModel().getMaterial().setDiffuseValue(0.2f);
         redObject.getModel().getMaterial().setSpecularValue(0.8f);
-        getCurrentScene().getLights().add(new Light(redObject.getPosition(),new Vector3f(0.5f,0,0),new Vector3f(1,0.01f,0.002f)));
+        getCurrentScene().getLights().add(new Light(redObject.getPosition(),new Vector3f(0.2f,0,0),new Vector3f(1,0.01f,0.002f)));
         greenObject = new GameObject("Green");
         greenObject.Create();
         greenObject.setPosition(new Vector3f(-3f,0f,-25f));
