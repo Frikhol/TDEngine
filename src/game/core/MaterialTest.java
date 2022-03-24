@@ -3,6 +3,8 @@ package core;
 import entities.GameObject;
 import entities.Light;
 import initialisation.GameProcess;
+import layout.components.Color;
+import layout.objects.GUIPane;
 import org.joml.Vector3f;
 
 import static core.GameEngine.*;

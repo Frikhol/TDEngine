@@ -29,7 +29,7 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addDeserializer(GUIObject.class, new GUIObjectDeserializer());
-        simpleModule.addDeserializer(GUIPane.class, new GUIPaneDeserializer());
+        //simpleModule.addDeserializer(GUIPane.class, new GUIPaneDeserializer());
         mapper.registerModule(simpleModule);
         GameEngine.setCurrentScene(scene);
         JsonNode jNode = jsonParser.getCodec().readTree(jsonParser);

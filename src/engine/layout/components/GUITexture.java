@@ -20,7 +20,6 @@ public class GUITexture {
         this.name = name;
         this.color = color;
         this.textureID = Loader.loadTexture("gui/"+ name +".png").getID();
-        System.out.println(name+"\n"+textureID);
         guiTextures.add(this);
     }
 

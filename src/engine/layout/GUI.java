@@ -33,12 +33,12 @@ public class GUI {
         guiList.remove(guiObject);
     }
 
-    public static Vector2f getProperPosition(int x, int y){
-        return new Vector2f(2f*((float)x/(float)getDisplayWIDTH()[0])-1.0f,(-2f)*((float)y/(float)getDisplayHEIGHT()[0]) +1);
+    public static Vector2f getProperPosition(float x, float y){
+        return new Vector2f(2f*(x)-1.0f,(-2f)*(y) +1);
     }
 
-    public static Vector2f getScreenPosition(float x, float y){
-        return new Vector2f((x+1f)/2f,(y-1)/(-2f));
+    public static Vector2f getScreenPosition(Vector2f pos){
+        return new Vector2f((pos.x+1f)/2f,(pos.y-1)/(-2f));
     }
 
     public static Vector2f getProperScale(int width,int height){

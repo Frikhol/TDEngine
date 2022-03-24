@@ -1,5 +1,5 @@
 package data.deserializers;
-
+/*
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -49,4 +49,4 @@ public class GUIPaneDeserializer extends StdDeserializer<GUIPane> {
         ));
         return guiObject;
     }
-}
+}*/
