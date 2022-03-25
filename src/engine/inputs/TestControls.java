@@ -2,6 +2,7 @@ package inputs;
 
 import core.GameEngine;
 import entities.Camera;
+import initialisation.GameProcess;
 import layout.GUI;
 import layout.GUIObject;
 import layout.objects.GUIButton;
@@ -32,6 +33,8 @@ public class TestControls implements InputList {
     public void keyPressed(int key, int mods) {
         if(key == KeyCode.GLFW_KEY_F1)
             GUI.changePolyMode();
+        if(key == KeyCode.GLFW_KEY_P)
+            GameProcess.setPause(!GameProcess.isPause());
     }
 
     @Override
