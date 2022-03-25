@@ -31,11 +31,11 @@ public class GUIObjectSerializer extends StdSerializer<GUIObject> {
                 jGen.writeNumberField("x",guiObject.getScale().x);
                 jGen.writeNumberField("y",guiObject.getScale().y);
             jGen.writeEndObject();
-            jGen.writeObjectFieldStart("textureColor");
-                jGen.writeNumberField("r",guiObject.getTexture().getColor().getRed());
-                jGen.writeNumberField("g",guiObject.getTexture().getColor().getGreen());
-                jGen.writeNumberField("b",guiObject.getTexture().getColor().getBlue());
-                jGen.writeNumberField("a",guiObject.getTexture().getColor().getAlpha());
+            jGen.writeObjectFieldStart("color");
+                jGen.writeNumberField("r",guiObject.getColor().getRed());
+                jGen.writeNumberField("g",guiObject.getColor().getGreen());
+                jGen.writeNumberField("b",guiObject.getColor().getBlue());
+                jGen.writeNumberField("a",guiObject.getColor().getAlpha());
             jGen.writeEndObject();
             /*if(guiObject.getText() != null) {
                 jGen.writeObjectFieldStart("text");

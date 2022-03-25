@@ -16,8 +16,26 @@ public class GameDisplay {
     private static long displayID;
     private static int[] WIDTH = new int[1]; //make changeable
     private static int[] HEIGHT = new int[1]; //make changeable
+    private static double cursorX = 0;
+    private static double cursorY = 0;
     private static int FPS = 144;
     private static int SAMPLES = 16;
+
+    public static double getCursorX() {
+        return cursorX;
+    }
+
+    public static void setCursorX(double cursorX) {
+        GameDisplay.cursorX = cursorX;
+    }
+
+    public static double getCursorY() {
+        return cursorY;
+    }
+
+    public static void setCursorY(double cursorY) {
+        GameDisplay.cursorY = cursorY;
+    }
 
     public static int getFPS() {
         return FPS;

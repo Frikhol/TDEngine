@@ -4,7 +4,7 @@ import core.GameEngine;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
 
-public class InputHandler{
+public class KeyInputHandler {
 
     private static int[] keys = new int[512];
     private static KeyList keyList;

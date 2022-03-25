@@ -18,11 +18,11 @@ public class Color {
 
     public final static Color GRAY = gray;
 
-    public final static Color darkGray  = new Color(64, 64, 64);
+    public final static Color darkGray  = new Color(80, 80, 80);
 
     public final static Color DARK_GRAY = darkGray;
 
-    public final static Color black     = new Color(0, 0, 0);
+    public final static Color black     = new Color(55, 55, 55);
 
     public final static Color BLACK = black;
 

@@ -14,16 +14,16 @@ import entities.Scene;
 import entities.components.Transform;
 import font.GUIText;
 import font.TextMaster;
+import inputs.CursorInputHadler;
 import layout.GUIObject;
 import layout.shaders.GUIRenderer;
-import inputs.InputHandler;
+import inputs.KeyInputHandler;
 import inputs.TestControls;
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 import static display.GameDisplay.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -53,7 +53,8 @@ public class GameEngine {
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),
                 (float)(getDisplayWIDTH()[0]/16)/getDisplayWIDTH()[0],true);
         scene.setKeyList(new TestControls());
-        glfwSetKeyCallback(getDisplayID(), InputHandler.keyCallback);
+        glfwSetKeyCallback(getDisplayID(), KeyInputHandler.keyCallback);
+        glfwSetCursorPosCallback(getDisplayID(), CursorInputHadler.cursorPosCallback);
         checkWindowResize();
     }
 
@@ -67,7 +68,8 @@ public class GameEngine {
         render();
         glfwSwapBuffers(getDisplayID()); // Don't delete
         glfwPollEvents();
-        InputHandler.getInputs();
+        KeyInputHandler.getInputs();
+        CursorInputHadler.cursorInputs();
     }
 
     private static void render(){
@@ -92,6 +94,8 @@ public class GameEngine {
             public void invoke(long window, int w, int h) {
                 glViewport(0,0,w,h);
                 Renderer.createProjectionMatrix();
+                for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList())
+                    guiObject.reset();
             }
         };
         glfwSetWindowSizeCallback(getDisplayID(), sizeCallback);

@@ -28,7 +28,7 @@ public class GUIObjectDeserializer extends StdDeserializer<GUIObject> {
         JsonNode jNode = jsonParser.getCodec().readTree(jsonParser);
         JsonNode guiPositionNode = jNode.get("position");
         JsonNode guiScaleNode = jNode.get("scale");
-        JsonNode guiColorNode = jNode.get("textureColor");
+        JsonNode guiColorNode = jNode.get("color");
         JsonNode guiTextNode = jNode.get("text");
         GUIObject guiObject = new GUIObject(
                 new Vector2f(
@@ -40,7 +40,7 @@ public class GUIObjectDeserializer extends StdDeserializer<GUIObject> {
                         guiScaleNode.get("y").floatValue()
                 )
         );
-        guiObject.getTexture().setColor(new Color(
+        guiObject.setColor(new Color(
                 guiColorNode.get("r").floatValue(),
                 guiColorNode.get("g").floatValue(),
                 guiColorNode.get("b").floatValue(),

@@ -2,7 +2,10 @@ package layout;
 
 import static display.GameDisplay.*;
 
+import layout.objects.GUIPane;
 import org.joml.Vector2f;
+import org.joml.Vector2i;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,22 +30,45 @@ public class GUI {
 
     public void add(GUIObject guiObject){
         guiList.add(guiObject);
+        if(guiObject instanceof GUIPane) {
+            guiList.addAll(((GUIPane) guiObject).getGrid().getGridList());
+        }
     }
 
     public void remove(GUIObject guiObject){
         guiList.remove(guiObject);
     }
 
-    public static Vector2f getProperPosition(float x, float y){
-        return new Vector2f(2f*(x)-1.0f,(-2f)*(y) +1);
+    public static Vector2f getProperPosition(int x, int y,int width,int height){
+        int screenWidth = getDisplayWIDTH()[0]/2;
+        int screenHeight = getDisplayHEIGHT()[0]/2;
+        if(x<screenWidth){
+            if(y<=screenHeight){//LEFT UP COORDINATE PANE
+                return new Vector2f((-(1-(((float)x+(float)width/2)/(float)screenWidth))),(1-(((float)x+(float)height/2)/(float)screenHeight)));
+            }
+            //LEFT DOWN COORDINATE PANE
+            return new Vector2f((-(1-(((float)x+(float)width/2)/(float)screenWidth))),(-((((float)y+(float)height/2)/(float)screenHeight)-1)));
+        }
+        else if(x>=screenWidth){
+            if(y<=screenHeight){//RIGHT UP COORDINATE PANE
+                return new Vector2f(((((float)x+(float)width/2)/(float)screenWidth)-1),(1-(((float)y+(float)height/2)/(float)screenHeight)));
+            }
+            //RIGHT DOWN COORDINATE PANE
+            return new Vector2f(((((float)x+(float)width/2)/(float)screenWidth)-1),(-((((float)y+(float)height/2)/(float)screenHeight)-1)));
+        }
+        return null;
     }
 
-    public static Vector2f getScreenPosition(Vector2f pos){
-        return new Vector2f((pos.x+1f)/2f,(pos.y-1)/(-2f));
+    public static Vector2i getLocation(Vector2f position,Vector2f scale){
+        return new Vector2i((int)(((position.x+1f)/2f-scale.x/2f)*getDisplayWIDTH()[0]),(int)(((position.y-1)/(-2f)-scale.y/2f)*getDisplayHEIGHT()[0]));
     }
 
     public static Vector2f getProperScale(int width,int height){
         return new Vector2f((float)width/(float)(getDisplayWIDTH()[0]),(float)height/(float)(getDisplayHEIGHT()[0]));
+    }
+
+    public static Vector2i getSize(Vector2f scale){
+        return new Vector2i((int)(scale.x*getDisplayWIDTH()[0]),(int)(scale.y*getDisplayHEIGHT()[0]));
     }
 
     public static void changePolyMode(){

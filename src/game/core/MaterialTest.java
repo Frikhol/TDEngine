@@ -4,6 +4,7 @@ import entities.GameObject;
 import entities.Light;
 import initialisation.GameProcess;
 import layout.components.Color;
+import layout.objects.GUIButton;
 import layout.objects.GUIPane;
 import org.joml.Vector3f;
 
@@ -31,6 +32,18 @@ public class MaterialTest extends GameProcess {
         greenObject.setPosition(new Vector3f(-3f,0f,-25f));
         greenObject.scale(0.2f);
         greenObject.rotateY(90);
+        GUIPane some1 = new GUIPane(100,300);
+        getCurrentScene().getCurrentGUI().add(some1);
+        GUIButton some2 = new GUIButton(100,50);
+        some2.setColor(Color.cyan);
+        GUIButton some3 = new GUIButton(100,50);
+        some3.setColor(Color.red);
+        GUIButton some4 = new GUIButton(100,50);
+        some4.setColor(Color.green);
+        some1.add(some2);
+        some1.add(some3);
+        some1.add(some4);
+        getCurrentScene().getCurrentGUI().add(some1);
     }
 
     public void update() {
