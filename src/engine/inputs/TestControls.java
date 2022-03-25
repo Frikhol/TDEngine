@@ -6,7 +6,6 @@ import initialisation.GameProcess;
 import layout.GUI;
 import layout.GUIObject;
 import layout.objects.GUIButton;
-import layout.objects.GUIPane;
 
 import static core.GameEngine.*;
 import static display.GameDisplay.*;
@@ -54,41 +53,23 @@ public class TestControls implements InputList {
     public void mousePressed(int button, int mods) {
         if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
             for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
-                checkPressedGUI(guiObject);
+                if(guiObject instanceof GUIButton)
+                    if((getCursorX()>=((GUIButton) guiObject).getLocation().x
+                            && getCursorX()<=(((GUIButton) guiObject).getLocation().x+((GUIButton) guiObject).getSize().x)
+                            && (getCursorY()>=((GUIButton) guiObject).getLocation().y
+                            && getCursorY()<=(((GUIButton) guiObject).getLocation().y+((GUIButton) guiObject).getSize().y))))
+                        ((GUIButton) guiObject).pressed();
             }
         }
-    }
-
-    private void checkPressedGUI(GUIObject guiObject){
-        if(guiObject instanceof GUIPane) {
-            for (GUIObject gui : ((GUIPane) guiObject).getGrid().getGridList())
-                checkPressedGUI(gui);
-            return;
-        }
-        if(guiObject instanceof GUIButton)
-            if((getCursorX()>=((GUIButton) guiObject).getLocation().x
-                    && getCursorX()<=(((GUIButton) guiObject).getLocation().x+((GUIButton) guiObject).getSize().x)
-                    && (getCursorY()>=((GUIButton) guiObject).getLocation().y
-                    && getCursorY()<=(((GUIButton) guiObject).getLocation().y+((GUIButton) guiObject).getSize().y))))
-                ((GUIButton) guiObject).pressed();
     }
 
     @Override
     public void mouseReleased(int button, int mods) {
         if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
             for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
-                checkReleasedGUI(guiObject);
+                if(guiObject instanceof GUIButton)
+                    ((GUIButton) guiObject).released();
             }
         }
-    }
-
-    private void checkReleasedGUI(GUIObject guiObject){
-        if(guiObject instanceof GUIPane) {
-            for (GUIObject gui : ((GUIPane) guiObject).getGrid().getGridList())
-                checkReleasedGUI(gui);
-            return;
-        }
-        if(guiObject instanceof GUIButton)
-            ((GUIButton) guiObject).released();
     }
 }
