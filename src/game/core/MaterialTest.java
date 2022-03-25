@@ -41,10 +41,10 @@ public class MaterialTest extends GameProcess {
         some3.setColor(Color.white);
         GUIButton some4 = new GUIButton(100,50);
         some4.setColor(Color.white);
+        getCurrentScene().getCurrentGUI().add(some1);
         some1.add(some2);
         some1.add(some3);
         some1.add(some4);
-        getCurrentScene().getCurrentGUI().add(some1);
         some2.addAction(new Action() {
             @Override
             public void actionOnPressed() {

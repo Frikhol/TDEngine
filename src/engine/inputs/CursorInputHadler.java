@@ -4,6 +4,7 @@ import static core.GameEngine.*;
 
 import layout.GUIObject;
 import layout.objects.GUIButton;
+import layout.objects.GUIPane;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 
 public class CursorInputHadler{
@@ -17,10 +18,17 @@ public class CursorInputHadler{
 
     public static void cursorInputs(){
         for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
-            if(guiObject instanceof GUIButton)
-                ((GUIButton) guiObject).cursorOn();
+            checkCursor(guiObject);
         }
     }
 
-
+    private static void checkCursor(GUIObject guiObject){
+        if(guiObject instanceof GUIPane) {
+            for (GUIObject gui : ((GUIPane) guiObject).getGrid().getGridList())
+                checkCursor(gui);
+            return;
+        }
+        if(guiObject instanceof GUIButton)
+            ((GUIButton) guiObject).cursorOn();
+    }
 }
