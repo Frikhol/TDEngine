@@ -78,6 +78,14 @@ public class GUI {
         return new Vector2i((int)(scale.x*getDisplayWIDTH()[0]),(int)(scale.y*getDisplayHEIGHT()[0]));
     }
 
+    public static Vector2f getTextPosition(Vector2i location,Vector2i size){
+        return new Vector2f((float)location.x/(float)getDisplayWIDTH()[0],((float)location.y+size.y/2f)/(float)getDisplayHEIGHT()[0]-0.015f);
+    }
+
+    public static Vector2f getTextPosition(Vector2f position,Vector2f scale){
+        return new Vector2f((position.x+1f-scale.x)/2f,1f-(position.y+1f)/2f-0.015f);
+    }
+
     public static void changePolyMode(){
         polygonMode = polygonMode == GL_FILL? GL_LINE: GL_FILL;
         glPolygonMode(GL_FRONT_AND_BACK, polygonMode);

@@ -66,9 +66,9 @@ public class TestControls implements InputList {
     @Override
     public void mouseReleased(int button, int mods) {
         if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
-            for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
-                if(guiObject instanceof GUIButton)
-                    ((GUIButton) guiObject).released();
+            for(int i = 0;i<getCurrentScene().getCurrentGUI().getGuiList().size();i++){
+                if(getCurrentScene().getCurrentGUI().getGuiList().get(i) instanceof GUIButton)
+                    ((GUIButton) getCurrentScene().getCurrentGUI().getGuiList().get(i)).released();
             }
         }
     }

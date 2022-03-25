@@ -24,25 +24,6 @@ public class GUIObject extends Object {
         this.color = Color.white;
     }
 
-    /*public GUIText getText() {
-        return text;
-    }
-
-    public String getTextString() {
-        return text.getTextString();
-    }
-
-    public void setTextString(String text) {
-        if(this.text == null)
-            this.text = new GUIText(text,1, TextMaster.getFonts().get("calibri"),GUI.getScreenPosition(this.position.x-scale.x,this.position.y),scale.x,true);
-        else
-            this.text.updateText(text);
-    }
-
-    public void setText(GUIText text) {
-            this.text = text;
-    }*/
-
     public void setTexture(String texture) {
         this.texture = GUITexture.findTexture(texture);
     }
@@ -59,8 +40,11 @@ public class GUIObject extends Object {
         this.position = position;
         if(this instanceof GUIPane)
             ((GUIPane) this).resetLocation(GUI.getLocation(this.position,this.scale));
-        if(this instanceof GUIButton)
-            ((GUIButton) this).resetLocation(GUI.getLocation(this.position,this.scale));
+        if(this instanceof GUIButton) {
+            ((GUIButton) this).resetLocation(GUI.getLocation(this.position, this.scale));
+            if(((GUIButton) this).getText()!=null)
+                ((GUIButton) this).getText().relocate(GUI.getTextPosition(this.position,this.scale),this.scale.x);
+        }
     }
 
     public void reset(){
@@ -82,8 +66,9 @@ public class GUIObject extends Object {
         this.scale = scale;
         if(this instanceof GUIPane)
             ((GUIPane) this).resetSize(GUI.getSize(this.scale));
-        if(this instanceof GUIButton)
+        if(this instanceof GUIButton) {
             ((GUIButton) this).resetSize(GUI.getSize(this.scale));
+        }
     }
 
     public Color getColor() {

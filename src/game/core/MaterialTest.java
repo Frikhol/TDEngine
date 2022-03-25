@@ -7,9 +7,11 @@ import layout.components.Action;
 import layout.components.Color;
 import layout.objects.GUIButton;
 import layout.objects.GUIPane;
+import org.joml.Vector2i;
 import org.joml.Vector3f;
 
 import static core.GameEngine.*;
+import static display.GameDisplay.*;
 
 public class MaterialTest extends GameProcess {
     private GameObject redObject;
@@ -36,8 +38,10 @@ public class MaterialTest extends GameProcess {
         GUIPane some1 = new GUIPane(100,100,100,300);
         getCurrentScene().getCurrentGUI().add(some1);
         GUIButton some2 = new GUIButton(100,50);
+        some2.setTextString("Action");
         some2.setColor(Color.white);
-        GUIButton some3 = new GUIButton(200,50);
+        some2.setSize(new Vector2i(200,50));
+        GUIButton some3 = new GUIButton(300,50);
         some3.setColor(Color.white);
         GUIButton some4 = new GUIButton(100,50);
         some4.setColor(Color.white);
@@ -45,6 +49,7 @@ public class MaterialTest extends GameProcess {
         some1.add(some3);
         some1.add(some4);
         getCurrentScene().getCurrentGUI().add(some1);
+        some2.setTextString("New Action");
         some2.addAction(new Action() {
             @Override
             public void actionOnPressed() {
@@ -52,7 +57,7 @@ public class MaterialTest extends GameProcess {
 
             @Override
             public void actionOnReleased() {
-                System.out.println("Action");
+
             }
         });
     }

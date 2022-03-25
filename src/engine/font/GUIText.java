@@ -83,6 +83,14 @@ public class GUIText {
 		TextMaster.loadText(this);
 	}
 
+	public void relocate(Vector2f position,float scaleX){
+		this.remove();
+		this.position = position;
+		this.lineMaxSize = scaleX;
+		textMeshVboList = new ArrayList<Integer>();
+		TextMaster.loadText(this);
+	}
+
 	/**
 	 * Remove the text from the screen.
 	 */

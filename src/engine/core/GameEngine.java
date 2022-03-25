@@ -79,7 +79,7 @@ public class GameEngine {
     private static void render(){
         Renderer.render();
         guiRenderer.render(scene.getCurrentGUI().getGuiList());
-        TextMaster.render();
+        TextMaster.render(text);
     }
 
     public static void stopEngine(){

@@ -1,5 +1,7 @@
 package layout.objects;
 
+import font.GUIText;
+import font.TextMaster;
 import layout.GUI;
 import layout.GUIObject;
 import layout.components.Action;
@@ -23,6 +25,7 @@ public class GUIButton extends GUIObject{
 
     private Vector2i location;
     private Vector2i size;
+    private GUIText text = null;
     private boolean isPressed = false;
     private boolean isReleased = true;
 
@@ -34,6 +37,25 @@ public class GUIButton extends GUIObject{
         super(GUI.getProperPosition(posX,posY,width,height),GUI.getProperScale(width,height));
         this.location = new Vector2i(posX,posY);
         this.size = new Vector2i(width,height);
+    }
+
+    public GUIText getText() {
+        return text;
+    }
+
+    public String getTextString() {
+        return text.getTextString();
+    }
+
+    public void setTextString(String text) {
+        if(this.text == null)
+            this.text = new GUIText(text, 1, TextMaster.getFonts().get("calibri"), GUI.getTextPosition(location, size), (float) size.x / (float) getDisplayWIDTH()[0], true);
+        else
+            this.text.updateText(text);
+    }
+
+    public void setText(GUIText text) {
+            this.text = text;
     }
 
     public Vector2i getLocation() {

@@ -27,8 +27,8 @@ public class TextMaster {
         fonts.put("calibri",font);
     }
 
-    public static void render(){
-        renderer.render(texts);
+    public static void render(GUIText text){
+        renderer.render(text.getFont(),text);
     }
 
     public static void loadText(GUIText text){
