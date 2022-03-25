@@ -6,6 +6,7 @@ import layout.components.GUIGrid;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 import static display.GameDisplay.*;
+import static core.GameEngine.*;
 
 public class GUIPane extends GUIObject {
     private GUIGrid grid = new GUIGrid();
@@ -28,9 +29,13 @@ public class GUIPane extends GUIObject {
         if(grid.getGridList().size()==0) {
             guiObject.setPosition(new Vector2f(this.getPosition().x,this.getPosition().y+this.getScale().y-guiObject.getScale().y-(0.03f*this.getScale().y)));
             grid.getGridList().add(guiObject);
+            if(getCurrentScene().getCurrentGUI().getGuiList().contains(this))
+                getCurrentScene().getCurrentGUI().add(guiObject);
             return;
         }
         grid.add(guiObject);
+        if(getCurrentScene().getCurrentGUI().getGuiList().contains(this))
+            getCurrentScene().getCurrentGUI().add(guiObject);
         float sum = 0;
         for(GUIObject guiInGrid : grid.getGridList())
             sum+=guiInGrid.getScale().y;

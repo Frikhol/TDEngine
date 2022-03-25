@@ -30,8 +30,15 @@ public class GUI {
 
     public void add(GUIObject guiObject){
         guiList.add(guiObject);
+        addChildes(guiObject);
+    }
+
+    private void addChildes(GUIObject guiObject){
         if(guiObject instanceof GUIPane) {
-            guiList.addAll(((GUIPane) guiObject).getGrid().getGridList());
+            for(GUIObject child : ((GUIPane) guiObject).getGrid().getGridList()) {
+                guiList.add(child);
+                addChildes(child);
+            }
         }
     }
 

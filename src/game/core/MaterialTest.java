@@ -48,7 +48,6 @@ public class MaterialTest extends GameProcess {
         some2.addAction(new Action() {
             @Override
             public void actionOnPressed() {
-
             }
 
             @Override
