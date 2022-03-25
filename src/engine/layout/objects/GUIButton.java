@@ -87,7 +87,7 @@ public class GUIButton extends GUIObject{
 
     public void cursorOn(){
         if(!isPressed && isReleased) {
-            if ((getCursorX() >= location.x && getCursorX() <= (location.x + size.x) && (getCursorY() >= location.y && getCursorY() <= (location.y + size.y))))
+            if ((getCursorX() > location.x && getCursorX() < (location.x + size.x) && (getCursorY() > location.y && getCursorY() < (location.y + size.y))))
                 this.setTexture("GUIButtonON");
             else
                 this.setTexture("GUIButton");

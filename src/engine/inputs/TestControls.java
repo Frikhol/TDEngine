@@ -54,10 +54,10 @@ public class TestControls implements InputList {
         if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
             for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
                 if(guiObject instanceof GUIButton)
-                    if((getCursorX()>=((GUIButton) guiObject).getLocation().x
-                            && getCursorX()<=(((GUIButton) guiObject).getLocation().x+((GUIButton) guiObject).getSize().x)
-                            && (getCursorY()>=((GUIButton) guiObject).getLocation().y
-                            && getCursorY()<=(((GUIButton) guiObject).getLocation().y+((GUIButton) guiObject).getSize().y))))
+                    if((getCursorX()>((GUIButton) guiObject).getLocation().x
+                            && getCursorX()<(((GUIButton) guiObject).getLocation().x+((GUIButton) guiObject).getSize().x)
+                            && (getCursorY()>((GUIButton) guiObject).getLocation().y
+                            && getCursorY()<(((GUIButton) guiObject).getLocation().y+((GUIButton) guiObject).getSize().y))))
                         ((GUIButton) guiObject).pressed();
             }
         }
