@@ -49,6 +49,7 @@ public class GameEngine {
         loadScene("Assets/scenes/GameTestScene.json");
         new Renderer();
         guiRenderer = new GUIRenderer();
+        preparePausePane();
         text = new GUIText("FPS: "+ GameDisplay.getFPS(),1,TextMaster.getFonts().get("calibri"),
                 new Vector2f((float)(getDisplayWIDTH()[0]-(getDisplayWIDTH()[0]/16))/getDisplayWIDTH()[0],
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),

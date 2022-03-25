@@ -6,6 +6,10 @@ import org.joml.Vector4f;
 
 public class Color {
 
+    public final static Color clear     = new Color(0, 0, 0,0);
+
+    public final static Color CLEAR = clear;
+
     public final static Color white     = new Color(255, 255, 255);
 
     public final static Color WHITE = white;
@@ -83,6 +87,10 @@ public class Color {
         this.g = g;
         this.b = b;
         this.a = a;
+    }
+
+    public Color(Color color) {
+        this(color.r,color.g,color.b,color.a);
     }
 
     public void setR(float r) {

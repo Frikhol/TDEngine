@@ -7,7 +7,9 @@ import layout.objects.GUIPane;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-public class GUIObject extends Object{
+import static core.GameEngine.getCurrentScene;
+
+public class GUIObject extends Object {
     private GUITexture texture;
     private Vector2f position;
     private Vector2f scale;
@@ -94,5 +96,13 @@ public class GUIObject extends Object{
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setVisible(boolean visible) {
+        if(!visible){
+            getCurrentScene().getCurrentGUI().remove(this);
+        }
+        else
+            getCurrentScene().getCurrentGUI().add(this);
     }
 }

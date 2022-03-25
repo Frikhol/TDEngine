@@ -8,10 +8,10 @@ import layout.GUIObject;
 import layout.objects.GUIButton;
 
 import static core.GameEngine.*;
-import static display.GameDisplay.getCursorX;
-import static display.GameDisplay.getCursorY;
+import static display.GameDisplay.*;
 
 public class TestControls implements InputList {
+
     @Override
     public void keyDown(int key, int mods) {
         Camera camera = GameEngine.getCurrentScene().getCamera();
@@ -33,8 +33,10 @@ public class TestControls implements InputList {
     public void keyPressed(int key, int mods) {
         if(key == KeyCode.GLFW_KEY_F1)
             GUI.changePolyMode();
-        if(key == KeyCode.GLFW_KEY_P)
+        if(key == KeyCode.GLFW_KEY_P) {
             GameProcess.setPause(!GameProcess.isPause());
+            getPausePane().setVisible(GameProcess.isPause());
+        }
     }
 
     @Override
@@ -70,5 +72,4 @@ public class TestControls implements InputList {
             }
         }
     }
-
 }

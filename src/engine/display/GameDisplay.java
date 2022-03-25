@@ -1,9 +1,13 @@
 package display;
 
+import layout.components.Color;
+import layout.objects.GUIPane;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import tools.Time;
+
+import static core.GameEngine.*;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -18,6 +22,7 @@ public class GameDisplay {
     private static int[] HEIGHT = new int[1]; //make changeable
     private static double cursorX = 0;
     private static double cursorY = 0;
+    private static GUIPane pausePane;
     private static int FPS = 144;
     private static int SAMPLES = 16;
 
@@ -99,6 +104,17 @@ public class GameDisplay {
     public static void closeDisplay() {
         glfwFreeCallbacks(displayID);
         glfwDestroyWindow(displayID);
+    }
+
+    public static void preparePausePane(){
+        pausePane = new GUIPane(getDisplayWIDTH()[0],getDisplayHEIGHT()[0]);
+        pausePane.setTexture("GUIPausePane");
+        pausePane.setColor(new Color(0,0,0,200));
+        pausePane.setVisible(false);
+    }
+
+    public static GUIPane getPausePane() {
+        return pausePane;
     }
 }
 

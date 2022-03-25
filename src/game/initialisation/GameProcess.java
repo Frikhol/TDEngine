@@ -1,9 +1,12 @@
 package initialisation;
 
+import layout.components.Color;
+import layout.objects.GUIPane;
+
 import java.util.ArrayList;
 
 import static core.GameEngine.*;
-import static display.GameDisplay.getDisplayID;
+import static display.GameDisplay.*;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public abstract class GameProcess{
@@ -26,7 +29,7 @@ public abstract class GameProcess{
                     }
                     while(!glfwWindowShouldClose(getDisplayID())){
                         if(!pause)
-                            for(GameProcess i : list){
+                            for (GameProcess i : list) {
                                 i.update();
                             }
                         loop();
@@ -38,7 +41,9 @@ public abstract class GameProcess{
             st.start();
         }
     }
+
     public abstract void start();
+
     public abstract void update();
 
     public static boolean isPause() {
