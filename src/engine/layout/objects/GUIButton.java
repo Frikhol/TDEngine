@@ -2,12 +2,29 @@ package layout.objects;
 
 import layout.GUI;
 import layout.GUIObject;
+import layout.components.Action;
 import org.joml.Vector2i;
+
 import static display.GameDisplay.*;
 
-public class GUIButton extends GUIObject {
+public class GUIButton extends GUIObject{
+
+    private Action action = new Action() {
+        @Override
+        public void actionOnPressed() {
+
+        }
+
+        @Override
+        public void actionOnReleased() {
+
+        }
+    };
+
     private Vector2i location;
     private Vector2i size;
+    private boolean isPressed = false;
+    private boolean isReleased = true;
 
     public GUIButton(int width,int height){
         this(0,0,width,height);
@@ -47,9 +64,39 @@ public class GUIButton extends GUIObject {
     }
 
     public void cursorOn(){
-        if((getCursorX()>=location.x && getCursorX()<=(location.x+size.x)&&(getCursorY()>=location.y && getCursorY()<=(location.y+size.y))))
-            this.setTexture("GUIButtonON");
-        else
+        if(!isPressed && isReleased) {
+            if ((getCursorX() >= location.x && getCursorX() <= (location.x + size.x) && (getCursorY() >= location.y && getCursorY() <= (location.y + size.y))))
+                this.setTexture("GUIButtonON");
+            else
+                this.setTexture("GUIButton");
+        }
+    }
+
+    public void setPressed(boolean pressed) {
+        isPressed = pressed;
+    }
+
+    public void setReleased(boolean released) {
+        isReleased = released;
+    }
+
+    public void pressed(){
+        this.setTexture("GUIButtonPRESS");
+        setPressed(true);
+        setReleased(false);
+        action.actionOnPressed();
+    }
+
+    public void released(){
+        if(isPressed && !isReleased) {
             this.setTexture("GUIButton");
+            action.actionOnReleased();
+            setPressed(false);
+            setReleased(true);
+        }
+    }
+
+    public void addAction(Action action){
+        this.action = action;
     }
 }

@@ -1,13 +1,18 @@
 package inputs;
 
 import core.GameEngine;
-import display.GameDisplay;
 import entities.Camera;
 import layout.GUI;
+import layout.GUIObject;
+import layout.objects.GUIButton;
 
-public class TestControls implements KeyList {
+import static core.GameEngine.*;
+import static display.GameDisplay.getCursorX;
+import static display.GameDisplay.getCursorY;
+
+public class TestControls implements InputList {
     @Override
-    public void down(int key, int mods) {
+    public void keyDown(int key, int mods) {
         Camera camera = GameEngine.getCurrentScene().getCamera();
         if(key == KeyCode.GLFW_KEY_S)
             camera.getTransform().translateZ(.1f);
@@ -24,14 +29,43 @@ public class TestControls implements KeyList {
     }
 
     @Override
-    public void pressed(int key, int mods) {
+    public void keyPressed(int key, int mods) {
         if(key == KeyCode.GLFW_KEY_F1)
             GUI.changePolyMode();
     }
 
     @Override
-    public void released(int key, int mods) {
+    public void keyReleased(int key, int mods) {
 
+    }
+
+    @Override
+    public void mouseDown(int button, int mods) {
+
+    }
+
+    @Override
+    public void mousePressed(int button, int mods) {
+        if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
+            for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
+                if(guiObject instanceof GUIButton)
+                    if((getCursorX()>=((GUIButton) guiObject).getLocation().x
+                            && getCursorX()<=(((GUIButton) guiObject).getLocation().x+((GUIButton) guiObject).getSize().x)
+                            && (getCursorY()>=((GUIButton) guiObject).getLocation().y
+                            && getCursorY()<=(((GUIButton) guiObject).getLocation().y+((GUIButton) guiObject).getSize().y))))
+                        ((GUIButton) guiObject).pressed();
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(int button, int mods) {
+        if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
+            for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
+                if(guiObject instanceof GUIButton)
+                    ((GUIButton) guiObject).released();
+            }
+        }
     }
 
 }

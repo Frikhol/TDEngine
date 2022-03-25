@@ -2,7 +2,7 @@ package entities;
 
 import entities.components.Model;
 import layout.GUI;
-import inputs.KeyList;
+import inputs.InputList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Scene {
     private GUI currentGUI;
     private List<Light> lights = new ArrayList<>();
     private Camera camera;
-    private KeyList keyList = null;
+    private InputList inputList = null;
 
     public Scene(){
     }
@@ -28,12 +28,12 @@ public class Scene {
         this.currentGUI = currentGUI;
     }
 
-    public void setKeyList(KeyList keyList) {
-        this.keyList = keyList;
+    public void setInputList(InputList inputList) {
+        this.inputList = inputList;
     }
 
-    public KeyList getKeyList(){
-        return keyList;
+    public InputList getInputList(){
+        return inputList;
     }
 
     public String getName() {

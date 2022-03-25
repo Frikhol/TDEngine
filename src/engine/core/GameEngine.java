@@ -15,6 +15,7 @@ import entities.components.Transform;
 import font.GUIText;
 import font.TextMaster;
 import inputs.CursorInputHadler;
+import inputs.MouseInputHandler;
 import layout.GUIObject;
 import layout.shaders.GUIRenderer;
 import inputs.KeyInputHandler;
@@ -52,8 +53,9 @@ public class GameEngine {
                 new Vector2f((float)(getDisplayWIDTH()[0]-(getDisplayWIDTH()[0]/16))/getDisplayWIDTH()[0],
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),
                 (float)(getDisplayWIDTH()[0]/16)/getDisplayWIDTH()[0],true);
-        scene.setKeyList(new TestControls());
+        scene.setInputList(new TestControls());
         glfwSetKeyCallback(getDisplayID(), KeyInputHandler.keyCallback);
+        glfwSetMouseButtonCallback(getDisplayID(), MouseInputHandler.mouseButtonCallback);
         glfwSetCursorPosCallback(getDisplayID(), CursorInputHadler.cursorPosCallback);
         checkWindowResize();
     }
@@ -69,6 +71,7 @@ public class GameEngine {
         glfwSwapBuffers(getDisplayID()); // Don't delete
         glfwPollEvents();
         KeyInputHandler.getInputs();
+        MouseInputHandler.getInputs();
         CursorInputHadler.cursorInputs();
     }
 

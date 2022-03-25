@@ -3,6 +3,7 @@ package core;
 import entities.GameObject;
 import entities.Light;
 import initialisation.GameProcess;
+import layout.components.Action;
 import layout.components.Color;
 import layout.objects.GUIButton;
 import layout.objects.GUIPane;
@@ -44,6 +45,17 @@ public class MaterialTest extends GameProcess {
         some1.add(some3);
         some1.add(some4);
         getCurrentScene().getCurrentGUI().add(some1);
+        some2.addAction(new Action() {
+            @Override
+            public void actionOnPressed() {
+
+            }
+
+            @Override
+            public void actionOnReleased() {
+                System.out.println("Action");
+            }
+        });
     }
 
     public void update() {
