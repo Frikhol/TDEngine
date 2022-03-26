@@ -46,28 +46,19 @@ public class GUI {
         guiList.remove(guiObject);
     }
 
-    public static Vector2f getProperPosition(int x, int y,int width,int height){
-        int screenWidth = getDisplayWIDTH()[0]/2;
-        int screenHeight = getDisplayHEIGHT()[0]/2;
-        if(x<screenWidth){
-            if(y<=screenHeight){//LEFT UP COORDINATE PANE
-                return new Vector2f((-(1-(((float)x+(float)width/2)/(float)screenWidth))),(1-(((float)x+(float)height/2)/(float)screenHeight)));
-            }
-            //LEFT DOWN COORDINATE PANE
-            return new Vector2f((-(1-(((float)x+(float)width/2)/(float)screenWidth))),(-((((float)y+(float)height/2)/(float)screenHeight)-1)));
-        }
-        else if(x>=screenWidth){
-            if(y<=screenHeight){//RIGHT UP COORDINATE PANE
-                return new Vector2f(((((float)x+(float)width/2)/(float)screenWidth)-1),(1-(((float)y+(float)height/2)/(float)screenHeight)));
-            }
-            //RIGHT DOWN COORDINATE PANE
-            return new Vector2f(((((float)x+(float)width/2)/(float)screenWidth)-1),(-((((float)y+(float)height/2)/(float)screenHeight)-1)));
-        }
-        return null;
+    public static Vector2f getProperPosition(int x, int y, int width, int height){
+        return new Vector2f(
+                ((((float)x+(float)width/2f)/(float)getDisplayWIDTH()[0])*2f-1f),
+                ((1f-((float)y+(float)height/2f)/(float)getDisplayHEIGHT()[0])*2f-1f)
+        );
     }
 
     public static Vector2i getLocation(Vector2f position,Vector2f scale){
-        return new Vector2i((int)(((position.x+1f)/2f-scale.x/2f)*getDisplayWIDTH()[0]),(int)(((position.y-1)/(-2f)-scale.y/2f)*getDisplayHEIGHT()[0]));
+        Vector2i size = getSize(scale);
+        return new Vector2i(
+                (int)((((position.x+1f)/2f)*(float)(getDisplayWIDTH()[0]))-(float)size.x/2f),
+                (int)(((1f-((position.y+1f)/2f))*(float)(getDisplayHEIGHT()[0]))-(float)size.y/2f)
+        );
     }
 
     public static Vector2f getProperScale(int width,int height){

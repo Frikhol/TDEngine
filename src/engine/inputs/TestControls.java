@@ -52,13 +52,16 @@ public class TestControls implements InputList {
     @Override
     public void mousePressed(int button, int mods) {
         if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
-            for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
-                if(guiObject instanceof GUIButton)
-                    if((getCursorX()>((GUIButton) guiObject).getLocation().x
-                            && getCursorX()<(((GUIButton) guiObject).getLocation().x+((GUIButton) guiObject).getSize().x)
-                            && (getCursorY()>((GUIButton) guiObject).getLocation().y
-                            && getCursorY()<(((GUIButton) guiObject).getLocation().y+((GUIButton) guiObject).getSize().y))))
-                        ((GUIButton) guiObject).pressed();
+            for(int i = getCurrentScene().getCurrentGUI().getGuiList().size()-1;i>=0;i--){
+                GUIObject obj = getCurrentScene().getCurrentGUI().getGuiList().get(i);
+                if((getCursorX() > (GUI.getLocation(obj.getPosition(),obj.getScale())).x
+                   && getCursorX() < (GUI.getLocation(obj.getPosition(),obj.getScale())).x+(GUI.getSize(obj.getScale())).x)
+                   && ((getCursorY() > (GUI.getLocation(obj.getPosition(),obj.getScale())).y
+                   && getCursorY() < (GUI.getLocation(obj.getPosition(),obj.getScale())).y+(GUI.getSize(obj.getScale())).y))){
+                    if(getCurrentScene().getCurrentGUI().getGuiList().get(i) instanceof GUIButton)
+                        ((GUIButton) getCurrentScene().getCurrentGUI().getGuiList().get(i)).pressed();
+                    return;
+                }
             }
         }
     }

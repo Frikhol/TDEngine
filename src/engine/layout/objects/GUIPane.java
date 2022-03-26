@@ -13,6 +13,10 @@ public class GUIPane extends GUIObject {
     private Vector2i location;
     private Vector2i size;
 
+    public GUIPane(GUIPane old){
+        this(old.location.x,old.location.y,old.size.x,old.size.y);
+    }
+
     public GUIPane(int width,int height){
         this(0,0,width,height);
     }

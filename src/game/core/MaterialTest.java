@@ -3,6 +3,8 @@ package core;
 import entities.GameObject;
 import entities.Light;
 import initialisation.GameProcess;
+import layout.GUI;
+import layout.GUIObject;
 import layout.components.Action;
 import layout.components.Color;
 import layout.objects.GUIButton;
@@ -50,14 +52,19 @@ public class MaterialTest extends GameProcess {
         some1.add(some4);
         getCurrentScene().getCurrentGUI().add(some1);
         some2.setTextString("New Action");
+        GUIPane newPane = new GUIPane(some1);
+        newPane.setTexture("GUIObject");
+        newPane.setColor(Color.cyan);
         some2.addAction(new Action() {
             @Override
             public void actionOnPressed() {
+                System.out.println("Action");
+                getCurrentScene().getCurrentGUI().add(newPane);
             }
 
             @Override
             public void actionOnReleased() {
-
+                getCurrentScene().getCurrentGUI().add(newPane);
             }
         });
     }
