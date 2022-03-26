@@ -12,6 +12,7 @@ public class GUIPane extends GUIObject {
     private GUIGrid grid = new GUIGrid();
     private Vector2i location;
     private Vector2i size;
+    private Vector2i padding = new Vector2i(0);
 
     public GUIPane(GUIPane old){
         this(old.location.x,old.location.y,old.size.x,old.size.y);
@@ -29,9 +30,9 @@ public class GUIPane extends GUIObject {
 
     public void add(GUIObject guiObject){
         if(guiObject.getScale().x>this.getScale().x)
-            this.setSize(new Vector2i((int)(guiObject.getScale().x*getDisplayWIDTH()[0]),this.getSize().y));
+            this.setSize(new Vector2i((int)((guiObject.getScale().x+properPaddingX()*2f)*getDisplayWIDTH()[0]),this.getSize().y));
         if(grid.getGridList().size()==0) {
-            guiObject.setPosition(new Vector2f(this.getPosition().x,this.getPosition().y+this.getScale().y-guiObject.getScale().y-(0.03f*this.getScale().y)));
+            guiObject.setPosition(new Vector2f(this.getPosition().x + properPaddingX(),this.getPosition().y+this.getScale().y-guiObject.getScale().y - properPaddingY()));
             grid.getGridList().add(guiObject);
             if(getCurrentScene().getCurrentGUI().getGuiList().contains(this))
                 getCurrentScene().getCurrentGUI().add(guiObject);
@@ -40,11 +41,11 @@ public class GUIPane extends GUIObject {
         grid.add(guiObject);
         if(getCurrentScene().getCurrentGUI().getGuiList().contains(this))
             getCurrentScene().getCurrentGUI().add(guiObject);
-        float sum = 0;
+        float sizeY = 0;
         for(GUIObject guiInGrid : grid.getGridList())
-            sum+=guiInGrid.getScale().y;
-        if(sum>this.getScale().y)
-            this.setSize(new Vector2i(this.getSize().x, (int) ((sum+(0.03f*this.getScale().y))*getDisplayHEIGHT()[0])));
+            sizeY+=guiInGrid.getScale().y;
+        if(sizeY>this.getScale().y)
+            this.setSize(new Vector2i(this.getSize().x, (int) ((sizeY+(properPaddingY()*2f))*getDisplayHEIGHT()[0])));
     }
 
     public GUIGrid getGrid() {
@@ -82,8 +83,24 @@ public class GUIPane extends GUIObject {
 
     private void remake(){
         if(!grid.getGridList().isEmpty()){
-            grid.getGridList().get(0).setPosition(new Vector2f(this.getPosition().x,this.getPosition().y+this.getScale().y-grid.getGridList().get(0).getScale().y-(0.03f*this.getScale().y)));
+            grid.getGridList().get(0).setPosition(new Vector2f(this.getPosition().x,this.getPosition().y+this.getScale().y-grid.getGridList().get(0).getScale().y- properPaddingY()));
             grid.remake();
         }
+    }
+
+    public Vector2i getPadding() {
+        return padding;
+    }
+
+    public void setPadding(int x,int y) {
+        this.padding = new Vector2i(x,y);
+    }
+
+    public float properPaddingX(){
+        return (float)padding.x/(float)getDisplayWIDTH()[0];
+    }
+
+    public float properPaddingY(){
+        return (float)padding.y/(float)getDisplayHEIGHT()[0];
     }
 }

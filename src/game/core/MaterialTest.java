@@ -41,6 +41,7 @@ public class MaterialTest extends GameProcess {
         some1.setTexture("GUIObject");
         getCurrentScene().getCurrentGUI().add(some1);
         GUIButton some2 = new GUIButton(100,50);
+        some1.setPadding(5,5);
         some2.setTextString("Action");
         some2.setColor(Color.white);
         some2.setSize(new Vector2i(200,50));
