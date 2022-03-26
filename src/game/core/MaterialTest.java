@@ -64,7 +64,7 @@ public class MaterialTest extends GameProcess {
 
             @Override
             public void actionOnReleased() {
-                getCurrentScene().getCurrentGUI().add(newPane);
+                getCurrentScene().getCurrentGUI().remove(newPane);
             }
         });
     }

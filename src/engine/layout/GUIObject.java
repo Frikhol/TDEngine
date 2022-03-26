@@ -8,12 +8,15 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import static core.GameEngine.getCurrentScene;
+import static display.GameDisplay.getCursorX;
+import static display.GameDisplay.getCursorY;
 
-public class GUIObject extends Object {
+public class GUIObject {
     private GUITexture texture;
     private Vector2f position;
     private Vector2f scale;
     private Color color;
+    private boolean pointed = false;
 
     public GUIObject(){}
 
@@ -81,6 +84,15 @@ public class GUIObject extends Object {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setPointed() {
+        this.pointed = (getCursorX() > GUI.getLocation(position,scale).x && getCursorX() < (GUI.getLocation(position,scale).x + GUI.getSize(scale).x)
+                && (getCursorY() > GUI.getLocation(position,scale).y && getCursorY() < (GUI.getLocation(position,scale).y + GUI.getSize(scale).y)));
+    }
+
+    public boolean isPointed() {
+        return pointed;
     }
 
     public void setVisible(boolean visible) {

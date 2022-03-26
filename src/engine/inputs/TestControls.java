@@ -54,12 +54,9 @@ public class TestControls implements InputList {
         if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
             for(int i = getCurrentScene().getCurrentGUI().getGuiList().size()-1;i>=0;i--){
                 GUIObject obj = getCurrentScene().getCurrentGUI().getGuiList().get(i);
-                if((getCursorX() > (GUI.getLocation(obj.getPosition(),obj.getScale())).x
-                   && getCursorX() < (GUI.getLocation(obj.getPosition(),obj.getScale())).x+(GUI.getSize(obj.getScale())).x)
-                   && ((getCursorY() > (GUI.getLocation(obj.getPosition(),obj.getScale())).y
-                   && getCursorY() < (GUI.getLocation(obj.getPosition(),obj.getScale())).y+(GUI.getSize(obj.getScale())).y))){
-                    if(getCurrentScene().getCurrentGUI().getGuiList().get(i) instanceof GUIButton)
-                        ((GUIButton) getCurrentScene().getCurrentGUI().getGuiList().get(i)).pressed();
+                if(obj.isPointed()){
+                    if(obj instanceof GUIButton)
+                        ((GUIButton) obj).pressed();
                     return;
                 }
             }
@@ -70,8 +67,9 @@ public class TestControls implements InputList {
     public void mouseReleased(int button, int mods) {
         if(button == MouseCode.GLFW_MOUSE_BUTTON_1){
             for(int i = 0;i<getCurrentScene().getCurrentGUI().getGuiList().size();i++){
-                if(getCurrentScene().getCurrentGUI().getGuiList().get(i) instanceof GUIButton)
-                    ((GUIButton) getCurrentScene().getCurrentGUI().getGuiList().get(i)).released();
+                GUIObject obj = getCurrentScene().getCurrentGUI().getGuiList().get(i);
+                if(obj instanceof GUIButton)
+                    ((GUIButton) obj).released();
             }
         }
     }
