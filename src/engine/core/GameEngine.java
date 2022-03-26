@@ -19,7 +19,7 @@ import inputs.MouseInputHandler;
 import layout.GUIObject;
 import layout.shaders.GUIRenderer;
 import inputs.KeyInputHandler;
-import inputs.TestControls;
+import inputs.DefaultControls;
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 
@@ -54,7 +54,7 @@ public class GameEngine {
                 new Vector2f((float)(getDisplayWIDTH()[0]-(getDisplayWIDTH()[0]/16))/getDisplayWIDTH()[0],
                         (float)(getDisplayHEIGHT()[0]/64)/getDisplayHEIGHT()[0]),
                 (float)(getDisplayWIDTH()[0]/16)/getDisplayWIDTH()[0],true);
-        scene.setInputList(new TestControls());
+        scene.setInputList(new DefaultControls());
         glfwSetKeyCallback(getDisplayID(), KeyInputHandler.keyCallback);
         glfwSetMouseButtonCallback(getDisplayID(), MouseInputHandler.mouseButtonCallback);
         glfwSetCursorPosCallback(getDisplayID(), CursorInputHadler.cursorPosCallback);

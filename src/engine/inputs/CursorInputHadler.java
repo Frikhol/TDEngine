@@ -15,8 +15,12 @@ public class CursorInputHadler{
     };
 
     public static void cursorInputs(){
-        for(GUIObject guiObject : getCurrentScene().getCurrentGUI().getGuiList()){
-            guiObject.setPointed();
+        for (GUIObject obj: getCurrentScene().getCurrentGUI().getGuiList())
+            obj.setUnPointed();
+        for(int i = getCurrentScene().getCurrentGUI().getGuiList().size()-1;i>=0;i--){
+            getCurrentScene().getCurrentGUI().getGuiList().get(i).setPointed();
+            if(getCurrentScene().getCurrentGUI().getGuiList().get(i).isPointed())
+                return;
         }
     }
 

@@ -38,6 +38,7 @@ public class MaterialTest extends GameProcess {
         greenObject.scale(0.2f);
         greenObject.rotateY(90);
         GUIPane some1 = new GUIPane(100,100,100,300);
+        some1.setTexture("GUIObject");
         getCurrentScene().getCurrentGUI().add(some1);
         GUIButton some2 = new GUIButton(100,50);
         some2.setTextString("Action");
@@ -50,7 +51,6 @@ public class MaterialTest extends GameProcess {
         some1.add(some2);
         some1.add(some3);
         some1.add(some4);
-        getCurrentScene().getCurrentGUI().add(some1);
         some2.setTextString("New Action");
         GUIPane newPane = new GUIPane(some1);
         newPane.setTexture("GUIObject");

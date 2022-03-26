@@ -10,7 +10,7 @@ import layout.objects.GUIButton;
 import static core.GameEngine.*;
 import static display.GameDisplay.*;
 
-public class TestControls implements InputList {
+public class DefaultControls implements InputList {
 
     @Override
     public void keyDown(int key, int mods) {

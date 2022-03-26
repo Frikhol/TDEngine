@@ -90,6 +90,9 @@ public class GUIObject {
         this.pointed = (getCursorX() > GUI.getLocation(position,scale).x && getCursorX() < (GUI.getLocation(position,scale).x + GUI.getSize(scale).x)
                 && (getCursorY() > GUI.getLocation(position,scale).y && getCursorY() < (GUI.getLocation(position,scale).y + GUI.getSize(scale).y)));
     }
+    public void setUnPointed() {
+        this.pointed = false;
+    }
 
     public boolean isPointed() {
         return pointed;
