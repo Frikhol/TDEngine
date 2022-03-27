@@ -195,6 +195,11 @@ public class Loader {
         for(int i = 0;i<indices.size();i++){
             indicesArray[i] = indices.get(i);
         }
+        try {
+            fr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return loadToVAO(verticesArray,indicesArray,textureArray,normalsArray);
     }
 

@@ -126,4 +126,8 @@ public class Renderer {
     public static void cleanUp(){
         shader.cleanUp();
     }
+
+    public static Matrix4f getProjectionMatrix() {
+        return projectionMatrix;
+    }
 }

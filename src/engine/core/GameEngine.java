@@ -9,6 +9,7 @@ import data.serializers.GameObjectSerializer;
 import data.serializers.SceneSerializer;
 import data.serializers.TransformSerializer;
 import display.GameDisplay;
+import display.MousePicker;
 import entities.GameObject;
 import entities.Scene;
 import entities.components.Transform;
@@ -35,6 +36,7 @@ public class GameEngine {
     private static Scene scene;
     private static GUIText text;
     private static GUIRenderer guiRenderer; //TODO make static
+    MousePicker picker;
 
     public static Scene getCurrentScene() {
         return scene;
@@ -59,6 +61,7 @@ public class GameEngine {
         glfwSetMouseButtonCallback(getDisplayID(), MouseInputHandler.mouseButtonCallback);
         glfwSetCursorPosCallback(getDisplayID(), CursorInputHadler.cursorPosCallback);
         checkWindowResize();
+        new MousePicker();
     }
 
     public static void loop(){
@@ -74,6 +77,7 @@ public class GameEngine {
         KeyInputHandler.getInputs();
         MouseInputHandler.getInputs();
         CursorInputHadler.cursorInputs();
+        MousePicker.update();
     }
 
     private static void render(){

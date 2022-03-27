@@ -68,6 +68,10 @@ public class Scene {
         this.lights = lights;
     }
 
+    public void addLight(Light light){
+        this.lights.add(light);
+    }
+
     public Camera getCamera() {
         return camera;
     }

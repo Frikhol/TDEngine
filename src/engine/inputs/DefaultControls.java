@@ -1,6 +1,7 @@
 package inputs;
 
 import core.GameEngine;
+import display.MousePicker;
 import entities.Camera;
 import initialisation.GameProcess;
 import ui.GUI;
@@ -60,6 +61,9 @@ public class DefaultControls implements InputList {
                     return;
                 }
             }
+        }
+        if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
+            getCurrentScene().getGameObjectList().get(2).setPosition(MousePicker.getCurrentPoint());
         }
     }
 
