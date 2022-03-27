@@ -3,9 +3,7 @@ package data.serializers;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import layout.GUI;
-import layout.GUIObject;
-import org.joml.Vector2f;
+import ui.objects.GUIObject;
 
 import java.io.IOException;
 

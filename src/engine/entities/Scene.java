@@ -1,7 +1,7 @@
 package entities;
 
 import entities.components.Model;
-import layout.GUI;
+import ui.GUI;
 import inputs.InputList;
 
 import java.util.ArrayList;

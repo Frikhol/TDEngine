@@ -1,4 +1,4 @@
-package layout.components;
+package ui.components;
 
 import core.Loader;
 

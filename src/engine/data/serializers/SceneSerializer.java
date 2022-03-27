@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import entities.GameObject;
 import entities.Scene;
-import layout.GUIObject;
+import ui.objects.GUIObject;
 
 import java.io.IOException;
 

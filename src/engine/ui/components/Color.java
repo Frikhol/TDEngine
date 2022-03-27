@@ -1,4 +1,4 @@
-package layout.components;
+package ui.components;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

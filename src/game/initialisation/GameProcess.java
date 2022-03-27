@@ -1,8 +1,5 @@
 package initialisation;
 
-import layout.components.Color;
-import layout.objects.GUIPane;
-
 import java.util.ArrayList;
 
 import static core.GameEngine.*;

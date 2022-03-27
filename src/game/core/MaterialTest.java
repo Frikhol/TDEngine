@@ -3,17 +3,14 @@ package core;
 import entities.GameObject;
 import entities.Light;
 import initialisation.GameProcess;
-import layout.GUI;
-import layout.GUIObject;
-import layout.components.Action;
-import layout.components.Color;
-import layout.objects.GUIButton;
-import layout.objects.GUIPane;
-import org.joml.Vector2i;
+import ui.components.Action;
+import ui.components.Color;
+import ui.layout.GUIGridLayout;
+import ui.objects.GUIButton;
+import ui.objects.GUIPane;
 import org.joml.Vector3f;
 
 import static core.GameEngine.*;
-import static display.GameDisplay.*;
 
 public class MaterialTest extends GameProcess {
     private GameObject redObject;
@@ -37,23 +34,18 @@ public class MaterialTest extends GameProcess {
         greenObject.setPosition(new Vector3f(-3f,0f,-25f));
         greenObject.scale(0.2f);
         greenObject.rotateY(90);
-        GUIPane some1 = new GUIPane(100,100,100,300);
-        some1.setTexture("GUIObject");
+        GUIPane some1 = new GUIPane(200,200,100,100);
         getCurrentScene().getCurrentGUI().add(some1);
-        GUIButton some2 = new GUIButton(100,50);
-        some1.setPadding(5,5);
-        some2.setTextString("Action");
-        some2.setColor(Color.white);
-        some2.setSize(new Vector2i(200,50));
-        GUIButton some3 = new GUIButton(300,50);
-        some3.setColor(Color.white);
-        GUIButton some4 = new GUIButton(100,50);
-        some4.setColor(Color.white);
-        some1.add(some2);
-        some1.add(some3);
-        some1.add(some4);
-        some2.setTextString("New Action");
-        GUIPane newPane = new GUIPane(some1);
+        some1.setTexture("GUIObject");
+        some1.setPadding(10,10);
+        GUIButton some2 = new GUIButton("button1");
+        GUIButton some3 = new GUIButton("button2");
+        GUIButton some4 = new GUIButton("button3");
+        some1.setLayout(new GUIGridLayout(1,3,some1));
+        some1.add(some2,0,0,1,1);
+        some1.add(some3,0,1,1,1);
+        some1.add(some4,0,2,1,1);
+        GUIPane newPane = some1.clone();
         newPane.setTexture("GUIObject");
         newPane.setColor(Color.cyan);
         some2.addAction(new Action() {

@@ -28,7 +28,7 @@
   "currentGUI": {
     "guiList": [
       {
-        "guiClass": "layout.GUIObject",
+        "guiClass": "ui.objects.GUIObject",
         "position": {
           "x": 0.9375,
           "y": 0.9375

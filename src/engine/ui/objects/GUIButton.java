@@ -1,10 +1,9 @@
-package layout.objects;
+package ui.objects;
 
 import font.GUIText;
 import font.TextMaster;
-import layout.GUI;
-import layout.GUIObject;
-import layout.components.Action;
+import org.joml.Vector2f;
+import ui.components.Action;
 import org.joml.Vector2i;
 
 import static display.GameDisplay.*;
@@ -23,24 +22,34 @@ public class GUIButton extends GUIObject{
         }
     };
 
-    private Vector2i location;
-    private Vector2i size;
     private GUIText text = null;
     private boolean isPressed = false;
     private boolean isReleased = true;
 
+    public GUIButton(){
+        super();
+    }
+
+    public GUIButton(String text){
+        super();
+        this.text = new GUIText(text, 1, TextMaster.getFonts().get("calibri"), new Vector2f(-100,-100), 0f, true);
+    }
+
     public GUIButton(int width,int height){
-        this(0,0,width,height);
+        super(width,height);
     }
 
     public GUIButton(int posX, int posY, int width, int height) {
-        super(GUI.getProperPosition(posX,posY,width,height),GUI.getProperScale(width,height));
-        this.location = new Vector2i(posX,posY);
-        this.size = new Vector2i(width,height);
+        super(posX, posY, width, height);
     }
 
     public GUIText getText() {
         return text;
+    }
+
+    public void setText(GUIText text) {
+        this.text = text;
+        text.relocate(toTextPosition(getPosition(),getScale()),getScale().x);
     }
 
     public String getTextString() {
@@ -48,41 +57,50 @@ public class GUIButton extends GUIObject{
     }
 
     public void setTextString(String text) {
+        setTextString(text,"calibri");
+    }
+
+    public void setTextString(String text,String font) {
         if(this.text == null)
-            this.text = new GUIText(text, 1, TextMaster.getFonts().get("calibri"), GUI.getTextPosition(location, size), (float) size.x / (float) getDisplayWIDTH()[0], true);
+            this.text = new GUIText(text, 1, TextMaster.getFonts().get(font), toTextPosition(getLocation(), getSize()), getScale().x, true);
         else
             this.text.updateText(text);
     }
 
-    public void setText(GUIText text) {
-            this.text = text;
+    @Override
+    public void setPosition(Vector2f position) {
+        super.setPosition(position);
+        if(text!=null)
+            text.relocate(toTextPosition(getPosition(),getScale()),getScale().x);
     }
 
-    public Vector2i getLocation() {
-        return location;
+    @Override
+    public void setScale(Vector2f scale) {
+        super.setScale(scale);
+        if(text!=null)
+            text.relocate(toTextPosition(getPosition(),getScale()),getScale().x);
     }
 
+    @Override
     public void setLocation(Vector2i location) {
-        setPosition(GUI.getProperPosition(location.x,location.y,size.x,size.y));
-        resetLocation(location);
+        super.setLocation(location);
+        if(text!=null)
+            text.relocate(toTextPosition(getPosition(),getScale()),getScale().x);
     }
 
-    public void resetLocation(Vector2i location) {
-        this.location = location;
-    }
-
-    public Vector2i getSize() {
-        return size;
-    }
-
+    @Override
     public void setSize(Vector2i size) {
-        setScale(GUI.getProperScale(size.x,size.y));
-        setPosition(GUI.getProperPosition(location.x,location.y,size.x,size.y));
-        resetSize(size);
+        super.setSize(size);
+        if(text!=null)
+            text.relocate(toTextPosition(getPosition(),getScale()),getScale().x);
     }
 
-    public void resetSize(Vector2i size) {
-        this.size = size;
+    private static Vector2f toTextPosition(Vector2i location, Vector2i size){
+        return new Vector2f((float)location.x/(float)getDisplayWIDTH()[0],((float)location.y+size.y/2f)/(float)getDisplayHEIGHT()[0]-0.015f);
+    }
+
+    private static Vector2f toTextPosition(Vector2f position,Vector2f scale){
+        return new Vector2f((position.x+1f-scale.x)/2f,1f-(position.y+1f)/2f-0.015f);
     }
 
     public void setPointed(){

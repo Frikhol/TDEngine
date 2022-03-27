@@ -5,10 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import font.GUIText;
-import font.TextMaster;
-import layout.GUIObject;
-import layout.components.Color;
+import ui.objects.GUIObject;
+import ui.components.Color;
 import org.joml.Vector2f;
 
 import java.io.IOException;

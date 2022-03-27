@@ -2,7 +2,7 @@ package inputs;
 import static display.GameDisplay.*;
 import static core.GameEngine.*;
 
-import layout.GUIObject;
+import ui.objects.GUIObject;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 
 public class CursorInputHadler{

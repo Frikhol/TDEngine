@@ -1,10 +1,10 @@
-package layout.shaders;
+package ui.shaders;
 
 import font.TextMaster;
-import layout.GUIObject;
+import ui.objects.GUIObject;
 import core.Loader;
 import entities.components.Mesh;
-import layout.objects.GUIButton;
+import ui.objects.GUIButton;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;

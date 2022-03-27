@@ -3,9 +3,9 @@ package inputs;
 import core.GameEngine;
 import entities.Camera;
 import initialisation.GameProcess;
-import layout.GUI;
-import layout.GUIObject;
-import layout.objects.GUIButton;
+import ui.GUI;
+import ui.objects.GUIObject;
+import ui.objects.GUIButton;
 
 import static core.GameEngine.*;
 import static display.GameDisplay.*;

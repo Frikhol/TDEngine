@@ -1,13 +1,11 @@
 package display;
 
-import layout.components.Color;
-import layout.objects.GUIPane;
+import ui.components.Color;
+import ui.objects.GUIPane;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import tools.Time;
-
-import static core.GameEngine.*;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;

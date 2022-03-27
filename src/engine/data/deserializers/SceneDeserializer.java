@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import core.GameEngine;
 import entities.*;
 import entities.components.*;
-import layout.*;
-import layout.objects.GUIPane;
+import ui.*;
 import org.joml.Vector3f;
+import ui.objects.GUIObject;
 
 import java.io.IOException;
 
