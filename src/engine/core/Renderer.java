@@ -11,8 +11,10 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import physics.colliders.Collider;
 import shaders.StaticShader;
 import tools.Maths;
+import ui.GUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +22,10 @@ import java.util.List;
 import java.util.Map;
 
 import static display.GameDisplay.*;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
+import static org.lwjgl.opengl.GL11.GL_FRONT_AND_BACK;
+import static org.lwjgl.opengl.GL11.glPolygonMode;
 
 public class Renderer {
 
@@ -30,6 +35,7 @@ public class Renderer {
     private static Matrix4f projectionMatrix;
     private static StaticShader shader = new StaticShader();
     private static Map<Model, List<GameObject>> entities = new HashMap<Model, List<GameObject>>();
+    private static Map<Model, List<Collider>> colliders = new HashMap<>();
 
     public Renderer(){
         GL11.glEnable(GL11.GL_CULL_FACE);
@@ -62,6 +68,24 @@ public class Renderer {
                 GL11.glDrawElements(GL11.GL_TRIANGLES,model.getMesh().getVertexCount(),GL11.GL_UNSIGNED_INT,0);
             }
             unbindTexturedModel();
+        }
+        if(GUI.isColliderVisibility()) {
+            for (Model model : entities.keySet()) {
+                boolean changed = false;
+                if (GUI.getPolygonMode() == GL_FILL) {
+                    GUI.changePolyMode();
+                    changed = true;
+                }
+                prepareTexturedModel(model.getCollider().getModel());
+                List<GameObject> batch = entities.get(model);
+                for (GameObject gameObject : batch) {
+                    prepareInstance((gameObject));
+                    GL11.glDrawElements(GL11.GL_TRIANGLES, model.getMesh().getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
+                }
+                if (changed)
+                    GUI.changePolyMode();
+                unbindTexturedModel();
+            }
         }
         shader.stop();
         entities.clear();

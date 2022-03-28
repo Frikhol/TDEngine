@@ -1,4 +1,4 @@
-package core;
+package core.loader;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 import entities.components.Mesh;
@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import physics.colliders.Collider;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -24,7 +25,7 @@ public class Loader {
     private static List<Integer> vbos = new ArrayList<Integer>();
     private static List<Integer> textures = new ArrayList<Integer>();
 
-    private static Mesh loadToVAO(float[] positions, int[] indices, float[] textureCoords, float[] normals){
+    public static Mesh loadToVAO(float[] positions, int[] indices, float[] textureCoords, float[] normals){
         int vaoID = createVAO();
         List<Integer> vboList = new ArrayList<>();
         bindIndicesBuffer(indices);
@@ -124,7 +125,8 @@ public class Loader {
         return new Texture(id);
     }
 
-    public static Mesh loadObjModel (String filename){
+    public static loadedMeshCollider loadObjModel (String filename){
+        Collider collider = new Collider();
         FileReader fr = null;
         try {
             fr = new FileReader(new File("Assets/models/"+filename+".obj"));
@@ -149,6 +151,7 @@ public class Loader {
                 if(line.startsWith("v ")){
                     Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1]),Float.parseFloat(currentLine[2]),Float.parseFloat(currentLine[3]));
                     vertices.add(vertex);
+                    collider.resize(vertex);
                 } else if(line.startsWith("vt ")){
                     Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]),Float.parseFloat(currentLine[2]));
                     textures.add(texture);
@@ -200,7 +203,7 @@ public class Loader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return loadToVAO(verticesArray,indicesArray,textureArray,normalsArray);
+        return new loadedMeshCollider(loadToVAO(verticesArray,indicesArray,textureArray,normalsArray),collider);
     }
 
     private static void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures, List<Vector3f> normals,float[] textureArray,float[] normalsArray){

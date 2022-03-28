@@ -1,6 +1,6 @@
 package ui.components;
 
-import core.Loader;
+import core.loader.Loader;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,6 +12,7 @@ public class GUI {
 
     private List<GUIObject> guiList;
     private static int polygonMode = GL_FILL;
+    private static boolean colliderVisibility = false;
 
     public GUI(){
         guiList = new LinkedList<>();
@@ -62,4 +63,15 @@ public class GUI {
         glPolygonMode(GL_FRONT_AND_BACK, polygonMode);
     }
 
+    public static void changeColliderVisibility() {
+        colliderVisibility = !colliderVisibility;
+    }
+
+    public static boolean isColliderVisibility() {
+        return colliderVisibility;
+    }
+
+    public static int getPolygonMode() {
+        return polygonMode;
+    }
 }

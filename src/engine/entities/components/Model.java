@@ -1,6 +1,8 @@
 package entities.components;
 
-import core.Loader;
+import core.loader.Loader;
+import core.loader.loadedMeshCollider;
+import physics.colliders.Collider;
 
 import static core.GameEngine.*;
 
@@ -9,18 +11,32 @@ public class Model {
     private String name;
     private Mesh mesh;
     private Material material;
+    private Collider collider;
 
     public Model(String name) {
         this.name = name;
-        this.mesh = Loader.loadObjModel(name);
+        loadedMeshCollider loaded = Loader.loadObjModel(name);
+        this.mesh = loaded.getMesh();
+        this.collider = loaded.getCollider();
         this.material = new Material(name,0.1f,1.0f,32,0.5f);
+        collider.loadCollider();
         getCurrentScene().getPrefabs().add(this);
     }
 
-    public Model(String name,Mesh mesh, Material material){
+    public Model(String name,Mesh mesh,Material material){
         this.name = name;
         this.mesh = mesh;
         this.material = material;
+        if(!getCurrentScene().getPrefabs().contains(this))
+            getCurrentScene().getPrefabs().add(this);
+    }
+
+    public Collider getCollider() {
+        return collider;
+    }
+
+    public void setCollider(String collider) {
+        //TODO this.collider = new Collider(collider);
     }
 
     public String getName() {

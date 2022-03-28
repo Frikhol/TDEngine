@@ -63,7 +63,7 @@ public class MaterialTest extends GameProcess {
     }
 
     public void update() {
-        whiteObject.rotateY(0.5f);
+        //whiteObject.rotateY(0.5f);
         redObject.rotateY(-0.3f);
         greenObject.rotateY(0.3f);
     }

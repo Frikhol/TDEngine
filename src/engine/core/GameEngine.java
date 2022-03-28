@@ -2,6 +2,7 @@ package core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import core.loader.Loader;
 import data.deserializers.GUIObjectDeserializer;
 import data.deserializers.SceneDeserializer;
 import data.serializers.GUIObjectSerializer;
@@ -9,7 +10,7 @@ import data.serializers.GameObjectSerializer;
 import data.serializers.SceneSerializer;
 import data.serializers.TransformSerializer;
 import display.GameDisplay;
-import display.MousePicker;
+import physics.MousePicker;
 import entities.GameObject;
 import entities.Scene;
 import entities.components.Transform;

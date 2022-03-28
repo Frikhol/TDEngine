@@ -1,6 +1,6 @@
 package entities.components;
 
-import core.Loader;
+import core.loader.Loader;
 
 public class Material {
 

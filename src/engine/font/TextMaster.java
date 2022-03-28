@@ -1,6 +1,6 @@
 package font;
 
-import core.Loader;
+import core.loader.Loader;
 import font.components.FontType;
 import font.components.TextMeshData;
 import org.lwjgl.opengl.GL30;

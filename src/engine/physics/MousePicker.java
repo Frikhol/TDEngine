@@ -1,4 +1,4 @@
-package display;
+package physics;
 
 import core.Renderer;
 import entities.Camera;
@@ -41,6 +41,7 @@ public class MousePicker {
     public static void update(){
         viewMatrix = Maths.createViewMatrix(camera);
         currentRay = calculateMouseRay();
+        //System.out.println("x "+currentRay.x+" y "+currentRay.y+" z:"+currentRay.z);
         if (intersectionInRange(0, RAY_RANGE, currentRay)) {
             currentPoint = binarySearch(0, 0, RAY_RANGE, currentRay);
         } else {
@@ -93,18 +94,10 @@ public class MousePicker {
     private static boolean intersectionInRange(float start, float finish, Vector3f ray) {
         Vector3f startPoint = getPointOnRay(ray, start);
         Vector3f endPoint = getPointOnRay(ray, finish);
-        if (!isUnderGround(startPoint) && isUnderGround(endPoint)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !isUnderGround(startPoint) && isUnderGround(endPoint);
     }
 
     private static boolean isUnderGround(Vector3f testPoint) {
-        if (testPoint.y < getCurrentScene().getGameObjectList().get(0).getPosition().y) {
-            return true;
-        } else {
-            return false;
-        }
+        return testPoint.y < 0;
     }
 }

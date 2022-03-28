@@ -1,9 +1,11 @@
 package inputs;
 
 import core.GameEngine;
-import display.MousePicker;
+import entities.GameObject;
+import physics.MousePicker;
 import entities.Camera;
 import initialisation.GameProcess;
+import physics.collision.RayToBoxCollision;
 import ui.GUI;
 import ui.objects.GUIObject;
 import ui.objects.GUIButton;
@@ -34,6 +36,8 @@ public class DefaultControls implements InputList {
     public void keyPressed(int key, int mods) {
         if(key == KeyCode.GLFW_KEY_F1)
             GUI.changePolyMode();
+        if(key == KeyCode.GLFW_KEY_F2)
+            GUI.changeColliderVisibility();
         if(key == KeyCode.GLFW_KEY_P) {
             GameProcess.setPause(!GameProcess.isPause());
             getPausePane().setVisible(GameProcess.isPause());
@@ -47,7 +51,11 @@ public class DefaultControls implements InputList {
 
     @Override
     public void mouseDown(int button, int mods) {
-
+        /*if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
+            GameObject nearest = RayToBoxCollision.getNearest();
+            if(nearest!=null)
+                System.out.println("holding"+nearest.getName());
+        }*/
     }
 
     @Override
@@ -63,8 +71,12 @@ public class DefaultControls implements InputList {
             }
         }
         if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
-            getCurrentScene().getGameObjectList().get(2).setPosition(MousePicker.getCurrentPoint());
+            GameObject nearest = RayToBoxCollision.getNearest();
+            if(nearest!=null)
+                System.out.println("pressed"+nearest.getName());
         }
+
+
     }
 
     @Override

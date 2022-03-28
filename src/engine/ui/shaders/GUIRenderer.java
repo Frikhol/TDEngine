@@ -2,7 +2,7 @@ package ui.shaders;
 
 import font.TextMaster;
 import ui.objects.GUIObject;
-import core.Loader;
+import core.loader.Loader;
 import entities.components.Mesh;
 import ui.objects.GUIButton;
 import org.joml.Matrix4f;
