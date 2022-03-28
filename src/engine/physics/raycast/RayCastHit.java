@@ -17,13 +17,17 @@ public class RayCastHit {
         float minDistance = 10000f;
         GameObject bufObject = null;
         Vector3f near;
+        Vector3f lastNear=null;
         for(GameObject gameObject : getCurrentScene().getGameObjectList())
             if((near = getBoxHitNearPoint(gameObject))!=null) {
                 if(start.distance(near)<minDistance) {
                     minDistance = Math.min(start.distance(near), minDistance);
                     bufObject = gameObject;
+                    lastNear = near;
                 }
             }
+        if(lastNear!=null)
+            System.out.println(lastNear.x+" "+lastNear.y+" "+lastNear.z);
         return bufObject;
     }
 
@@ -54,12 +58,12 @@ public class RayCastHit {
         Vector3f end = getScaledRay(start);
         if(PointCollision.toBox(start,object))
             return null;
-        if ((((start.x < minX)) && ((end.x < minX))) ||
-                (((start.x > maxX)) && ((end.x > maxX))) ||
-                (((start.y < minY)) && ((end.y < minY))) ||
-                (((start.y > maxY)) && ((end.y > maxY))) ||
-                (((start.z < minZ)) && ((end.z < minZ))) ||
-                (((start.z > maxZ)) && ((end.z > maxZ))))
+        if ((((start.x < minX)) && ((end.x < minX)) && start.x == end.x) ||
+                (((start.x > maxX)) && ((end.x > maxX)) && start.x == end.x) ||
+                (((start.y < minY)) && ((end.y < minY))&& start.y == end.y) ||
+                (((start.y > maxY)) && ((end.y > maxY))&& start.y == end.y) ||
+                (((start.z < minZ)) && ((end.z < minZ))&& start.z == end.z) ||
+                (((start.z > maxZ)) && ((end.z > maxZ))&& start.z == end.z))
             return null;
         Vector3f near = new Vector3f(
                 getNFactor(start.x,end.x,minX,maxX),
@@ -69,7 +73,7 @@ public class RayCastHit {
                 getFFactor(start.x,end.x,minX,maxX),
                 getFFactor(start.y,end.y,minY,maxY),
                 getFFactor(start.z,end.z,minZ,maxZ));
-        if((far.x<near.y)||(far.x<near.z)||(far.y<near.z))
+        if((far.x<near.y)||(far.x<near.z)||(far.y<near.z)||(far.z<near.y)||(far.y<near.x)||far.z<near.x)
             return null;
         float nFactor = Math.max(Math.max(near.x,near.y),near.z);
         float fFactor = Math.min(Math.min(far.x,far.y),far.z);
@@ -81,7 +85,7 @@ public class RayCastHit {
             return Math.abs(max-v0)/Math.abs(v1-v0);
         if (v1<v0)
             return  Math.abs(min-v0)/Math.abs(v1-v0);
-        return v1;
+        return v1-v0;
     }
 
     private static float getNFactor(float v0, float v1, float min, float max) {

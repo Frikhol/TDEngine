@@ -39,9 +39,6 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
         for(JsonNode gameObjectNode : gameObjectListNode){
             JsonNode goModel = gameObjectNode.get("model");
             JsonNode goTransform = gameObjectNode.get("transform");
-            Model model;
-            if((model = scene.findModel(goModel.asText()))==null)
-                model = new Model(goModel.asText());
             Transform transform = new Transform(
                     new Vector3f(
                             goTransform.get("position").get("x").floatValue(),
@@ -55,6 +52,10 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
                     ),
                     goTransform.get("scale").floatValue()
                     );
+            Model model;
+            if((model = scene.findModel(goModel.asText()))==null)
+                model = new Model(goModel.asText());
+            model.getCollider().scale(transform.getScale());
             model.getMaterial().setAmbientValue(gameObjectNode.get("material").get("ambientValue").floatValue());
             model.getMaterial().setDiffuseValue(gameObjectNode.get("material").get("diffuseValue").floatValue());
             model.getMaterial().setSmoothness(gameObjectNode.get("material").get("smoothness").floatValue());

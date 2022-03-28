@@ -13,6 +13,8 @@ import static core.GameEngine.*;
 
 public class RayCast {
 
+    private static boolean pointingInWorld;
+
     private static Vector3f currentRay;
 
     private static Matrix4f projectionMatrix;
@@ -23,6 +25,14 @@ public class RayCast {
         projectionMatrix = Renderer.getProjectionMatrix();
         camera = getCurrentScene().getCamera();
         viewMatrix = Maths.createViewMatrix(camera);
+    }
+
+    public static boolean isPointingInWorld() {
+        return pointingInWorld;
+    }
+
+    public static void setPointingInWorld(boolean pointingInWorld) {
+        RayCast.pointingInWorld = pointingInWorld;
     }
 
     public static Vector3f getCurrentRay() {

@@ -4,6 +4,7 @@ import core.GameEngine;
 import entities.GameObject;
 import entities.Camera;
 import initialisation.GameProcess;
+import physics.raycast.RayCast;
 import physics.raycast.RayCastHit;
 import ui.GUI;
 import ui.objects.GUIObject;
@@ -65,9 +66,11 @@ public class DefaultControls implements InputList {
             }
         }
         if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
-            GameObject nearest = RayCastHit.getNearest();
-            if(nearest!=null)
-                System.out.println("pressed"+nearest.getName());
+            if(RayCast.isPointingInWorld()) {
+                GameObject nearest = RayCastHit.getNearest();
+                if (nearest != null)
+                    System.out.println("pressed" + nearest.getName());
+            }
         }
 
 
