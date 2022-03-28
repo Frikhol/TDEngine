@@ -4,8 +4,10 @@ import entities.GameObject;
 import org.joml.Vector3f;
 import physics.colliders.Collider;
 
-public class PointToBoxCollision {
-    public static boolean check(Vector3f point, GameObject object){
+public abstract class PointCollision {
+
+//TODO заменить на коллайдер
+    public static boolean toBox(Vector3f point, GameObject object){
         Collider box = object.getModel().getCollider();
         float minX = object.getPosition().x-box.getSize().x;
         float maxX = object.getPosition().x+box.getSize().x;
@@ -17,4 +19,5 @@ public class PointToBoxCollision {
                 (point.y >= minY && point.y <= maxY) &&
                 (point.z >= minZ && point.z <= maxZ);
     }
+
 }

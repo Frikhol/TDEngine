@@ -2,10 +2,9 @@ package inputs;
 
 import core.GameEngine;
 import entities.GameObject;
-import physics.MousePicker;
 import entities.Camera;
 import initialisation.GameProcess;
-import physics.collision.RayToBoxCollision;
+import physics.raycast.RayCastHit;
 import ui.GUI;
 import ui.objects.GUIObject;
 import ui.objects.GUIButton;
@@ -51,11 +50,6 @@ public class DefaultControls implements InputList {
 
     @Override
     public void mouseDown(int button, int mods) {
-        /*if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
-            GameObject nearest = RayToBoxCollision.getNearest();
-            if(nearest!=null)
-                System.out.println("holding"+nearest.getName());
-        }*/
     }
 
     @Override
@@ -71,7 +65,7 @@ public class DefaultControls implements InputList {
             }
         }
         if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
-            GameObject nearest = RayToBoxCollision.getNearest();
+            GameObject nearest = RayCastHit.getNearest();
             if(nearest!=null)
                 System.out.println("pressed"+nearest.getName());
         }

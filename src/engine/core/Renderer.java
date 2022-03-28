@@ -33,7 +33,6 @@ public class Renderer {
     private static Matrix4f projectionMatrix;
     private static StaticShader shader = new StaticShader();
     private static Map<Model, List<GameObject>> entities = new HashMap<Model, List<GameObject>>();
-    private static Map<Model, List<Collider>> colliders = new HashMap<>();
 
     public Renderer(){
         GL11.glEnable(GL11.GL_CULL_FACE);
@@ -74,7 +73,7 @@ public class Renderer {
                     GUI.changePolyMode();
                     changed = true;
                 }
-                prepareTexturedModel(model.getCollider().getModel());
+                prepareTexturedModel(model.getCollider().getColliderModel());
                 List<GameObject> batch = entities.get(model);
                 for (GameObject gameObject : batch) {
                     prepareInstance((gameObject));

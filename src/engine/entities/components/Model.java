@@ -2,6 +2,7 @@ package entities.components;
 
 import core.loader.Loader;
 import core.loader.LoadedMeshCollider;
+import physics.colliders.BoxCollider;
 import physics.colliders.Collider;
 
 import static core.GameEngine.*;
@@ -19,7 +20,6 @@ public class Model {
         this.mesh = loaded.getMesh();
         this.collider = loaded.getCollider();
         this.material = new Material(name,0.1f,1.0f,32,0.5f);
-        collider.loadCollider();
         getCurrentScene().getPrefabs().add(this);
     }
 
@@ -35,8 +35,10 @@ public class Model {
         return collider;
     }
 
-    public void setCollider(String collider) {
-        //TODO this.collider = new Collider(collider);
+    public void resetCollider(){
+        collider.getColliderModel().getMesh().clearUp();
+        getCurrentScene().getPrefabs().remove(collider.getColliderModel());
+        collider.loadCollider();
     }
 
     public String getName() {

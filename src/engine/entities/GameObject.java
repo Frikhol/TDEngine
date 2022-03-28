@@ -147,7 +147,7 @@ public class GameObject {
 
     public void scale(float scale){
         transform.scale(scale);
-        model.getCollider().scale(scale);
+        getModel().getCollider().scale(scale);
         for(GameObject child: childes)
             child.scale(scale);
     }

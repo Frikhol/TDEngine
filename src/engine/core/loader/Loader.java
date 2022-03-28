@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import physics.colliders.BoxCollider;
 import physics.colliders.Collider;
 
 import java.io.*;
@@ -126,7 +127,7 @@ public class Loader {
     }
 
     public static LoadedMeshCollider loadObjModel (String filename){
-        Collider collider = new Collider();
+        Collider collider = new BoxCollider();
         FileReader fr = null;
         try {
             fr = new FileReader(new File("Assets/models/"+filename+".obj"));
@@ -203,6 +204,7 @@ public class Loader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        collider.loadCollider();
         return new LoadedMeshCollider(loadToVAO(verticesArray,indicesArray,textureArray,normalsArray),collider);
     }
 

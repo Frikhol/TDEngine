@@ -51,7 +51,7 @@ public class Tower extends GameObject implements Effectible {
         newBullet.setTarget(aimEnemy);
         newBullet.setDamage(damage*effectMultiplayer("damage"));
         newBullet.getTransform().setPosition(bulletPosition);
-        newBullet.getTransform().setScale(0.1f);
+        newBullet.getTransform().scale(0.1f);
         //newBullet.getTransform().scale(this.getScale());
         newBullet.Create();
 
