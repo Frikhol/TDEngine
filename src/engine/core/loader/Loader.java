@@ -125,7 +125,7 @@ public class Loader {
         return new Texture(id);
     }
 
-    public static loadedMeshCollider loadObjModel (String filename){
+    public static LoadedMeshCollider loadObjModel (String filename){
         Collider collider = new Collider();
         FileReader fr = null;
         try {
@@ -203,7 +203,7 @@ public class Loader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new loadedMeshCollider(loadToVAO(verticesArray,indicesArray,textureArray,normalsArray),collider);
+        return new LoadedMeshCollider(loadToVAO(verticesArray,indicesArray,textureArray,normalsArray),collider);
     }
 
     private static void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures, List<Vector3f> normals,float[] textureArray,float[] normalsArray){

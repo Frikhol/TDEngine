@@ -3,11 +3,11 @@ package core.loader;
 import entities.components.Mesh;
 import physics.colliders.Collider;
 
-public class loadedMeshCollider {
+public class LoadedMeshCollider {
     private Mesh mesh;
     private Collider collider;
 
-    public loadedMeshCollider(Mesh mesh, Collider collider) {
+    public LoadedMeshCollider(Mesh mesh, Collider collider) {
         this.mesh = mesh;
         this.collider = collider;
     }

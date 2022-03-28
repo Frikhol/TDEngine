@@ -118,6 +118,7 @@ public class Tower extends GameObject implements Effectible {
     @Override
     public void Create() {
         super.Create();
+        this.scale(0.5f);
     }
 
     @Override
@@ -135,8 +136,6 @@ public class Tower extends GameObject implements Effectible {
                     new Bullet.BaseMagicBullet(15),
                     new Vector3f(1,1.5f,0)
             );
-            this.scale(0.5f);
-
         }
     }
 }

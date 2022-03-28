@@ -88,6 +88,7 @@ public class Enemy extends GameObject implements Effectible {
     @Override
     public void Create(){
         super.Create();
+        this.scale(0.1f);
         aliveEnemy.add(this);
         alive = true;
     }
@@ -103,7 +104,6 @@ public class Enemy extends GameObject implements Effectible {
 
         public BaseEnemyTest(Track track) {
             super(100, 0, track, 3f, 0);
-            this.scale(0.1f);
         }
     }
 }

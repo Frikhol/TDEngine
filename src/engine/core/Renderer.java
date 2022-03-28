@@ -24,8 +24,6 @@ import java.util.Map;
 import static display.GameDisplay.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
-import static org.lwjgl.opengl.GL11.GL_FRONT_AND_BACK;
-import static org.lwjgl.opengl.GL11.glPolygonMode;
 
 public class Renderer {
 

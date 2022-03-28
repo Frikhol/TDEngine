@@ -1,7 +1,7 @@
 package entities.components;
 
 import core.loader.Loader;
-import core.loader.loadedMeshCollider;
+import core.loader.LoadedMeshCollider;
 import physics.colliders.Collider;
 
 import static core.GameEngine.*;
@@ -15,7 +15,7 @@ public class Model {
 
     public Model(String name) {
         this.name = name;
-        loadedMeshCollider loaded = Loader.loadObjModel(name);
+        LoadedMeshCollider loaded = Loader.loadObjModel(name);
         this.mesh = loaded.getMesh();
         this.collider = loaded.getCollider();
         this.material = new Material(name,0.1f,1.0f,32,0.5f);
