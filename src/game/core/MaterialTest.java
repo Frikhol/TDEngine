@@ -34,7 +34,7 @@ public class MaterialTest extends GameProcess {
         greenObject.setPosition(new Vector3f(-3f,0f,-25f));
         greenObject.scale(0.2f);
         greenObject.rotateY(90);
-        GUIPane some1 = new GUIPane(200,200,100,100);
+        /*GUIPane some1 = new GUIPane(200,200,100,100);
         getCurrentScene().getCurrentGUI().add(some1);
         some1.setTexture("GUIObject");
         some1.setPadding(10,10);
@@ -59,12 +59,12 @@ public class MaterialTest extends GameProcess {
             public void actionOnReleased() {
                 getCurrentScene().getCurrentGUI().remove(newPane);
             }
-        });
+        });*/
     }
 
     public void update() {
         //whiteObject.rotateY(0.5f);
-        redObject.rotateY(-0.3f);
-        greenObject.rotateY(0.3f);
+        //redObject.rotateY(-0.3f);
+        //greenObject.rotateY(0.3f);
     }
 }

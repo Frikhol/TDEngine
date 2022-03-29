@@ -47,4 +47,12 @@ public class Camera {
         return roll;
     }
 
+    public void setPitch(float pitch) {
+        this.pitch = pitch;
+    }
+
+    public void rotateY(float yaw) {
+        if(Math.abs(this.yaw += yaw) > 360.0f)
+            this.yaw = 0f;
+    }
 }

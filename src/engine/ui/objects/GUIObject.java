@@ -48,6 +48,10 @@ public class GUIObject {
         this.texture = GUITexture.findTexture(texture);
     }
 
+    public void setTexture(String name, int id) {
+        this.texture = new GUITexture(name,id);
+    }
+
     public Vector2f getPosition() {
         return position;
     }

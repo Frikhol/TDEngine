@@ -19,6 +19,7 @@ import font.TextMaster;
 import inputs.CursorInputHadler;
 import inputs.MouseInputHandler;
 import ui.objects.GUIObject;
+import ui.objects.GUIPane;
 import ui.shaders.GUIRenderer;
 import inputs.KeyInputHandler;
 import inputs.DefaultControls;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import static display.GameDisplay.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 
 public class GameEngine {
 
@@ -63,6 +65,9 @@ public class GameEngine {
         glfwSetCursorPosCallback(getDisplayID(), CursorInputHadler.cursorPosCallback);
         checkWindowResize();
         new RayCast();
+        /*GUIPane test = new GUIPane(0,0,500,500);
+        test.setTexture("someTest",Renderer.getShadowMapTexture());
+        getCurrentScene().getCurrentGUI().add(test);*/
     }
 
     public static void loop(){
@@ -70,6 +75,9 @@ public class GameEngine {
         countFPS();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.74902f,  0.847059f, 0.847059f, 0.0f); //background's color
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D,Renderer.getShadowMapTexture());
+        Renderer.renderShadowMap();
         text.updateText("FPS: "+GameDisplay.getFPS());
         text.setColour(1,0.9f,0);
         render();

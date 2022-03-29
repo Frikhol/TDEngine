@@ -25,6 +25,8 @@ public class StaticShader extends ShaderProgram{
     private int location_diffuseValue;
     private int location_smoothness;
     private int location_specularValue;
+    private int location_toShadowMapSpace;
+    private int location_shadowMap;
 
     public StaticShader(){
         super(VERTEX_FILE,FRAGMENT_FILE);
@@ -46,6 +48,8 @@ public class StaticShader extends ShaderProgram{
         location_diffuseValue = super.getUniformLocation("diffuseValue");
         location_smoothness = super.getUniformLocation("smoothness");
         location_specularValue = super.getUniformLocation("specularValue");
+        location_toShadowMapSpace = super.getUniformLocation("toShadowMapSpace");
+        location_shadowMap = super.getUniformLocation("shadowMap");
 
         location_lightPosition = new int[MAX_LIGHTS];
         location_lightColour = new int[MAX_LIGHTS];
@@ -55,6 +59,14 @@ public class StaticShader extends ShaderProgram{
             location_lightColour[i] = super.getUniformLocation("lightColour["+i+"]");
             location_attenuation[i] = super.getUniformLocation("attenuation["+i+"]");
         }
+    }
+
+    public void connectTextureUnits(){
+        super.loadInt(location_shadowMap,1);
+    }
+
+    public void loadToShadowMapSpaceMatrix(Matrix4f matrix){
+        super.loadMatrix(location_toShadowMapSpace,matrix);
     }
 
     public void loadMaterialVariables(float ambientValue,float diffuseValue,float smoothness,float specularValue){

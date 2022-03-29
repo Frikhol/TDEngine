@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import physics.colliders.Collider;
 import shaders.StaticShader;
+import shadows.ShadowMapMasterRenderer;
 import tools.Maths;
 import ui.GUI;
 
@@ -21,18 +22,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static core.GameEngine.*;
 import static display.GameDisplay.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 
 public class Renderer {
 
-    private static final float FOV = 70;
-    private static final float NEAR_PLANE = 0.1f;
-    private static final float FAR_PLANE = 1000;
+    public static final float FOV = 70;
+    public static final float NEAR_PLANE = 0.1f;
+    public static final float FAR_PLANE = 1000;
     private static Matrix4f projectionMatrix;
     private static StaticShader shader = new StaticShader();
     private static Map<Model, List<GameObject>> entities = new HashMap<Model, List<GameObject>>();
+    private static ShadowMapMasterRenderer shadowMapRenderer;
 
     public Renderer(){
         GL11.glEnable(GL11.GL_CULL_FACE);
@@ -41,6 +44,7 @@ public class Renderer {
         shader.start();
         shader.loadProjectionMatrix(projectionMatrix);
         shader.stop();
+        shadowMapRenderer = new ShadowMapMasterRenderer(getCurrentScene().getCamera());
     }
 
     /**
@@ -56,6 +60,8 @@ public class Renderer {
         shader.start();
         shader.loadLights(lights);
         shader.loadViewMatrix(camera);
+        shader.connectTextureUnits();
+        shader.loadToShadowMapSpaceMatrix(shadowMapRenderer.getToShadowMapSpaceMatrix());
         processEntities();
         for(Model model: entities.keySet()){
             prepareTexturedModel(model);
@@ -144,8 +150,19 @@ public class Renderer {
         projectionMatrix.perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
     }
 
-    public static void cleanUp(){
+    public static void renderShadowMap(){
+        processEntities();
+        shadowMapRenderer.render(entities,getCurrentScene().getLights().get(0));
+        entities.clear();
+    }
+
+    public static int getShadowMapTexture(){
+        return shadowMapRenderer.getShadowMap();
+    }
+
+    public static void cleanUp() {
         shader.cleanUp();
+        shadowMapRenderer.cleanUp();
     }
 
     public static Matrix4f getProjectionMatrix() {

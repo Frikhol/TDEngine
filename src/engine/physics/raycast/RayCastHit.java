@@ -13,21 +13,16 @@ public class RayCastHit {
 
     public static GameObject getNearest(){
         Vector3f start = new Vector3f(getCurrentScene().getCamera().getTransform().getPosition());
-        System.out.println(start.x+" "+start.y+" "+start.z);
         float minDistance = 10000f;
         GameObject bufObject = null;
         Vector3f near;
-        Vector3f lastNear=null;
         for(GameObject gameObject : getCurrentScene().getGameObjectList())
             if((near = getBoxHitNearPoint(gameObject))!=null) {
                 if(start.distance(near)<minDistance) {
                     minDistance = Math.min(start.distance(near), minDistance);
                     bufObject = gameObject;
-                    lastNear = near;
                 }
             }
-        if(lastNear!=null)
-            System.out.println(lastNear.x+" "+lastNear.y+" "+lastNear.z);
         return bufObject;
     }
 

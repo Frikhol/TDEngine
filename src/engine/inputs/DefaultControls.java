@@ -30,6 +30,10 @@ public class DefaultControls implements InputList {
             camera.getTransform().translateY(.1f);
         if(key == KeyCode.GLFW_KEY_LEFT_CONTROL)
             camera.getTransform().translateY(-.1f);
+        if(key == KeyCode.GLFW_KEY_Q)
+            camera.rotateY(-.3f);
+        if(key == KeyCode.GLFW_KEY_E)
+            camera.rotateY(.3f);
     }
 
     @Override

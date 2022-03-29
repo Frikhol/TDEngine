@@ -16,6 +16,12 @@ public class GUITexture {
         guiTextures.add(this);
     }
 
+    public GUITexture(String name,int id){
+        this.name = name;
+        this.textureID = id;
+        guiTextures.add(this);
+    }
+
     public static GUITexture findTexture(String name){
         for(GUITexture texture : guiTextures){
             if(texture.name.equals(name))
