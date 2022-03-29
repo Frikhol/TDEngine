@@ -75,9 +75,9 @@ public class GameEngine {
         countFPS();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.74902f,  0.847059f, 0.847059f, 0.0f); //background's color
+        Renderer.renderShadowMap();
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D,Renderer.getShadowMapTexture());
-        Renderer.renderShadowMap();
         text.updateText("FPS: "+GameDisplay.getFPS());
         text.setColour(1,0.9f,0);
         render();

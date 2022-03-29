@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class INI {
     public static void main(String[] args) {
-        //new Game();
-        new MaterialTest();
+        new Game();
+        //new MaterialTest();
 
 
 
