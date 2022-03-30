@@ -4,6 +4,7 @@ import entities.GameObject;
 import game.event.GameEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -47,6 +48,15 @@ public class GameEventProcessor {
         Queue<GameEvent> temp = first;
         first = second;
         second = temp;
+    }
+
+    /**
+     * pushing all game events of game
+     * @param gameEventList - game events list of game
+     */
+    public static void loadGameEvents(List<GameEvent> gameEventList){
+        for(GameEvent gameEvent : gameEventList)
+            pushGameEvent(gameEvent);
     }
 
     /**

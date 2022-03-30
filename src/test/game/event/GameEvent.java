@@ -1,7 +1,6 @@
 package game.event;
 
 import entities.GameObject;
-import game.processor.GameEventProcessor;
 
 import java.util.ArrayList;
 
@@ -14,11 +13,10 @@ public abstract class GameEvent {
     private ArrayList<GameObject> gameObjectList;
 
     /**
-     * creates own GameObject list and pushing event on initialised
+     * creates own GameObject list
      */
     public GameEvent(){
         this.gameObjectList = new ArrayList<>();
-        GameEventProcessor.pushGameEvent(this);
     }
 
     /**
