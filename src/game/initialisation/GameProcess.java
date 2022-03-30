@@ -14,27 +14,24 @@ public abstract class GameProcess{
     public GameProcess(){
         list.add(this);
         if(st==null){
-            st = new Thread (){
-                public void run() {
-                    startEngine();
-                    if(getCurrentScene() == null){
-                        System.err.println("No loaded scene");
-                        return;
-                    }
-                    for(GameProcess i : list){
-                        i.start();
-                    }
-                    while(!glfwWindowShouldClose(getDisplayID())){
-                        if(!pause)
-                            for (GameProcess i : list) {
-                                i.update();
-                            }
-                        loop();
-                    }
-                    stopEngine();
+            st = new Thread(() -> {
+                startEngine();
+                if(getCurrentScene() == null){
+                    System.err.println("No loaded scene");
+                    return;
                 }
-
-            };
+                for(GameProcess i : list){
+                    i.start();
+                }
+                while(!glfwWindowShouldClose(getDisplayID())){
+                    if(!pause)
+                        for (GameProcess i : list) {
+                            i.update();
+                        }
+                    loop();
+                }
+                stopEngine();
+            });
             st.start();
         }
     }

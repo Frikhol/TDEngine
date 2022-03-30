@@ -56,7 +56,7 @@ void main(void){
 
         float nDot1 = dot(unitNormal,unitLightVector);
         float brightness = max(nDot1,0.0);
-        totalDiffuse = totalDiffuse + (brightness * lightColour[i])/attFactor;
+        totalDiffuse = totalDiffuse* lightFactor + (brightness * lightColour[i])/attFactor;
 
         float specularFactor = dot(reflectedLightDirection,unitVectorToCamera);
         specularFactor = max(specularFactor,0.0);
@@ -64,10 +64,10 @@ void main(void){
         totalSpecular = totalSpecular + (dampedFactor * lightColour[i] * max(min(specularValue,1.0),0.0))/attFactor;
     }
 
-    totalDiffuse = max(min(diffuseValue,1.0),0.0) * totalDiffuse * lightFactor;
+    totalDiffuse = max(min(diffuseValue,1.0),0.0) * totalDiffuse;
     totalAmbient = max(min(ambientValue,1.0),0.0)*vec3(1.0,1.0,1.0);
 
-    vec3 result = totalAmbient+(totalDiffuse)+totalSpecular;
+    vec3 result = totalAmbient+totalDiffuse+totalSpecular;
     out_Color = vec4(result,1.0)*texture(textureSampler,pass_textureCoords);
 
 }

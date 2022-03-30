@@ -1,7 +1,6 @@
 package initialisation;
 
 import core.GameEngine;
-import core.MaterialTest;
 import entities.GameObject;
 import core.Game;
 import entities.Tower;

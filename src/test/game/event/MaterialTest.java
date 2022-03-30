@@ -1,18 +1,12 @@
-package core;
+package game.event;
 
 import entities.GameObject;
 import entities.Light;
-import initialisation.GameProcess;
-import ui.components.Action;
-import ui.components.Color;
-import ui.layout.GUIGridLayout;
-import ui.objects.GUIButton;
-import ui.objects.GUIPane;
 import org.joml.Vector3f;
 
-import static core.GameEngine.*;
+import static core.GameEngine.getCurrentScene;
 
-public class MaterialTest extends GameProcess {
+public class MaterialTest extends GameEvent {
     private GameObject redObject;
     private GameObject greenObject;
     private GameObject whiteObject;
