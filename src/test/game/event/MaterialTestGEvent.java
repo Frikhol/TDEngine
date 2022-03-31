@@ -6,7 +6,7 @@ import org.joml.Vector3f;
 
 import static core.GameEngine.getCurrentScene;
 
-public class MaterialTest extends GameEvent {
+public class MaterialTestGEvent extends GameEvent {
     private GameObject redObject;
     private GameObject greenObject;
     private GameObject whiteObject;

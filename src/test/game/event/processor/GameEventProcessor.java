@@ -1,4 +1,4 @@
-package game.processor;
+package game.event.processor;
 
 import entities.GameObject;
 import game.event.GameEvent;
@@ -62,7 +62,7 @@ public class GameEventProcessor {
     /**
      * used for first push GameEvent
      *
-     * @param event - GameEvent to push to game.processor
+     * @param event - GameEvent to push to game.event.processor
      */
 
     public static void pushGameEvent(GameEvent event){
