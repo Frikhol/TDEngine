@@ -2,22 +2,22 @@ package tools;
 
 public abstract class Time {
 
-    private static double deltaTime;
-    private static double lastTime;
+    private static float deltaTime;
+    private static float lastTime;
 
-    public static double getDeltaTime() {
+    public static float getDeltaTime() {
         return deltaTime;
     }
 
-    public static void setDeltaTime(double deltaTime) {
+    public static void setDeltaTime(float deltaTime) {
         Time.deltaTime = deltaTime;
     }
 
-    public static double getLastTime() {
+    public static float getLastTime() {
         return lastTime;
     }
 
-    public static void setLastTime(double lastTime) {
+    public static void setLastTime(float lastTime) {
         Time.lastTime = lastTime;
     }
 }

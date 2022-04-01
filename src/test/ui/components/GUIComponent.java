@@ -13,7 +13,6 @@ public class GUIComponent implements Serializable {
      * Metadata map, place where renderers or event processors can store state of component.
      */
     private final Map<String, Object> metadata = new HashMap<>();
-
     /**
      * List of child components.
      */
@@ -26,8 +25,6 @@ public class GUIComponent implements Serializable {
      * Map for UI event listeners.
      */
     private GUIListenerMap GUIListenerMap = new GUIListenerMap();
-
-
     /**
      * Returns event listeners for component instance.
      *

@@ -6,6 +6,7 @@ import entities.Camera;
 import initialisation.GameProcess;
 import physics.raycast.RayCast;
 import physics.raycast.RayCastHit;
+import tools.Time;
 import ui.GUI;
 import ui.objects.GUIObject;
 import ui.objects.GUIButton;
@@ -18,14 +19,22 @@ public class DefaultControls implements InputList {
     @Override
     public void keyDown(int key, int mods) {
         Camera camera = GameEngine.getCurrentScene().getCamera();
-        if(key == KeyCode.GLFW_KEY_S)
-            camera.getTransform().translateZ(.1f);
-        if(key == KeyCode.GLFW_KEY_W)
-            camera.getTransform().translateZ(-.1f);
-        if(key == KeyCode.GLFW_KEY_A)
-            camera.getTransform().translateX(-.1f);
-        if(key == KeyCode.GLFW_KEY_D)
-            camera.getTransform().translateX(.1f);
+        if(key == KeyCode.GLFW_KEY_S){
+            camera.getTransform().translateZ((float) (.1f * Math.cos(camera.getYaw()*Math.PI/180)));
+            camera.getTransform().translateX((float) (-.1f * Math.sin(camera.getYaw()*Math.PI/180)));
+        }
+        if(key == KeyCode.GLFW_KEY_W) {
+            camera.getTransform().translateZ((float) (-.1f * Math.cos(camera.getYaw() * Math.PI / 180)));
+            camera.getTransform().translateX((float) (.1f * Math.sin(camera.getYaw() * Math.PI / 180)));
+        }
+        if(key == KeyCode.GLFW_KEY_A) {
+            camera.getTransform().translateX((float) (-.1f * Math.cos(camera.getYaw()*Math.PI/180)));
+            camera.getTransform().translateZ((float) (-.1f * Math.sin(camera.getYaw()*Math.PI/180)));
+        }
+        if(key == KeyCode.GLFW_KEY_D) {
+            camera.getTransform().translateX((float) (.1f * Math.cos(camera.getYaw()*Math.PI/180)));
+            camera.getTransform().translateZ((float) (.1f * Math.sin(camera.getYaw()*Math.PI/180)));
+        }
         if(key == KeyCode.GLFW_KEY_SPACE)
             camera.getTransform().translateY(.1f);
         if(key == KeyCode.GLFW_KEY_LEFT_CONTROL)

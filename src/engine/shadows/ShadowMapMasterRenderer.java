@@ -15,6 +15,8 @@ import entities.Light;
 import java.util.List;
 import java.util.Map;
 
+import static org.lwjgl.opengl.GL11.*;
+
 /**
  * This class is in charge of using all of the classes in the shadows package to
  * carry out the shadow render pass, i.e. rendering the scene to the shadow map
@@ -61,7 +63,9 @@ public class ShadowMapMasterRenderer {
 		Vector3f sunPosition = sun.getPosition();
 		Vector3f lightDirection = new Vector3f(-sunPosition.x, -sunPosition.y, -sunPosition.z);
 		prepare(lightDirection, shadowBox);
+		glCullFace(GL_FRONT);
 		entityRenderer.render(entities);
+		glCullFace(GL_BACK);
 		finish();
 	}
 

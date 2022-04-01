@@ -89,9 +89,9 @@ public class GameDisplay {
     }
 
     public static void countFPS(){
-       Time.setDeltaTime(glfwGetTime()-Time.getLastTime());
+       Time.setDeltaTime((float) (glfwGetTime()-Time.getLastTime()));
         GameDisplay.setFPS((int)(1.0f/Time.getDeltaTime()));
-        Time.setLastTime(glfwGetTime());
+        Time.setLastTime((float) glfwGetTime());
     }
 
     public static void setFPSCup(int cup){
