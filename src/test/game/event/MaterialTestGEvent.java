@@ -57,9 +57,11 @@ public class MaterialTestGEvent extends GameEvent {
         });*/
     }
 
-    public void update() {
+    @Override
+    public boolean update() {
         //whiteObject.rotateY(0.5f);
         //redObject.rotateY(-0.3f);
         greenObject.rotateY(0.3f);
+        return true;
     }
 }

@@ -28,14 +28,15 @@ public class GameEventProcessor {
         if(!pause){
             swap();
             for(GameEvent event = second.poll(); event!=null; event = second.poll()){
-               event.update();
+               boolean alive = event.update();
                ArrayList<GameObject> objList = event.getGameObjectList();
                if(!objList.isEmpty()) {
                    for(int i = 0; i < objList.size(); i++) {
                        objList.get(i).Update();
                    }
                }
-               first.add(event);
+               if(alive)
+                   first.add(event);
             }
         }
     }

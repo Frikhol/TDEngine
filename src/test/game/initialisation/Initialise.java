@@ -17,10 +17,14 @@ import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public class Initialise implements Runnable{
     private static List<GameEvent> gameEventList = new ArrayList<>();
+    static private Thread th = null;
+    private Initialise(){
 
+    }
     public static void main(String[] args) {
         gameEventList.add(new MaterialTestGEvent());
-        new Initialise().run();
+        th = new Thread(new Initialise());
+        th.start();
     }
 
     @Override

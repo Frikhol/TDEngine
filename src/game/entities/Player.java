@@ -16,4 +16,5 @@ public class Player {
     static public void spend(float expenses){
         gold-=expenses;
     }
+
 }

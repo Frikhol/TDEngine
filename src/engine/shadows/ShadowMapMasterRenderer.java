@@ -28,7 +28,7 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class ShadowMapMasterRenderer {
 
-	private static final int SHADOW_MAP_SIZE = 16384;
+	private static final int SHADOW_MAP_SIZE = 1024;
 
 	private ShadowFrameBuffer shadowFbo;
 	private ShadowShader shader;

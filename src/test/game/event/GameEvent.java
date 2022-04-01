@@ -15,7 +15,7 @@ public abstract class GameEvent {
     /**
      * creates own GameObject list
      */
-    public GameEvent(){
+    public GameEvent() {
         this.gameObjectList = new ArrayList<>();
     }
 
@@ -27,7 +27,9 @@ public abstract class GameEvent {
     /**
      * used to update objects every frame in game loop
      */
-    public abstract void update();
+    public boolean update() {
+        return false;
+    }
 
     /**
      * returns GameObject list using in this event
