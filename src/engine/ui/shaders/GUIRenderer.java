@@ -1,9 +1,9 @@
 package ui.shaders;
 
-import font.TextMaster;
+import ui.font.TextMaster;
 import ui.objects.GUIObject;
-import core.loader.Loader;
-import entities.components.Mesh;
+import core.render.Loader;
+import core.entities.components.Mesh;
 import ui.objects.GUIButton;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;

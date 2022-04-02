@@ -1,18 +1,17 @@
 package inputs;
 
 import core.GameEngine;
-import entities.GameObject;
-import entities.Camera;
+import core.entities.GameObject;
+import core.entities.Camera;
 import initialisation.GameProcess;
 import physics.raycast.RayCast;
 import physics.raycast.RayCastHit;
-import tools.Time;
 import ui.GUI;
 import ui.objects.GUIObject;
 import ui.objects.GUIButton;
 
 import static core.GameEngine.*;
-import static display.GameDisplay.*;
+import static core.display.GameDisplay.*;
 
 public class DefaultControls implements InputList {
 

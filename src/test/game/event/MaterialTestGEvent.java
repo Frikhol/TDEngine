@@ -1,7 +1,7 @@
 package game.event;
 
-import entities.GameObject;
-import entities.Light;
+import core.entities.GameObject;
+import core.entities.Light;
 import org.joml.Vector3f;
 
 import static core.GameEngine.getCurrentScene;

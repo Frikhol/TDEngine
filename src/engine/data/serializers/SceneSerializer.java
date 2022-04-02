@@ -3,8 +3,8 @@ package data.serializers;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import entities.GameObject;
-import entities.Scene;
+import core.entities.GameObject;
+import core.entities.Scene;
 import ui.objects.GUIObject;
 
 import java.io.IOException;

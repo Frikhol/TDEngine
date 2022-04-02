@@ -3,7 +3,7 @@ package ui.objects;
 import ui.layout.GUIGridLayout;
 import ui.layout.GUILayout;
 import org.joml.Vector2i;
-import static display.GameDisplay.*;
+import static core.display.GameDisplay.*;
 import static core.GameEngine.*;
 
 public class GUIPane extends GUIObject {

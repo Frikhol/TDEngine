@@ -1,5 +1,5 @@
 package inputs;
-import static display.GameDisplay.*;
+import static core.display.GameDisplay.*;
 import static core.GameEngine.*;
 
 import physics.raycast.RayCast;

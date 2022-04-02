@@ -1,14 +1,14 @@
 package physics.raycast;
 
-import core.Renderer;
-import entities.Camera;
+import core.render.Renderer;
+import core.entities.Camera;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import tools.Maths;
 
-import static display.GameDisplay.*;
+import static core.display.GameDisplay.*;
 import static core.GameEngine.*;
 
 public class RayCast {

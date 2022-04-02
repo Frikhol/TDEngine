@@ -1,142 +1,69 @@
 package physics.colliders;
 
-import entities.components.Material;
-import entities.components.Model;
-import entities.components.Transform;
-import org.joml.Vector2f;
+import core.entities.GameObject;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
-
-import static core.loader.Loader.loadToVAO;
 
 public abstract class Collider {
     private Vector3f size;
-    private Transform transform;
-    private Model colliderModel;
-
-    public Collider() {
-        size = new Vector3f(0.0f);
+    private Vector3f center;
+    private Quaternionf rotation;
+    
+    public Collider(GameObject object){
+        resize(object);
+        this.center = new Vector3f().zero();
     }
+
+    abstract void resize(GameObject object);
 
     public Vector3f getSize() {
         return size;
     }
 
-    public void setSize(Vector3f size) {
-        this.size = size;
+    public Vector3f getCenter() {
+        return center;
     }
 
-    public Model getColliderModel() {
-        return colliderModel;
+    public void setCenter(Vector3f center) {
+        this.center = center;
     }
 
-    public void setColliderModel(Model colliderModel) {
-        this.colliderModel = colliderModel;
+    public Quaternionf getRotation() {
+        return rotation;
     }
 
-    public Transform getTransform() {
-        return transform;
+    Vector3f getLocalOptimalRotations(ArrayList<Vector3f> vertices){
+        Vector3f up = new Vector3f(0f,1f,0f);
+        Vector3f right = new Vector3f(1f,0f,0f);
+        Vector3f forward = new Vector3f(0f,0f,1f);
+        Vector3f rotationXYZ;
+        //Вокруг оси Y
+
+
+
+        return new Vector3f();
     }
 
-    public void setTransform(Transform transform) {
-        this.transform = transform;
-    }
-
-    public void loadCollider(){
-        FileReader fr = null;
-        try {
-            fr = new FileReader(new File("Assets/models/BoxCollider.obj"));
-        } catch (FileNotFoundException e) {
-            System.err.println("Couldn't load file");
-            e.printStackTrace();
+    private float leastSquaresUp(ArrayList<Vector3f> vertices,float angle,float range){
+        float optimalAngle = angle;
+        if(range<1)
+            return optimalAngle;
+        float leftValue=0;
+        float rightValue=0;
+        float kLeft = (float) Math.tan(Math.toRadians(angle-range));
+        float kRight = (float) Math.tan(Math.toRadians(angle+range));
+        for(Vector3f vertex : vertices){
+            leftValue+=(vertex.z - vertex.x/kLeft)*(vertex.z - vertex.x/kLeft);
+            rightValue+=(vertex.z - vertex.x/kRight)*(vertex.z - vertex.x/kRight);
         }
-        BufferedReader reader = new BufferedReader(fr);
-        String line;
-        List<Vector3f> vertices = new ArrayList<Vector3f>();
-        List<Vector2f> textures = new ArrayList<Vector2f>();
-        List<Vector3f> normals = new ArrayList<Vector3f>();
-        List<Integer> indices = new ArrayList<Integer>();
-        float[] verticesArray = null;
-        float[] normalsArray = null;
-        float[] textureArray = null;
-        int[] indicesArray = null;
-        try{
-            while (true){
-                line=reader.readLine();
-                String[] currentLine = line.split(" ");
-                if(line.startsWith("v ")){
-                    Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1])*getSize().x,Float.parseFloat(currentLine[2])*getSize().y/2f,Float.parseFloat(currentLine[3])*getSize().z);
-                    vertices.add(vertex);
-                } else if(line.startsWith("vt ")){
-                    Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]),Float.parseFloat(currentLine[2]));
-                    textures.add(texture);
-                } else if(line.startsWith("vn ")){
-                    Vector3f normal = new Vector3f(Float.parseFloat(currentLine[1]),Float.parseFloat(currentLine[2]),Float.parseFloat(currentLine[3]));
-                    normals.add(normal);
-                } else if(line.startsWith("f ")){
-                    textureArray = new float[vertices.size()*2];
-                    normalsArray = new float[vertices.size()*3];
-                    break;
-                }
-            }
-            while(line!=null){
-                if(!line.startsWith("f")){
-                    line = reader.readLine();
-                    continue;
-                }
-                String[] currentLine = line.split(" ");
-                String[] vertex1 = currentLine[1].split("/");
-                String[] vertex2 = currentLine[2].split("/");
-                String[] vertex3 = currentLine[3].split("/");
-
-                processVertex(vertex1,indices,textures,normals,textureArray,normalsArray);
-                processVertex(vertex2,indices,textures,normals,textureArray,normalsArray);
-                processVertex(vertex3,indices,textures,normals,textureArray,normalsArray);
-                line = reader.readLine();
-            }
-            reader.close();
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        verticesArray = new float[vertices.size()*3];
-        indicesArray = new int[indices.size()];
-
-        int vertexPointer = 0;
-        for(Vector3f vertex:vertices){
-            verticesArray[vertexPointer++] = vertex.x;
-            verticesArray[vertexPointer++] = vertex.y;
-            verticesArray[vertexPointer++] = vertex.z;
-
-        }
-        for(int i = 0;i<indices.size();i++){
-            indicesArray[i] = indices.get(i);
-        }
-        setColliderModel(new Model("BoxCollider",loadToVAO(verticesArray,indicesArray,textureArray,normalsArray),new Material("Collider",1f,0,1,0)));
+        if(leftValue<rightValue)
+            optimalAngle = leastSquaresUp(vertices,angle-range,range/2);
+        else
+            optimalAngle = leastSquaresUp(vertices,angle+range,range/2);
+        return optimalAngle;
     }
 
-    private static void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures, List<Vector3f> normals,float[] textureArray,float[] normalsArray){
-        int currentVertexPointer = Integer.parseInt(vertexData[0])-1;
-        indices.add(currentVertexPointer);
-        Vector2f currentTex = textures.get(Integer.parseInt((vertexData[1]))-1);
-        textureArray[currentVertexPointer*2] = currentTex.x;
-        textureArray[currentVertexPointer*2+1] = 1 - currentTex.y;
-        Vector3f currentNorm = normals.get(Integer.parseInt(vertexData[2])-1);
-        normalsArray[currentVertexPointer*3] = currentNorm.x;
-        normalsArray[currentVertexPointer*3+1] = currentNorm.y;
-        normalsArray[currentVertexPointer*3+2] = currentNorm.z;
-    }
-
-    public abstract void resize(Vector3f vertex);
-
-    public void scale(float scale){
-        this.size.mul(scale);
-    }
 }

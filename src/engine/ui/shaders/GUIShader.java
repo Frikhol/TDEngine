@@ -2,12 +2,12 @@ package ui.shaders;
 
 import org.joml.Matrix4f;
 import org.joml.Vector4f;
-import shaders.ShaderProgram;
+import core.render.shaders.ShaderProgram;
 
 public class GUIShader extends ShaderProgram {
 
-    private static final String VERTEX_FILE = "src/engine/ui/shaders/GUIVertexShader.txt";
-    private static final String FRAGMENT_FILE = "src/engine/ui/shaders/GUIFragmentShader.txt";
+    private static final String VERTEX_FILE = "src/engine/ui/core.render.shaders/GUIVertexShader.txt";
+    private static final String FRAGMENT_FILE = "src/engine/ui/core.render.shaders/GUIFragmentShader.txt";
 
     private int location_transformationMatrix;
     private int location_color;

@@ -1,6 +1,6 @@
 package ui.components;
 
-import core.loader.Loader;
+import core.render.Loader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +12,7 @@ public class GUITexture {
 
     public GUITexture(String name) {
         this.name = name;
-        this.textureID = Loader.loadTexture("gui/"+ name +".png").getID();
-        guiTextures.add(this);
-    }
-
-    public GUITexture(String name,int id){
-        this.name = name;
-        this.textureID = id;
+        this.textureID = Loader.loadTexture("gui/"+ name +".png");
         guiTextures.add(this);
     }
 

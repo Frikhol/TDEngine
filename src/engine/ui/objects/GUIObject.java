@@ -7,8 +7,8 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import static core.GameEngine.getCurrentScene;
-import static display.GameDisplay.*;
-import static display.GameDisplay.getDisplayHEIGHT;
+import static core.display.GameDisplay.*;
+import static core.display.GameDisplay.getDisplayHEIGHT;
 
 public class GUIObject {
     private GUITexture texture;
@@ -46,10 +46,6 @@ public class GUIObject {
 
     public void setTexture(String texture) {
         this.texture = GUITexture.findTexture(texture);
-    }
-
-    public void setTexture(String name, int id) {
-        this.texture = new GUITexture(name,id);
     }
 
     public Vector2f getPosition() {
