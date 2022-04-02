@@ -18,7 +18,8 @@ public class Tower extends GameObject implements Effectible {
     float critDamage;
     float critChance;
     Vector3f gunPosition;
-    Bullet bullet;
+    Projectile projectile;
+    protected Vector2f lookAt = null;
     //icon
     TargetChoice targetChoice = TargetChoice.FIRST;
     Tower(Vector3f position,float range,float damage,
@@ -31,76 +32,38 @@ public class Tower extends GameObject implements Effectible {
         this.critChance = critChance;
         this.gunPosition = gunPosition;
         getTransform().setPosition(position);
-        bullet = bulletPrototype;
+        projectile = bulletPrototype;
     }
 
-    private void shoot(Enemy aimEnemy, Vector3f bulletPosition){
+    protected void shoot(){
         if(attackReload>0) {
             attackReload -= Time.getDeltaTime();
             attackReload = Math.max(0,attackReload);
         }
-        if(aimEnemy == null){
-            return;
-        }
+
         if(attackReload>0)
             return;
         attackReload+=1/attackSpeed;
 
 
-        Bullet newBullet = bullet.clone();
-        newBullet.setTarget(aimEnemy);
-        newBullet.setDamage(damage*effectMultiplayer("damage"));
-        newBullet.getTransform().setPosition(bulletPosition);
-        newBullet.getTransform().scale(0.1f);
+        Projectile newProjectile = projectile.clone();
+        setProjectileValues(newProjectile);
         //newBullet.getTransform().scale(this.getScale());
-        newBullet.Create();
+        newProjectile.Create();
 
+    }
+    protected void setProjectileValues(Projectile projectile){
+        projectile.setDamage(damage*effectMultiplayer("damage"));
+        projectile.getTransform().setPosition(new Vector3f(gunPosition.x, gunPosition.y, gunPosition.z));
+        projectile.getTransform().scale(0.1f);
     }
     protected void rotateTower(float angle){
         getTransform().setRotation(new Vector3f(0,angle,0));
     }
-    private Enemy aim(){
-        Vector2f towerPosition = new Vector2f(getTransform().getPosition().x,getTransform().getPosition().z);
-        ArrayList<Enemy> enemyList = Enemy.getList();
-        Enemy aimEnemy = null;
-        for (int i=0;i<enemyList.size();i++){
-            Enemy enemy = enemyList.get(i);
-            float distance = enemy.getTrackPosition().distance(towerPosition);
-            if(distance<=range){
-                if(aimEnemy == null) {
-                    aimEnemy = enemy;
-                    continue;
-                }
-                switch (targetChoice){
-                    case FIRST:
-                        if(enemy.getPositionOnTrack()>=aimEnemy.getPositionOnTrack())
-                            aimEnemy=enemy;
-                        break;
-                    case LAST:
-                        if(enemy.getPositionOnTrack()<aimEnemy.getPositionOnTrack())
-                            aimEnemy=enemy;
-                        break;
-                    case LOW:
-                        if(enemy.getHealth()<aimEnemy.getHealth())
-                            aimEnemy=enemy;
-                        break;
-                    case TALL:
-                        if(enemy.getHealth()>=aimEnemy.getHealth())
-                            aimEnemy=enemy;
-                        break;
-                }
-            }
-        }
-        return aimEnemy;
-    }
-
-    @Override
-    public void Update() {
-        super.Update();
-        Enemy aimEnemy = aim();
+    protected void aim(){
         Vector3f bulletPosition = new Vector3f(gunPosition.x, gunPosition.y, gunPosition.z);
-        if(aimEnemy!=null) {
-            Vector2f enemyV2f = new Vector2f(aimEnemy.getTransform().getPosition().x, aimEnemy.getTransform().getPosition().z);
+        if(lookAt!=null) {
+            Vector2f enemyV2f = lookAt;
             Vector2f myV2f = new Vector2f(this.getTransform().getPosition().x, this.getTransform().getPosition().z);
             Vector2f direction = new Vector2f(enemyV2f.x - myV2f.x, enemyV2f.y - myV2f.y).normalize();
             float signum = direction.y == 0 ? 1 : -(direction.y / Math.abs(direction.y));
@@ -112,7 +75,13 @@ public class Tower extends GameObject implements Effectible {
                     this.getScale()
             ).transformPosition(bulletPosition);
         }
-        shoot(aimEnemy,bulletPosition);
+    }
+
+    @Override
+    public void Update() {
+        super.Update();
+        aim();
+        shoot();
     }
 
     @Override
@@ -125,7 +94,7 @@ public class Tower extends GameObject implements Effectible {
     public void Destroy() {
         super.Destroy();
     }
-    public static class  BaseMagicTower extends Tower{
+    public static class  BaseMagicTower extends BulletTower{
         public BaseMagicTower(Vector3f position){
             super(position,
                     10,

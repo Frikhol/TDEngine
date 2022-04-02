@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 public class BoxCollision {
 
     public boolean toCircle(GameObject circle,GameObject box){
+        return true;
     }
 
     private Vector3f toLocalCoords(Vector3f worldCoords){
