@@ -1,10 +1,8 @@
 package initialisation;
 
 import core.GameEngine;
-import entities.GameObject;
+import core.entities.GameObject;
 import core.Game;
-import entities.Tower;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 

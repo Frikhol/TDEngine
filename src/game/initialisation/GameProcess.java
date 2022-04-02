@@ -3,7 +3,7 @@ package initialisation;
 import java.util.ArrayList;
 
 import static core.GameEngine.*;
-import static display.GameDisplay.*;
+import static core.display.GameDisplay.*;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 public abstract class GameProcess{

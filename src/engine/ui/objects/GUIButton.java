@@ -1,12 +1,12 @@
 package ui.objects;
 
-import font.GUIText;
-import font.TextMaster;
+import ui.font.GUIText;
+import ui.font.TextMaster;
 import org.joml.Vector2f;
 import ui.components.Action;
 import org.joml.Vector2i;
 
-import static display.GameDisplay.*;
+import static core.display.GameDisplay.*;
 
 public class GUIButton extends GUIObject{
 

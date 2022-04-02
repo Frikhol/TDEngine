@@ -1,6 +1,6 @@
 package tools;
 
-import entities.Camera;
+import core.entities.Camera;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;

@@ -8,7 +8,7 @@ import java.util.List;
 
 import static game.event.processor.GameEventProcessor.*;
 import static core.GameEngine.*;
-import static display.GameDisplay.*;
+import static core.display.GameDisplay.*;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 
 /**

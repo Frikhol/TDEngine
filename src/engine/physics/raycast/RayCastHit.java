@@ -1,6 +1,6 @@
 package physics.raycast;
 
-import entities.GameObject;
+import core.entities.GameObject;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import physics.colliders.Collider;

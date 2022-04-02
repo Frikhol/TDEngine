@@ -1,6 +1,6 @@
 package effects;
 
-import entities.Enemy;
+import core.entities.Enemy;
 
 public abstract class EnemyEffect extends Effect{
     //название для визуальных эффектов

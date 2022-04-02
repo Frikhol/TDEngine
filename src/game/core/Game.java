@@ -1,13 +1,11 @@
 package core;
 
-import entities.Enemy;
-import entities.Tower;
-import entities.Track;
+import core.entities.Enemy;
+import core.entities.Tower;
+import core.entities.Track;
 import initialisation.GameProcess;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-
-import javax.swing.*;
 
 public class Game extends GameProcess {
     Enemy enemy1;

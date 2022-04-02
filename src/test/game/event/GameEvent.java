@@ -1,6 +1,6 @@
 package game.event;
 
-import entities.GameObject;
+import core.entities.GameObject;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package effects;
 
-import entities.Tower;
+import core.entities.Tower;
 
 public abstract class TowerEffect extends Effect{
 

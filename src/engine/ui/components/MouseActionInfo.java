@@ -1,6 +1,6 @@
 package ui.components;
 
-import entities.GameObject;
+import core.entities.GameObject;
 import ui.objects.GUIObject;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
