@@ -1,9 +1,11 @@
 package physics.colliders;
 
 import core.entities.GameObject;
+import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+import tools.Maths;
 
 import java.util.ArrayList;
 
@@ -11,8 +13,8 @@ public abstract class Collider {
     private Vector3f size;
     private Vector3f center;
     private Quaternionf rotation;
-    
-    public Collider(GameObject object){
+
+    public Collider(GameObject object) {
         resize(object);
         this.center = new Vector3f().zero();
     }
@@ -35,35 +37,44 @@ public abstract class Collider {
         return rotation;
     }
 
-    Vector3f getLocalOptimalRotations(ArrayList<Vector3f> vertices){
-        Vector3f up = new Vector3f(0f,1f,0f);
-        Vector3f right = new Vector3f(1f,0f,0f);
-        Vector3f forward = new Vector3f(0f,0f,1f);
-        Vector3f rotationXYZ;
-        //Вокруг оси Y
-
-
-
-        return new Vector3f();
+    private static Vector3f getLocalOptimalRotations(ArrayList<Vector3f> vertices) {
+        return new Vector3f(
+                Maths.leastSquares2f(Maths.toVector2fListYZ(vertices), 0, 90),
+                Maths.leastSquares2f(Maths.toVector2fListXZ(vertices), 0, 90),
+                Maths.leastSquares2f(Maths.toVector2fListXY(vertices), 0, 90));
     }
 
-    private float leastSquaresUp(ArrayList<Vector3f> vertices,float angle,float range){
-        float optimalAngle = angle;
-        if(range<1)
-            return optimalAngle;
-        float leftValue=0;
-        float rightValue=0;
-        float kLeft = (float) Math.tan(Math.toRadians(angle-range));
-        float kRight = (float) Math.tan(Math.toRadians(angle+range));
+    public static Vector3f setLocalMaxSizes(ArrayList<Vector3f> vertices){
+        Vector3f rotation = getLocalOptimalRotations(vertices);
+        Matrix4f transformRotationMatrix = new Matrix4f();
+        transformRotationMatrix.rotateX((float) Math.toRadians(rotation.x));
+        transformRotationMatrix.rotateY((float) Math.toRadians(rotation.y));
+        transformRotationMatrix.rotateZ((float) Math.toRadians(rotation.z));
+        Vector3f size = new Vector3f().zero();
         for(Vector3f vertex : vertices){
-            leftValue+=(vertex.z - vertex.x/kLeft)*(vertex.z - vertex.x/kLeft);
-            rightValue+=(vertex.z - vertex.x/kRight)*(vertex.z - vertex.x/kRight);
+            Vector4f localVertex4f = new Vector4f(vertex.x,vertex.y,vertex.z,1f).mul(new Matrix4f(transformRotationMatrix));
+            if((size.x - Math.abs(localVertex4f.x)<0))
+                size.x = Math.abs(localVertex4f.x);
+            if((size.y - Math.abs(localVertex4f.y)<0))
+                size.y = Math.abs(localVertex4f.y);
+            if((size.z - Math.abs(localVertex4f.z)<0))
+                size.z = Math.abs(localVertex4f.z);
         }
-        if(leftValue<rightValue)
-            optimalAngle = leastSquaresUp(vertices,angle-range,range/2);
-        else
-            optimalAngle = leastSquaresUp(vertices,angle+range,range/2);
-        return optimalAngle;
+        return size;
     }
+
+    public static Vector3f setWorldMaxSizes(ArrayList<Vector3f> vertices){
+        Vector3f size = new Vector3f().zero();
+        for(Vector3f vertex : vertices){
+            if((size.x - Math.abs(vertex.x)<0))
+                size.x = Math.abs(vertex.x);
+            if((size.y - Math.abs(vertex.y)<0))
+                size.y = Math.abs(vertex.y);
+            if((size.z - Math.abs(vertex.z)<0))
+                size.z = Math.abs(vertex.z);
+        }
+        return size;
+    }
+
 
 }

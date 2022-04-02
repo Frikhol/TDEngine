@@ -55,7 +55,7 @@ public class SceneDeserializer extends StdDeserializer<Scene> {
             Model model;
             if((model = scene.findModel(goModel.asText()))==null)
                 model = new Model(goModel.asText());
-            model.getCollider().scale(transform.getScale());
+            //model.getCollider().scale(transform.getScale());
             model.getMaterial().setAmbientValue(gameObjectNode.get("material").get("ambientValue").floatValue());
             model.getMaterial().setDiffuseValue(gameObjectNode.get("material").get("diffuseValue").floatValue());
             model.getMaterial().setSmoothness(gameObjectNode.get("material").get("smoothness").floatValue());

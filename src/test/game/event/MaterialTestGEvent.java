@@ -3,6 +3,7 @@ package game.event;
 import core.entities.GameObject;
 import core.entities.Light;
 import org.joml.Vector3f;
+import physics.colliders.Collider;
 
 import static core.GameEngine.getCurrentScene;
 
@@ -17,9 +18,18 @@ public class MaterialTestGEvent extends GameEvent {
         whiteObject.scale(1f);
         redObject = new GameObject("Red");
         redObject.Create();
+
+
+        long lastTime = System.currentTimeMillis();
+        System.out.println(Collider.setWorldMaxSizes(redObject.getModel().getMesh().getVertices()));
+        System.out.println(System.currentTimeMillis()-lastTime);
+        lastTime = System.currentTimeMillis();
+        System.out.println(Collider.setLocalMaxSizes(redObject.getModel().getMesh().getVertices()));
+        System.out.println(System.currentTimeMillis()-lastTime);
+
         redObject.setPosition(new Vector3f(3f,1f,-25f));
         redObject.scale(0.2f);
-        redObject.rotateY(90);
+        //redObject.rotateY(90);
         redObject.getModel().getMaterial().setDiffuseValue(0.2f);
         redObject.getModel().getMaterial().setSpecularValue(0.8f);
         getCurrentScene().addLight(new Light(redObject.getPosition(),new Vector3f(0.2f,0,0),new Vector3f(1,0.01f,0.002f)));

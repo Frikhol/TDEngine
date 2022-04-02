@@ -6,8 +6,8 @@ import core.render.shaders.ShaderProgram;
 
 public class FontShader extends ShaderProgram {
 
-	private static final String VERTEX_FILE = "src/engine/ui.font/core.render.shaders/fontVertex.txt";
-	private static final String FRAGMENT_FILE = "src/engine/ui.font/core.render.shaders/fontFragment.txt";
+	private static final String VERTEX_FILE = "src/engine/ui/font/shaders/fontVertex.txt";
+	private static final String FRAGMENT_FILE = "src/engine/ui/font/shaders/fontFragment.txt";
 
 	private int location_colour;
 	private int location_translation;

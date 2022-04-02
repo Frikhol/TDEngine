@@ -3,9 +3,9 @@ package inputs;
 import core.GameEngine;
 import core.entities.GameObject;
 import core.entities.Camera;
-import initialisation.GameProcess;
+//import initialisation.GameProcess;
 import physics.raycast.RayCast;
-import physics.raycast.RayCastHit;
+//import physics.raycast.RayCastHit;
 import ui.GUI;
 import ui.objects.GUIObject;
 import ui.objects.GUIButton;
@@ -50,10 +50,10 @@ public class DefaultControls implements InputList {
             GUI.changePolyMode();
         if(key == KeyCode.GLFW_KEY_F2)
             GUI.changeColliderVisibility();
-        if(key == KeyCode.GLFW_KEY_P) {
+        /*if(key == KeyCode.GLFW_KEY_P) {
             GameProcess.setPause(!GameProcess.isPause());
             getPausePane().setVisible(GameProcess.isPause());
-        }
+        }*/
     }
 
     @Override
@@ -77,13 +77,13 @@ public class DefaultControls implements InputList {
                 }
             }
         }
-        if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
+        /*if(button == MouseCode.GLFW_MOUSE_BUTTON_2){
             if(RayCast.isPointingInWorld()) {
                 GameObject nearest = RayCastHit.getNearest();
                 if (nearest != null)
                     System.out.println("pressed" + nearest.getName());
             }
-        }
+        }*/
 
 
     }

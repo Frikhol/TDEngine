@@ -1,6 +1,8 @@
 package core.entities;
 
 import effects.Effectible;
+import entities.BulletTower;
+import entities.Projectile;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import tools.Maths;
@@ -92,7 +94,7 @@ public class Tower extends GameObject implements Effectible {
     public void Destroy() {
         super.Destroy();
     }
-    public static class  BaseMagicTower extends BulletTower{
+    public static class  BaseMagicTower extends BulletTower {
         public BaseMagicTower(Vector3f position){
             super(position,
                     10,

@@ -7,7 +7,7 @@ import physics.colliders.Collider;
 import physics.collision.PointCollision;
 
 import static core.GameEngine.getCurrentScene;
-
+/*
 public class RayCastHit {
     private static final float D = 10000f;
 
@@ -94,4 +94,4 @@ public class RayCastHit {
     private static Vector3f getScaledRay(Vector3f start){
         return new Vector3f(RayCast.getCurrentRay().x*D, RayCast.getCurrentRay().y*D, RayCast.getCurrentRay().z*D).add(start);
     }
-}
+}*/

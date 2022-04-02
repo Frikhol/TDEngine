@@ -136,7 +136,7 @@ public class Renderer {
         shader.loadTransformationMatrix(transformationMatrix);
     }
 
-    protected static void createProjectionMatrix(){
+    public static void createProjectionMatrix(){
         glfwGetWindowSize(getDisplayID(),getDisplayWIDTH(),getDisplayHEIGHT());
         int width = getDisplayWIDTH()[0];
         int height = getDisplayHEIGHT()[0];

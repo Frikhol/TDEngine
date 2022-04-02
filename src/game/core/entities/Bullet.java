@@ -1,10 +1,11 @@
 package core.entities;
 
+import entities.Projectile;
 import org.joml.Vector3f;
 import static core.GameEngine.*;
 import tools.Time;
 
-public class Bullet extends Projectile{
+public class Bullet extends Projectile {
 
     protected Enemy target;
     //texture

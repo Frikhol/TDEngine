@@ -6,8 +6,8 @@ import core.render.shaders.ShaderProgram;
 
 public class ShadowShader extends ShaderProgram {
 	
-	private static final String VERTEX_FILE = "src/engine/core.render.shadows/shadowVertexShader.txt";
-	private static final String FRAGMENT_FILE = "src/engine/core.render.shadows/shadowFragmentShader.txt";
+	private static final String VERTEX_FILE = "src/engine/core/render/shadows/shadowVertexShader.txt";
+	private static final String FRAGMENT_FILE = "src/engine/core/render/shadows/shadowFragmentShader.txt";
 	
 	private int location_mvpMatrix;
 
